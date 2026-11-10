@@ -1,4 +1,4 @@
-﻿---
+---
 // src/pages/en/contact.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
@@ -195,13 +195,22 @@ const description = 'Contact JaliBlaat Al Batin for a free marble polishing or t
               <!-- Error display -->
               <div id="cf-error" class="hidden bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm"></div>
 
-              <button type="submit"
-                      class="w-full flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-6 py-4 rounded-xl font-bold text-base shadow-sm">
-                <span class="material-symbols-outlined">chat</span>
-                Send via WhatsApp
+              <!-- Success message -->
+              <div id="cf-success" class="hidden bg-green-50 border border-green-200 rounded-xl px-5 py-4 text-green-800 text-sm flex items-start gap-3">
+                <span class="material-symbols-outlined text-green-600 text-xl shrink-0">check_circle</span>
+                <div>
+                  <p class="font-bold mb-1">Message sent successfully!</p>
+                  <p>Your details have been saved. We will contact you shortly. WhatsApp is opening now for instant confirmation.</p>
+                </div>
+              </div>
+
+              <button type="submit" id="cf-submit"
+                      class="w-full flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-6 py-4 rounded-xl font-bold text-base shadow-sm disabled:opacity-60 disabled:cursor-not-allowed">
+                <span class="material-symbols-outlined" id="cf-btn-icon">chat</span>
+                <span id="cf-btn-text">Send via WhatsApp</span>
               </button>
               <p class="text-center text-xs text-[#44474e]/60">
-                Your details open a WhatsApp message — no data is stored on our servers.
+                Your details are saved to our records and a WhatsApp message will open for instant confirmation.
               </p>
             </form>
           </div>
@@ -217,21 +226,28 @@ const description = 'Contact JaliBlaat Al Batin for a free marble polishing or t
 </BaseLayout>
 
 <script>
-  const form      = document.getElementById('contact-form') as HTMLFormElement;
-  const errBox    = document.getElementById('cf-error') as HTMLDivElement;
-  const waNum     = '966500000000';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzRk6YmHJt29VD4W3Z7BD7A2yEsAxevOu4YL6Tyvnmhs_p_Qu6Uj9blIQtx4-e6XVZuSg/exec';
+  const WA_NUM   = '966500000000';
 
-  form?.addEventListener('submit', (e) => {
+  const form       = document.getElementById('contact-form')  as HTMLFormElement;
+  const errBox     = document.getElementById('cf-error')      as HTMLDivElement;
+  const successBox = document.getElementById('cf-success')    as HTMLDivElement;
+  const submitBtn  = document.getElementById('cf-submit')     as HTMLButtonElement;
+  const btnIcon    = document.getElementById('cf-btn-icon')   as HTMLSpanElement;
+  const btnText    = document.getElementById('cf-btn-text')   as HTMLSpanElement;
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name    = (document.getElementById('cf-name')     as HTMLInputElement).value.trim();
-    const phone   = (document.getElementById('cf-phone')    as HTMLInputElement).value.trim();
-    const email   = (document.getElementById('cf-email')    as HTMLInputElement).value.trim();
-    const service = (document.getElementById('cf-service')  as HTMLSelectElement).value;
-    const district= (document.getElementById('cf-district') as HTMLSelectElement).value;
-    const area    = (document.getElementById('cf-area')     as HTMLInputElement).value.trim();
-    const msg     = (document.getElementById('cf-msg')      as HTMLTextAreaElement).value.trim();
+    const name     = (document.getElementById('cf-name')     as HTMLInputElement).value.trim();
+    const phone    = (document.getElementById('cf-phone')    as HTMLInputElement).value.trim();
+    const email    = (document.getElementById('cf-email')    as HTMLInputElement).value.trim();
+    const service  = (document.getElementById('cf-service')  as HTMLSelectElement).value;
+    const district = (document.getElementById('cf-district') as HTMLSelectElement).value;
+    const area     = (document.getElementById('cf-area')     as HTMLInputElement).value.trim();
+    const message  = (document.getElementById('cf-msg')      as HTMLTextAreaElement).value.trim();
 
+    // Validate
     if (!name || !phone || !service || !district) {
       errBox.textContent = 'Please fill in all required fields (Name, Phone, Service, District).';
       errBox.classList.remove('hidden');
@@ -239,17 +255,46 @@ const description = 'Contact JaliBlaat Al Batin for a free marble polishing or t
     }
     errBox.classList.add('hidden');
 
+    // Loading state
+    submitBtn.disabled = true;
+    btnIcon.textContent = 'hourglass_top';
+    btnText.textContent = 'Saving…';
+
+    // 1️⃣ Send to Google Sheets
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email, service, district, area, message, lang: 'en', page: 'contact' }),
+      });
+    } catch (_) {
+      // no-cors fetch always "succeeds" silently — ignore errors
+    }
+
+    // 2️⃣ Open WhatsApp
     const waMsg = [
-      `Hello JaliBlaat Al Batin, I would like to request a free floor inspection.`,
+      'Hello JaliBlaat Al Batin, I would like to request a free floor inspection.',
       `Name: ${name}`,
       `Phone: ${phone}`,
-      email ? `Email: ${email}` : '',
+      email    ? `Email: ${email}`      : '',
       `Service: ${service}`,
       `District: ${district}`,
-      area ? `Area: ${area} m²` : '',
-      msg ? `Notes: ${msg}` : '',
+      area     ? `Area: ${area} m²`    : '',
+      message  ? `Notes: ${message}`   : '',
     ].filter(Boolean).join('\n');
 
-    window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(waMsg)}`, '_blank');
+    window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(waMsg)}`, '_blank');
+
+    // 3️⃣ Show success, reset form
+    successBox.classList.remove('hidden');
+    form.reset();
+    submitBtn.disabled = false;
+    btnIcon.textContent = 'check';
+    btnText.textContent = 'Sent!';
+    setTimeout(() => {
+      btnIcon.textContent = 'chat';
+      btnText.textContent = 'Send via WhatsApp';
+    }, 4000);
   });
 </script>

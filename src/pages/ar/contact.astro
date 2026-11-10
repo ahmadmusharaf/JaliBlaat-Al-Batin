@@ -1,4 +1,4 @@
-﻿---
+---
 // src/pages/ar/contact.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
@@ -146,12 +146,22 @@ const description = 'تواصل مع جلي بلاط حفرالباطن للحص
                           class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] transition-colors resize-none"></textarea>
               </div>
               <div id="ar-cf-error" class="hidden bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm"></div>
-              <button type="submit"
-                      class="w-full flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-6 py-4 rounded-xl font-bold text-base">
-                <span class="material-symbols-outlined">chat</span>
-                أرسل عبر واتساب
+
+              <!-- Success message -->
+              <div id="ar-cf-success" class="hidden bg-green-50 border border-green-200 rounded-xl px-5 py-4 text-green-800 text-sm flex items-start gap-3">
+                <span class="material-symbols-outlined text-green-600 text-xl shrink-0">check_circle</span>
+                <div>
+                  <p class="font-bold mb-1">تم إرسال رسالتك بنجاح!</p>
+                  <p>تم حفظ بياناتك وسنتواصل معك قريباً. واتساب يفتح الآن للتأكيد الفوري.</p>
+                </div>
+              </div>
+
+              <button type="submit" id="ar-cf-submit"
+                      class="w-full flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-6 py-4 rounded-xl font-bold text-base disabled:opacity-60 disabled:cursor-not-allowed">
+                <span class="material-symbols-outlined" id="ar-btn-icon">chat</span>
+                <span id="ar-btn-text">أرسل عبر واتساب</span>
               </button>
-              <p class="text-center text-xs text-[#44474e]/60">بياناتك تفتح رسالة واتساب — لا يتم تخزين أي بيانات على خوادمنا.</p>
+              <p class="text-center text-xs text-[#44474e]/60">بياناتك تُحفظ في سجلاتنا وتفتح رسالة واتساب للتأكيد الفوري.</p>
             </form>
           </div>
         </div>
@@ -164,34 +174,73 @@ const description = 'تواصل مع جلي بلاط حفرالباطن للحص
 </BaseLayout>
 
 <script>
-  const form    = document.getElementById('ar-contact-form') as HTMLFormElement;
-  const errBox  = document.getElementById('ar-cf-error') as HTMLDivElement;
-  const waNum   = '966500000000';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzRk6YmHJt29VD4W3Z7BD7A2yEsAxevOu4YL6Tyvnmhs_p_Qu6Uj9blIQtx4-e6XVZuSg/exec';
+  const WA_NUM   = '966500000000';
 
-  form?.addEventListener('submit', (e) => {
+  const form       = document.getElementById('ar-contact-form')  as HTMLFormElement;
+  const errBox     = document.getElementById('ar-cf-error')      as HTMLDivElement;
+  const successBox = document.getElementById('ar-cf-success')    as HTMLDivElement;
+  const submitBtn  = document.getElementById('ar-cf-submit')     as HTMLButtonElement;
+  const btnIcon    = document.getElementById('ar-btn-icon')      as HTMLSpanElement;
+  const btnText    = document.getElementById('ar-btn-text')      as HTMLSpanElement;
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name    = (document.getElementById('ar-name')     as HTMLInputElement).value.trim();
-    const phone   = (document.getElementById('ar-phone')    as HTMLInputElement).value.trim();
-    const service = (document.getElementById('ar-service')  as HTMLSelectElement).value;
-    const district= (document.getElementById('ar-district') as HTMLSelectElement).value;
-    const area    = (document.getElementById('ar-area')     as HTMLInputElement).value.trim();
-    const msg     = (document.getElementById('ar-msg')      as HTMLTextAreaElement).value.trim();
 
+    const name     = (document.getElementById('ar-name')     as HTMLInputElement).value.trim();
+    const phone    = (document.getElementById('ar-phone')    as HTMLInputElement).value.trim();
+    const service  = (document.getElementById('ar-service')  as HTMLSelectElement).value;
+    const district = (document.getElementById('ar-district') as HTMLSelectElement).value;
+    const area     = (document.getElementById('ar-area')     as HTMLInputElement).value.trim();
+    const message  = (document.getElementById('ar-msg')      as HTMLTextAreaElement).value.trim();
+
+    // Validate
     if (!name || !phone || !service || !district) {
       errBox.textContent = 'يرجى تعبئة جميع الحقول المطلوبة (الاسم، الهاتف، الخدمة، الحي).';
       errBox.classList.remove('hidden');
       return;
     }
     errBox.classList.add('hidden');
+
+    // Loading state
+    submitBtn.disabled = true;
+    btnIcon.textContent = 'hourglass_top';
+    btnText.textContent = 'جارٍ الحفظ…';
+
+    // 1️⃣ Send to Google Sheets
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email: '', service, district, area, message, lang: 'ar', page: 'contact' }),
+      });
+    } catch (_) {
+      // no-cors fetch always "succeeds" silently — ignore errors
+    }
+
+    // 2️⃣ Open WhatsApp
     const waMsg = [
-      `السلام عليكم، أرغب في الاستفسار عن خدمة جلي الأرضيات.`,
+      'السلام عليكم، أرغب في الاستفسار عن خدمة جلي الأرضيات.',
       `الاسم: ${name}`,
       `الهاتف: ${phone}`,
       `الخدمة: ${service}`,
       `الحي: ${district}`,
-      area ? `المساحة: ${area} م²` : '',
-      msg ? `ملاحظات: ${msg}` : '',
+      area    ? `المساحة: ${area} م²` : '',
+      message ? `ملاحظات: ${message}` : '',
     ].filter(Boolean).join('\n');
-    window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(waMsg)}`, '_blank');
+
+    window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(waMsg)}`, '_blank');
+
+    // 3️⃣ Show success, reset form
+    successBox.classList.remove('hidden');
+    form.reset();
+    submitBtn.disabled = false;
+    btnIcon.textContent = 'check';
+    btnText.textContent = 'تم الإرسال!';
+    setTimeout(() => {
+      btnIcon.textContent = 'chat';
+      btnText.textContent = 'أرسل عبر واتساب';
+    }, 4000);
   });
 </script>
