@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0b2545"/>
+  <rect x="1" y="1" width="798" height="498" fill="none" stroke="rgba(200,169,106,0.3)" stroke-width="2"/>
+  <text x="400" y="220" text-anchor="middle" font-family="system-ui,sans-serif" font-size="80" fill="rgba(200,169,106,0.4)">◆</text>
+  <text x="400" y="310" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="600" fill="rgba(255,255,255,0.7)">Hero — Marble Floor</text>
+  <text x="400" y="340" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="rgba(255,255,255,0.4)">Replace with real photo — public/images/hero-marble-floor.jpg</text>
+</svg>
