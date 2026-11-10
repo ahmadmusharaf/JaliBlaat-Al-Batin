@@ -1,0 +1,32 @@
+---
+// src/pages/ar/pricing.astro  — Arabic Pricing Guide Page
+import PageLayout     from '../../layouts/PageLayout.astro';
+import PricingHero    from '../../components/sections/PricingHero.astro';
+import PricingTable   from '../../components/sections/PricingTable.astro';
+import FAQ            from '../../components/sections/FAQ.astro';
+import ContactForm    from '../../components/sections/ContactForm.astro';
+import { SITE }       from '../../data/site';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "ما هو سعر جلي الرخام والبلاط في حفر الباطن؟",
+      "acceptedAnswer": { "@type": "Answer", "text": "يتراوح سعر جلي الرخام والبلاط بين 12 و35 ريال سعودي للمتر المربع حسب نوع المادة وحالة الأرضية." } },
+    { "@type": "Question", "name": "هل المعاينة مجانية في حفر الباطن؟",
+      "acceptedAnswer": { "@type": "Answer", "text": "نعم، المعاينة مجانية 100% وتشمل زيارة ميدانية وعينة تجريبية على متر مربع." } }
+  ]
+});
+---
+
+<PageLayout
+  title="سعر جلي البلاط والرخام في حفر الباطن 2025 | دليل الأسعار الشامل"
+  description="دليل شامل وشفاف لأسعار جلي وتلميع البلاط والرخام في حفر الباطن 2025. من 12 إلى 35 ريال للمتر. معاينة مجانية، ضمان مكتوب."
+  lang="ar"
+  schemaJson={schema}
+>
+  <PricingHero  lang="ar" />
+  <PricingTable lang="ar" />
+  <FAQ          lang="ar" />
+  <ContactForm  lang="ar" />
+</PageLayout>

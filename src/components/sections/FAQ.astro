@@ -1,0 +1,80 @@
+---
+// src/components/sections/FAQ.astro
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const faqs = [
+  {
+    ar: { q: 'ما هو سعر جلي الرخام والبلاط في حفر الباطن؟',
+          a: 'يتراوح سعر جلي الرخام والبلاط بين 12 و35 ريال سعودي للمتر المربع، ويعتمد على نوع المادة (رخام، بورسلان، بلاط عادي)، وحالة الأرضية، ومساحة المشروع. المعاينة مجانية بالكامل.' },
+    en: { q: 'How much does tile and marble polishing cost in Hafar Al-Batin?',
+          a: 'Marble and tile polishing ranges from 12 to 35 SAR per m², depending on the material type (marble, porcelain, regular tile), floor condition, and project size. The inspection is completely free.' },
+  },
+  {
+    ar: { q: 'هل تُسبب عملية الجلي أضراراً للأثاث أو الأرضية؟',
+          a: 'لا إطلاقاً. نستخدم مكائن Klindex الإيطالية المزودة بشفط مائي فوري يمنع أي غبار أو رطوبة زائدة. لا نحتاج إلى إخلاء الأثاث في معظم الحالات.' },
+    en: { q: 'Does the polishing process damage furniture or the floor?',
+          a: 'Absolutely not. We use Italian Klindex machines with instant water suction that prevents any dust or excess moisture. In most cases we don\'t require furniture removal.' },
+  },
+  {
+    ar: { q: 'ما الفرق بين جلي الرخام العادي والجلي الكريستالي؟',
+          a: 'الجلي العادي يُنظّف ويُلمّع السطح مؤقتاً، أما الجلي الكريستالي فيستخدم مادة الكريستلايزر والحرارة لإعادة بناء طبقة الكالسيوم في الرخام، مما يمنح لمعاناً مرآوياً حقيقياً يدوم 5 إلى 10 سنوات.' },
+    en: { q: 'What\'s the difference between regular and crystal marble polishing?',
+          a: 'Regular polishing cleans and temporarily shines the surface, while crystal polishing uses crystallizer compound and heat to rebuild the calcium layer in marble — giving a true mirror shine lasting 5–10 years.' },
+  },
+  {
+    ar: { q: 'كم تستغرق عملية الجلي للفيلا أو الشقة كاملة؟',
+          a: 'تعتمد مدة العمل على المساحة. فيلا بمساحة 400 م² تستغرق عادةً يومين إلى ثلاثة أيام عمل. الشقة المتوسطة (120 م²) تنجز في يوم إلى يومين.' },
+    en: { q: 'How long does polishing a full villa or apartment take?',
+          a: 'Duration depends on the area. A villa of 400 m² typically takes 2–3 working days. An average apartment (120 m²) is completed in 1–2 days.' },
+  },
+  {
+    ar: { q: 'هل تقدمون ضماناً على عملية الجلي؟',
+          a: 'نعم، نُصدر ضماناً رسمياً مكتوباً على جودة الجلي واللمعان. الضمان يشمل عيوب التنفيذ وليس التآكل الطبيعي الناتج عن الاستخدام اليومي.' },
+    en: { q: 'Do you provide a warranty on the polishing?',
+          a: 'Yes, we issue an official written warranty on polish quality and shine. The warranty covers execution defects — not natural wear from daily use.' },
+  },
+  {
+    ar: { q: 'هل المعاينة الميدانية مجانية حقاً داخل حفر الباطن؟',
+          a: 'نعم، المعاينة مجانية 100% وتشمل زيارة ميدانية وعينة تجريبية على متر مربع لترى النتيجة قبل الاتفاق على أي شيء.' },
+    en: { q: 'Is the on-site inspection really 100% free in Hafar Al-Batin?',
+          a: 'Yes, 100% free — including a field visit and a 1 m² test sample so you see the result before agreeing to anything.' },
+  },
+];
+---
+
+<section id="faq" class="w-full bg-[#fcf9f2] py-20 lg:py-28">
+  <div class="max-w-4xl mx-auto px-6 lg:px-12">
+
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fedb98] text-[#785f28] text-xs font-bold font-['Inter'] mb-4">
+        <span class="material-symbols-outlined text-[15px]">quiz</span>
+        {isAr ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
+        {isAr ? 'الأسئلة الشائعة حول الجلي والرخام في حفر الباطن' : 'Common Questions About Tile Polishing in Hafar Al-Batin'}
+      </h2>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      {faqs.map((faq, i) => (
+        <details class="group bg-white border border-[#e5e2db] rounded-xl overflow-hidden" open={i === 0}>
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+            <span class="font-bold text-[#001026] text-sm sm:text-base">
+              {isAr ? faq.ar.q : faq.en.q}
+            </span>
+            <span class="faq-icon-close material-symbols-outlined text-[#735b24] text-[22px] shrink-0">add</span>
+            <span class="faq-icon-open material-symbols-outlined text-[#735b24] text-[22px] shrink-0">remove</span>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-[#44474e] leading-relaxed border-t border-[#e5e2db] pt-4">
+            {isAr ? faq.ar.a : faq.en.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>

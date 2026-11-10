@@ -1,0 +1,68 @@
+---
+// src/pages/index.astro  — Arabic Homepage (default language)
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero        from '../components/sections/Hero.astro';
+import Stats       from '../components/sections/Stats.astro';
+import Services    from '../components/sections/Services.astro';
+import WhyUs       from '../components/sections/WhyUs.astro';
+import BeforeAfter from '../components/sections/BeforeAfter.astro';
+import HowItWorks  from '../components/sections/HowItWorks.astro';
+import Districts   from '../components/sections/Districts.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import FAQ         from '../components/sections/FAQ.astro';
+import ContactForm from '../components/sections/ContactForm.astro';
+import { SITE }    from '../data/site';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "جلي بلاط حفرالباطن | JaliBlaat Al Batin",
+  "alternateName": "مؤسسة جلي وتلميع الرخام والبلاط بحفر الباطن",
+  "url": SITE.url,
+  "telephone": SITE.phone,
+  "image": `${SITE.url}/images/og-default.jpg`,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": SITE.address.street,
+    "addressLocality": SITE.address.city,
+    "addressRegion": SITE.address.region,
+    "postalCode": SITE.address.zip,
+    "addressCountry": SITE.address.country
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": SITE.address.lat, "longitude": SITE.address.lng },
+  "areaServed": SITE.districts.ar,
+  "priceRange": "$$",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "07:00", "closes": "23:00"
+  }],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "خدمات جلي وتلميع الأرضيات",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتلميع الرخام الطبيعي بالكريستال والألماس" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتنظيف البلاط والسيراميك والبورسلان" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "تنظيف وتجريد الأرضيات العميقة وتجديد الترويبة" } }
+    ]
+  }
+});
+---
+
+<PageLayout
+  title="جلي بلاط حفرالباطن | خدمات جلي وتلميع الرخام والأرضيات"
+  description="خدمات جلي وتلميع البلاط والرخام في حفر الباطن بأحدث أقراص الألماس الإيطالية. معاينة مجانية، ضمان مكتوب. اتصل الآن!"
+  lang="ar"
+  schemaJson={schema}
+>
+  <Hero        lang="ar" />
+  <Stats       lang="ar" />
+  <Services    lang="ar" />
+  <WhyUs       lang="ar" />
+  <BeforeAfter lang="ar" />
+  <HowItWorks  lang="ar" />
+  <Districts   lang="ar" />
+  <Testimonials lang="ar" />
+  <FAQ         lang="ar" />
+  <ContactForm lang="ar" />
+</PageLayout>

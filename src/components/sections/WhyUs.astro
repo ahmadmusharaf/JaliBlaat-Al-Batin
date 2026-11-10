@@ -1,0 +1,56 @@
+---
+// src/components/sections/WhyUs.astro
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const reasons = [
+  { icon: 'inspection',      ar: { h: 'معاينة مجانية فورية',         d: 'نصل إلى موقعك داخل حفر الباطن خلال ساعتين مع عينة تجريبية مجانية.' },
+                              en: { h: 'Free Instant On-Site Inspection', d: 'We reach your Hafar Al-Batin location within 2 hours with a free test sample.' } },
+  { icon: 'diamond',         ar: { h: 'أقراص ألماس إيطالية Klindex',   d: 'نستخدم فقط أقراص الألماس المائي Klindex الإيطالية — أعلى معيار في الصناعة.' },
+                              en: { h: 'Italian Klindex Diamond Discs',   d: 'We use only Klindex Italian water-diamond discs — the highest industry standard.' } },
+  { icon: 'speed',           ar: { h: 'فريق متجاوب وسريع',             d: 'متاحون 7 أيام في الأسبوع من 7 صباحاً حتى 11 مساءً لأي طارئ.' },
+                              en: { h: 'Rapid Response Team',             d: 'Available 7 days a week, 7 AM–11 PM for any emergency.' } },
+  { icon: 'star',            ar: { h: 'تلميع كريستال بمعيار إيطالي',   d: 'عملية تلميع 6 مراحل تنتهي بمادة كريستلايزر معتمدة تُعطي لمعان مرآة.' },
+                              en: { h: 'Italian Crystal Stone Standard',  d: '6-stage polishing process finishing with certified crystallizer for mirror shine.' } },
+  { icon: 'verified_user',   ar: { h: 'ضمان رسمي مكتوب',               d: 'نُصدر ضماناً رسمياً مكتوباً على جودة الجلي واللمعان.' },
+                              en: { h: 'Official Written Warranty',        d: 'We issue an official written warranty on polish quality and shine duration.' } },
+  { icon: 'eco',             ar: { h: 'مواد آمنة وصديقة للبيئة',        d: 'نعمل بمواد معتمدة آمنة للأطفال والحيوانات الأليفة وخالية من الغبار.' },
+                              en: { h: 'Safe & Eco-Friendly Materials',   d: 'We use certified materials that are safe for children and pets, with zero dust.' } },
+];
+---
+
+<section class="w-full bg-[#f6f3ec] py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b2545] text-[#ffdf9f] text-xs font-bold font-['Inter'] mb-4">
+        <span class="material-symbols-outlined text-[15px]">emoji_events</span>
+        {isAr ? 'لماذا يختارنا أهل حفر الباطن؟' : 'Why Hafar Al-Batin homeowners trust us'}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
+        {isAr ? 'الفارق الذي نُحدثه لأرضياتك' : 'The difference we make for your floors'}
+      </h2>
+      <p class="text-lg text-[#44474e] max-w-2xl mx-auto">
+        {isAr
+          ? 'لا نعمل بالمواد الكيميائية السريعة — نعمل بأقراص الألماس والكريستال الإيطالي لنتيجة حقيقية ودائمة.'
+          : 'We don\'t use quick chemicals — we work with diamond discs and Italian crystal for genuine, lasting results.'}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {reasons.map(r => (
+        <div class="bg-white rounded-xl p-6 border border-[rgba(200,169,106,0.2)] shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-[#fedb98] flex items-center justify-center text-[#735b24] mb-4">
+            <span class="material-symbols-outlined text-[22px]">{r.icon}</span>
+          </div>
+          <h3 class="font-bold text-[#001026] text-base mb-2">{isAr ? r.ar.h : r.en.h}</h3>
+          <p class="text-sm text-[#44474e] leading-relaxed">{isAr ? r.ar.d : r.en.d}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

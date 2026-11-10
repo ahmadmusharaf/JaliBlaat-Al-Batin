@@ -1,0 +1,29 @@
+---
+// src/components/MobileCTABar.astro
+// Fixed bottom bar visible only on mobile — 60% WhatsApp / 40% Call
+import { SITE, waLink } from '../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+---
+
+<!-- Mobile sticky bottom CTA bar — hidden on md+ -->
+<div class="mobile-cta-bar md:hidden pb-safe" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
+  <!-- WhatsApp — 60% width -->
+  <a href={waLink(lang)} target="_blank" rel="noopener"
+     class="flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 font-bold text-sm font-['Inter'] active:brightness-90 transition-all"
+     style="flex: 3;">
+    <span class="material-symbols-outlined text-[20px]">chat</span>
+    <span>{isAr ? 'احجز مجاناً عبر واتساب' : 'Free Quote on WhatsApp'}</span>
+  </a>
+  <!-- Call — 40% width -->
+  <a href={`tel:${SITE.phone}`}
+     class="flex items-center justify-center gap-2 bg-[#001026] text-white py-4 font-bold text-sm font-['Inter'] border-r-0 active:brightness-90 transition-all"
+     style="flex: 2;">
+    <span class="material-symbols-outlined text-[20px]">call</span>
+    <span>{isAr ? 'اتصل الآن' : 'Call Now'}</span>
+  </a>
+</div>

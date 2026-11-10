@@ -1,0 +1,144 @@
+---
+// src/components/sections/ContactForm.astro
+import { SITE, waLink } from '../../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+---
+
+<section id="contact" class="w-full bg-[#f6f3ec] py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+      <!-- Left: Info -->
+      <div class="flex flex-col gap-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#001026] text-[#ffdf9f] text-xs font-bold font-['Inter'] mb-4">
+            <span class="material-symbols-outlined text-[15px]">support_agent</span>
+            {isAr ? 'جاهزون الآن' : 'Ready now'}
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
+            {isAr ? 'جاهزون في حفر الباطن للتسعير المجاني' : 'Ready in Hafar Al-Batin for a Free Quote'}
+          </h2>
+          <p class="text-lg text-[#44474e] leading-relaxed">
+            {isAr
+              ? 'تواصل معنا الآن عبر الواتساب أو الهاتف للحصول على معاينة مجانية وعرض سعر شفاف بدون أي التزام.'
+              : 'Contact us now via WhatsApp or phone for a free inspection and transparent quote with no obligation.'}
+          </p>
+        </div>
+
+        <!-- Contact cards -->
+        <div class="flex flex-col gap-4">
+          <a href={waLink(lang)} target="_blank" rel="noopener"
+             class="flex items-center gap-4 bg-[#25D366] text-white px-6 py-5 rounded-xl shadow-md hover:brightness-110 transition-all">
+            <span class="material-symbols-outlined text-[32px]">chat</span>
+            <div>
+              <div class="font-bold text-base">WhatsApp</div>
+              <div class="text-sm text-white/80">{isAr ? 'احجز معاينة مجانية — رد خلال دقائق' : 'Book free inspection — reply within minutes'}</div>
+            </div>
+          </a>
+          <a href={`tel:${SITE.phone}`}
+             class="flex items-center gap-4 bg-[#001026] text-white px-6 py-5 rounded-xl shadow-md hover:bg-[#0b2545] transition-all">
+            <span class="material-symbols-outlined text-[32px]">call</span>
+            <div>
+              <div class="font-bold text-base" dir="ltr">{SITE.phoneDisplay}</div>
+              <div class="text-sm text-white/70">{isAr ? SITE.hours : SITE.hoursEn}</div>
+            </div>
+          </a>
+          <div class="flex items-center gap-4 bg-white border border-[rgba(200,169,106,0.3)] px-6 py-5 rounded-xl">
+            <span class="material-symbols-outlined text-[#735b24] text-[32px]">location_on</span>
+            <div>
+              <div class="font-bold text-[#001026] text-base">
+                {isAr ? 'حفر الباطن، المنطقة الشرقية' : 'Hafar Al-Batin, Eastern Province'}
+              </div>
+              <div class="text-sm text-[#44474e]">
+                {isAr ? 'المملكة العربية السعودية' : 'Saudi Arabia'}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Quick WhatsApp form -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg border border-[rgba(200,169,106,0.2)]">
+        <h3 class="font-bold text-[#001026] text-xl mb-6">
+          {isAr ? 'احصل على تسعير فوري عبر واتساب' : 'Get an Instant WhatsApp Quote'}
+        </h3>
+
+        <form id="wa-form" class="flex flex-col gap-5">
+          <!-- Name -->
+          <div>
+            <label class="block text-sm font-semibold text-[#1c1c18] mb-2">
+              {isAr ? 'الاسم الكريم' : 'Your Name'}
+            </label>
+            <input type="text" id="f-name" required placeholder={isAr ? 'الاسم الكريم' : 'Your Name'}
+                   class="w-full px-4 py-3 rounded border border-[#e5e2db] bg-[#fcf9f2] text-[#1c1c18] text-sm
+                          focus:outline-none focus:border-[rgba(200,169,106,0.8)] focus:ring-1 focus:ring-[rgba(200,169,106,0.5)]
+                          transition-colors placeholder:text-[#74777f]" />
+          </div>
+          <!-- Floor type -->
+          <div>
+            <label class="block text-sm font-semibold text-[#1c1c18] mb-2">
+              {isAr ? 'نوع الأرضية' : 'Floor Type'}
+            </label>
+            <select id="f-type"
+                    class="w-full px-4 py-3 rounded border border-[#e5e2db] bg-[#fcf9f2] text-[#1c1c18] text-sm
+                           focus:outline-none focus:border-[rgba(200,169,106,0.8)] transition-colors">
+              {isAr
+                ? ['رخام طبيعي','بلاط وسيراميك','بورسلان','تيرازو','غرانيت','أخرى'].map(o => <option>{o}</option>)
+                : ['Natural Marble','Tile & Ceramic','Porcelain','Terrazzo','Granite','Other'].map(o => <option>{o}</option>)
+              }
+            </select>
+          </div>
+          <!-- Area -->
+          <div>
+            <label class="block text-sm font-semibold text-[#1c1c18] mb-2">
+              {isAr ? 'المساحة التقريبية (م²)' : 'Approximate Area (m²)'}
+            </label>
+            <input type="number" id="f-area" min="1" placeholder={isAr ? 'مثال: 200' : 'e.g. 200'}
+                   class="w-full px-4 py-3 rounded border border-[#e5e2db] bg-[#fcf9f2] text-[#1c1c18] text-sm
+                          focus:outline-none focus:border-[rgba(200,169,106,0.8)] focus:ring-1 focus:ring-[rgba(200,169,106,0.5)]
+                          transition-colors placeholder:text-[#74777f]" />
+          </div>
+          <!-- District -->
+          <div>
+            <label class="block text-sm font-semibold text-[#1c1c18] mb-2">
+              {isAr ? 'الحي / المنطقة' : 'District / Area'}
+            </label>
+            <input type="text" id="f-district" placeholder={isAr ? 'مثال: العزيزية' : 'e.g. Al-Aziziyah'}
+                   class="w-full px-4 py-3 rounded border border-[#e5e2db] bg-[#fcf9f2] text-[#1c1c18] text-sm
+                          focus:outline-none focus:border-[rgba(200,169,106,0.8)] focus:ring-1 focus:ring-[rgba(200,169,106,0.5)]
+                          transition-colors placeholder:text-[#74777f]" />
+          </div>
+
+          <button type="submit"
+                  class="w-full inline-flex items-center justify-center gap-3 bg-[#25D366] text-white py-4 rounded
+                         font-bold text-sm font-['Inter'] hover:brightness-110 transition-all shadow-md">
+            <span class="material-symbols-outlined text-[20px]">chat</span>
+            {isAr ? 'أرسل طلبك عبر واتساب' : 'Send Request via WhatsApp'}
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ waNumber: SITE.waNumber, isAr: lang === 'ar' }}>
+  document.getElementById('wa-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name     = (document.getElementById('f-name') as HTMLInputElement)?.value.trim() || (isAr ? 'عميل' : 'Customer');
+    const type     = (document.getElementById('f-type') as HTMLSelectElement)?.value || '';
+    const area     = (document.getElementById('f-area') as HTMLInputElement)?.value.trim() || '';
+    const district = (document.getElementById('f-district') as HTMLInputElement)?.value.trim() || '';
+
+    const msg = isAr
+      ? `السلام عليكم،\nاسمي: ${name}\nنوع الأرضية: ${type}\nالمساحة: ${area} م²\nالحي: ${district}\nأرغب في الاستفسار عن خدمة جلي الأرضيات في حفر الباطن.`
+      : `Hello,\nMy name: ${name}\nFloor type: ${type}\nArea: ${area} m²\nDistrict: ${district}\nI would like to inquire about floor polishing services in Hafar Al-Batin.`;
+
+    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+</script>

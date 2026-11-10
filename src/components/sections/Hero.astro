@@ -1,0 +1,155 @@
+---
+// src/components/sections/Hero.astro
+import { SITE, waLink } from '../../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+---
+
+<section class="relative w-full overflow-hidden bg-[#f6f3ec] pt-10 pb-20 lg:pt-16 lg:pb-28">
+  <!-- Ambient gradient bloom -->
+  <div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[520px]
+              bg-gradient-to-b from-[#ffdf9f]/20 via-[#e5e2db]/30 to-transparent rounded-full blur-3xl"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+      <!-- Text & CTA column -->
+      <div class="lg:col-span-7 flex flex-col gap-6">
+
+        <!-- Authority badge -->
+        <div class="inline-flex items-center gap-2.5 bg-white/80 px-3.5 py-1.5 rounded-full w-fit shadow-sm border border-[#e5e2db]">
+          <span class="inline-flex h-2 w-2 rounded-full bg-[#735b24] animate-pulse"></span>
+          <span class="text-xs font-semibold font-['Inter'] text-[#1c1c18]">
+            {isAr
+              ? 'المؤسسة الرائدة المتخصصة في حفر الباطن والمنطقة الشرقية'
+              : 'The Leading Specialist in Hafar Al-Batin & Eastern Province'}
+          </span>
+        </div>
+
+        <!-- H1 -->
+        <h1 class="text-4xl lg:text-5xl font-bold text-[#001026] tracking-tight leading-tight">
+          {isAr
+            ? <>جلي بلاط حفرالباطن<br /><span class="text-[#735b24]">خدمات جلي وتلميع الرخام والأرضيات</span></>
+            : <>Tile Polishing in Hafar Al&#8209;Batin<br /><span class="text-[#735b24]">Luxury Marble & Floor Restoration</span></>}
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg text-[#44474e] max-w-2xl leading-relaxed">
+          {isAr
+            ? 'خدمات جلي وتلميع البلاط، السيراميك، والرخام بأحدث أقراص الألماس الكريستالية ومكائن الجلي الإيطالية، مع معالجة الشقوق وتسكير الفواصل بجودة معتمدة.'
+            : 'Professional tile, marble, and floor polishing services using Italian diamond grinding machines and crystal polishing compounds — restoring your floors to a flawless mirror finish.'}
+        </p>
+
+        <!-- CTA buttons -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
+          <a href={waLink(lang)} target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-3 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404]
+                    transition-all duration-200 px-6 py-4 rounded font-bold text-sm font-['Inter'] shadow-md hover:shadow-lg wa-pulse">
+            <span class="material-symbols-outlined text-[22px]">chat</span>
+            <span>{isAr ? 'احجز معاينة مجانية عبر واتساب' : 'Book Free Inspection via WhatsApp'}</span>
+          </a>
+          <a href={`tel:${SITE.phone}`}
+             class="inline-flex items-center justify-center gap-2.5 bg-[#001026] text-white hover:bg-[#0b2545]
+                    transition-all duration-200 px-6 py-4 rounded font-bold text-sm font-['Inter'] shadow-sm">
+            <span class="material-symbols-outlined text-[20px]">phone_in_talk</span>
+            <span dir="ltr">{isAr ? `اتصال: ${SITE.phoneDisplay}` : `Call: ${SITE.phoneDisplay}`}</span>
+          </a>
+        </div>
+
+        <a href="#services"
+           class="inline-flex items-center gap-2 text-[#735b24] hover:text-[#1c1c18] transition-colors text-sm font-semibold underline underline-offset-4 w-fit">
+          <span>{isAr ? 'استكشف خدماتنا' : 'Explore our services'}</span>
+          <span class="material-symbols-outlined text-[15px]">{isAr ? 'arrow_downward' : 'arrow_downward'}</span>
+        </a>
+      </div>
+
+      <!-- Hero image mosaic -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative bg-[#f0eee7] rounded-xl p-3 shadow-xl">
+          <!-- Hero image -->
+          <div class="relative h-[360px] sm:h-[420px] w-full rounded-lg overflow-hidden bg-[#e5e2db]">
+            <!-- Placeholder gradient — replace src with real photo -->
+            <img
+              src="/images/hero-marble-floor.jpg"
+              alt={isAr
+                ? 'أرضية رخام إيطالي فاخر مجلوّة وملمّعة في فيلا بحفر الباطن'
+                : 'Luxury Italian marble floor polished to mirror finish in Hafar Al-Batin villa'}
+              class="w-full h-full object-cover"
+              width="600" height="420"
+              loading="eager"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <!-- Fallback when no image yet -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center">
+              <div class="text-center text-white/60">
+                <span class="material-symbols-outlined text-[64px] mb-2 block">diamond</span>
+                <div class="text-sm font-['Inter']">{isAr ? 'صورة الرخام الفاخر' : 'Luxury Marble Photo'}</div>
+              </div>
+            </div>
+            <!-- Overlay gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#001026]/80 via-[#001026]/20 to-transparent"></div>
+            <!-- Bottom badge -->
+            <div class="absolute bottom-4 inset-x-4 bg-white/95 backdrop-blur-md p-4 rounded shadow-md flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-[#fedb98] flex items-center justify-center text-[#735b24]">
+                  <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                </div>
+                <div>
+                  <p class="font-bold text-[#001026] text-sm">
+                    {isAr ? 'لمعان بلوري زجاجي' : 'Crystal Glass Shine'}
+                  </p>
+                  <p class="text-xs text-[#44474e]">
+                    {isAr ? 'تقنية الكريستال الإيطالي خالية من الغبار' : 'Italian crystal tech — 100% dust-free'}
+                  </p>
+                </div>
+              </div>
+              <span class="px-3 py-1 bg-[#ebe8e1] text-[#001026] text-xs font-bold font-['Inter'] rounded">
+                {isAr ? '100% مضمون' : '100% Guaranteed'}
+              </span>
+            </div>
+          </div>
+
+          <!-- Floating top badge -->
+          <div class="absolute -top-4 {isAr ? '-end-4' : '-start-4'} bg-white p-3 rounded-lg shadow-lg hidden sm:flex items-center gap-3 max-w-[200px]">
+            <span class="material-symbols-outlined text-[#735b24] text-[26px]">verified</span>
+            <div>
+              <p class="font-bold text-[#001026] text-xs">
+                {isAr ? 'معاينة مجانية' : 'Free Inspection'}
+              </p>
+              <p class="text-[10px] text-[#44474e]">
+                {isAr ? 'خلال ساعتين في حفر الباطن' : 'Within 2 hours in Hafar Al-Batin'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Trust strip -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-14">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-6 rounded-xl shadow-sm border border-[#e5e2db]">
+      {[
+        { icon: 'pin_drop',      ar: 'تغطية فورية',       en: 'Instant Coverage',    sub_ar: 'كافة أحياء حفر الباطن',   sub_en: 'All Hafar Al-Batin districts' },
+        { icon: 'diamond',       ar: 'أقراص ألماس إيطالية', en: 'Italian Diamond Discs', sub_ar: 'Klindex — الجيل الأحدث', sub_en: 'Klindex — latest generation' },
+        { icon: 'verified',      ar: 'ضمان مكتوب',        en: 'Written Warranty',    sub_ar: 'ضمان رسمي على اللمعان',   sub_en: 'Official polish warranty' },
+        { icon: 'cleaning_services', ar: 'خالٍ من الغبار', en: '100% Dust-Free',     sub_ar: 'شفط مائي فوري',           sub_en: 'Instant water suction' },
+      ].map(item => (
+        <div class="flex items-center gap-3 p-2">
+          <div class="w-10 h-10 rounded-full bg-[#f0eee7] flex items-center justify-center text-[#735b24] shrink-0">
+            <span class="material-symbols-outlined text-[20px]">{item.icon}</span>
+          </div>
+          <div>
+            <div class="font-bold text-[#001026] text-sm">{isAr ? item.ar : item.en}</div>
+            <div class="text-xs text-[#44474e]">{isAr ? item.sub_ar : item.sub_en}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

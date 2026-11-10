@@ -1,0 +1,67 @@
+---
+// src/components/sections/Testimonials.astro
+export interface Props { lang?: 'ar' | 'en'; }
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const reviews = [
+  { stars: 5, district_ar: 'حي العزيزية', district_en: 'Al-Aziziyah',
+    name_ar: 'محمد العتيبي',  name_en: 'Mohammed Al-Otaibi',
+    ar: 'نتيجة الجلي فاقت توقعاتي تماماً! الأرضية أصبحت كالمرآة، والفريق كان محترفاً جداً وسريعاً. أنصح الجميع.',
+    en: 'The polishing result exceeded my expectations! The floor looks like a mirror. The team was very professional and fast. Highly recommended.' },
+  { stars: 5, district_ar: 'حي الخالدية', district_en: 'Al-Khalidiyah',
+    name_ar: 'سارة الحربي',   name_en: 'Sarah Al-Harbi',
+    ar: 'كنت قلقة من الغبار لكن العمل كان نظيفاً 100%! حتى الستائر لم تتسخ. شكراً جزيلاً على الاحترافية.',
+    en: 'I was worried about dust but the work was 100% clean! Even the curtains didn\'t get dirty. Thank you for the professionalism.' },
+  { stars: 5, district_ar: 'حي المحمدية', district_en: 'Al-Muhammadiyah',
+    name_ar: 'خالد الشمري',   name_en: 'Khalid Al-Shammari',
+    ar: 'عملنا معهم في مشروع فيلا كبيرة (450 م²) وأنهوا العمل في يومين فقط بجودة عالية. ضمان مكتوب مطمئن.',
+    en: 'We worked with them on a large villa project (450 m²) — completed in just 2 days with high quality. The written warranty is reassuring.' },
+];
+---
+
+<section class="w-full bg-[#fcf9f2] py-20 lg:py-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fedb98] text-[#785f28] text-xs font-bold font-['Inter'] mb-4">
+        <span class="material-symbols-outlined text-[15px]">reviews</span>
+        {isAr ? 'آراء عملائنا الحقيقية' : 'Real Client Reviews'}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight">
+        {isAr ? 'ماذا يقول عملاؤنا في حفر الباطن؟' : 'What Our Hafar Al-Batin Clients Say'}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {reviews.map(r => (
+        <div class="bg-white rounded-2xl p-7 border border-[rgba(200,169,106,0.2)] shadow-sm hover:shadow-lg transition-shadow">
+          <!-- Stars -->
+          <div class="flex gap-1 mb-4">
+            {Array.from({ length: r.stars }).map(() => (
+              <span class="material-symbols-outlined text-[#735b24] text-[20px]" style="font-variation-settings:'FILL' 1">star</span>
+            ))}
+          </div>
+          <!-- Quote -->
+          <p class="text-sm text-[#44474e] leading-relaxed mb-5 italic">
+            "{isAr ? r.ar : r.en}"
+          </p>
+          <!-- Author -->
+          <div class="flex items-center gap-3 pt-4 border-t border-[#e5e2db]">
+            <div class="w-10 h-10 rounded-full bg-[#fedb98] flex items-center justify-center text-[#735b24] font-bold text-sm shrink-0">
+              {(isAr ? r.name_ar : r.name_en).charAt(0)}
+            </div>
+            <div>
+              <div class="font-bold text-[#001026] text-sm">{isAr ? r.name_ar : r.name_en}</div>
+              <div class="text-xs text-[#44474e] flex items-center gap-1">
+                <span class="material-symbols-outlined text-[12px]">location_on</span>
+                {isAr ? r.district_ar : r.district_en}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

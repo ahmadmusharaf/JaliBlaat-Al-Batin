@@ -1,0 +1,40 @@
+---
+// src/components/sections/Stats.astro
+// Animated counter strip — trust signals
+export interface Props { lang?: 'ar' | 'en'; }
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const stats = [
+  { value: '1,200+', icon: 'home_work',
+    ar: { label: 'مشروع منفذ',       sub: 'في حفر الباطن والمنطقة الشرقية' },
+    en: { label: 'Projects Completed', sub: 'Across Hafar Al-Batin & Eastern Province' } },
+  { value: '100%',   icon: 'cleaning_services',
+    ar: { label: 'خالٍ من الغبار',   sub: 'بأجهزة شفط مائي Klindex' },
+    en: { label: 'Dust-Free Process', sub: 'Using Klindex water suction machines' } },
+  { value: '10 yrs', icon: 'verified_user',
+    ar: { label: 'ضمان اللمعان',     sub: 'مع طبقة النانو الإيطالية' },
+    en: { label: 'Shine Warranty',    sub: 'With Italian nano-protective coating' } },
+  { value: '4.9★',   icon: 'star',
+    ar: { label: 'تقييم العملاء',    sub: 'بناءً على آراء حقيقية موثقة' },
+    en: { label: 'Customer Rating',   sub: 'Based on verified client reviews' } },
+];
+---
+
+<div class="w-full bg-[#0b2545] py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {stats.map(s => (
+        <div class="text-center group">
+          <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-[#ffdf9f] mx-auto mb-4
+                      group-hover:bg-[rgba(200,169,106,0.2)] transition-colors">
+            <span class="material-symbols-outlined text-[28px]">{s.icon}</span>
+          </div>
+          <div class="text-3xl lg:text-4xl font-bold text-white mb-1 font-['Inter']">{s.value}</div>
+          <div class="text-[#ffdf9f] font-semibold text-sm mb-1">{isAr ? s.ar.label : s.en.label}</div>
+          <div class="text-white/50 text-xs">{isAr ? s.ar.sub : s.en.sub}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+---
+// src/components/sections/HowItWorks.astro
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const steps = [
+  { n: '1', icon: 'photo_camera',
+    ar: { h: 'أرسل صور أرضيتك', d: 'أرسل صوراً أو فيديو لأرضيتك عبر الواتساب ونُقيّم الحالة فوراً.' },
+    en: { h: 'Send Floor Photos', d: 'Send photos or a video of your floor via WhatsApp — we assess the condition instantly.' } },
+  { n: '2', icon: 'engineering',
+    ar: { h: 'معاينة ميدانية وتسعير', d: 'يصل فريقنا الهندسي خلال ساعتين لمعاينة الموقع وتقديم عرض سعر مجاني.' },
+    en: { h: 'On-Site Inspection & Quote', d: 'Our team arrives within 2 hours for a site inspection and free price proposal.' } },
+  { n: '3', icon: 'auto_awesome',
+    ar: { h: 'تنفيذ فوري وتسليم كامل', d: 'ننجز العمل بأقراص الألماس والكريستلايزر ونُسلّم أرضية كالمرآة مع ضمان مكتوب.' },
+    en: { h: 'Flawless Execution & Handover', d: 'We complete the work with diamond discs and crystallizer, delivering a mirror-shine floor with a written warranty.' } },
+];
+---
+
+<section class="w-full bg-[#0b2545] py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#ffdf9f] text-xs font-bold font-['Inter'] mb-4">
+        <span class="material-symbols-outlined text-[15px]">checklist</span>
+        {isAr ? 'بسيط وسريع' : 'Simple & Fast'}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
+        {isAr ? 'كيف تتم عملية الجلي في 3 خطوات بسيطة؟' : 'How it works in 3 simple steps'}
+      </h2>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto">
+        {isAr
+          ? 'نظام محكم مصمم لإنهاء مشروعك بأقصى سرعة وأعلى جودة.'
+          : 'A streamlined system designed to complete your project at maximum speed and quality.'}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+      <!-- Connecting line (desktop only) -->
+      <div class="hidden md:block absolute top-10 left-[16.5%] right-[16.5%] h-px bg-[rgba(200,169,106,0.3)]"></div>
+
+      {steps.map(step => (
+        <div class="flex flex-col items-center text-center gap-5">
+          <div class="relative">
+            <div class="w-20 h-20 rounded-full bg-[rgba(200,169,106,0.15)] border-2 border-[rgba(200,169,106,0.4)]
+                        flex items-center justify-center text-[#ffdf9f]">
+              <span class="material-symbols-outlined text-[36px]">{step.icon}</span>
+            </div>
+            <span class="absolute -top-2 -end-2 w-6 h-6 rounded-full bg-[#735b24] text-white text-xs font-bold font-['Inter'] flex items-center justify-center">
+              {step.n}
+            </span>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-lg mb-2">{isAr ? step.ar.h : step.en.h}</h3>
+            <p class="text-sm text-white/65 leading-relaxed">{isAr ? step.ar.d : step.en.d}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

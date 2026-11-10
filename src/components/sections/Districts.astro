@@ -1,0 +1,70 @@
+---
+// src/components/sections/Districts.astro
+import { SITE } from '../../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+const districts = isAr ? SITE.districts.ar : SITE.districts.en;
+---
+
+<section id="service-areas" class="w-full bg-[#f6f3ec] py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#001026] text-[#ffdf9f] text-xs font-bold font-['Inter'] mb-4">
+        <span class="material-symbols-outlined text-[15px]">location_on</span>
+        {isAr ? 'نغطي كل حفر الباطن' : 'Covering all of Hafar Al-Batin'}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
+        {isAr ? 'نخدم أحياء ومناطق حفر الباطن' : 'Serving Hafar Al-Batin Neighbourhoods'}
+      </h2>
+      <p class="text-lg text-[#44474e] max-w-2xl mx-auto">
+        {isAr
+          ? 'فريقنا مجهز للوصول إلى أي حي داخل حفر الباطن خلال ساعتين كحد أقصى.'
+          : 'Our team is equipped to reach any neighbourhood within Hafar Al-Batin within 2 hours maximum.'}
+      </p>
+    </div>
+
+    <!-- District chips grid -->
+    <div class="flex flex-wrap gap-3 justify-center mb-12">
+      {districts.map(d => (
+        <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-[rgba(200,169,106,0.3)]
+                    text-sm text-[#001026] font-semibold shadow-sm hover:bg-[#0b2545] hover:text-[#ffdf9f]
+                    hover:border-[rgba(200,169,106,0.6)] transition-all duration-150 cursor-default">
+          <span class="material-symbols-outlined text-[14px] text-[#735b24]">location_on</span>
+          {d}
+        </div>
+      ))}
+    </div>
+
+    <!-- Big CTA card -->
+    <div class="bg-[#0b2545] rounded-2xl p-8 lg:p-12 text-center text-white">
+      <span class="material-symbols-outlined text-[48px] text-[#ffdf9f] mb-4 block">local_shipping</span>
+      <h3 class="text-2xl lg:text-3xl font-bold mb-3">
+        {isAr ? 'هل أرضيتك في حفر الباطن؟' : 'Is your floor in Hafar Al-Batin?'}
+      </h3>
+      <p class="text-white/70 text-lg max-w-xl mx-auto mb-8">
+        {isAr
+          ? 'نصل إليك داخل حفر الباطن خلال ساعتين بدون رسوم معاينة — اتصل أو أرسل واتساب الآن.'
+          : 'We reach you within Hafar Al-Batin in 2 hours with no inspection fee — call or WhatsApp now.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(isAr ? SITE.waMessageAr : SITE.waMessageEn)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded font-bold text-sm font-['Inter'] hover:brightness-110 transition-all shadow-lg">
+          <span class="material-symbols-outlined text-[22px]">chat</span>
+          {isAr ? 'احجز معاينة مجانية عبر واتساب' : 'Book Free Inspection via WhatsApp'}
+        </a>
+        <a href={`tel:${SITE.phone}`}
+           class="inline-flex items-center justify-center gap-3 bg-white/10 text-white border border-white/20 px-8 py-4 rounded font-bold text-sm font-['Inter'] hover:bg-white/20 transition-all">
+          <span class="material-symbols-outlined text-[20px]">call</span>
+          {isAr ? 'اتصل مباشرة' : 'Call Directly'}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

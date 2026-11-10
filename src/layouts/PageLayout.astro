@@ -1,0 +1,41 @@
+---
+// src/layouts/PageLayout.astro
+// High-level layout used by all pages — composes BaseLayout + Header + Footer + MobileBar
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCTABar from '../components/MobileCTABar.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  lang?: 'ar' | 'en';
+  canonical?: string;
+  ogImage?: string;
+  schemaJson?: string;
+}
+
+const { title, description, lang = 'ar', canonical, ogImage, schemaJson } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  canonical={canonical}
+  ogImage={ogImage}
+  schemaJson={schemaJson}
+>
+  <Header lang={lang} />
+
+  <!-- Main content pushed below sticky header (top-bar 40px + nav 80px = 120px) -->
+  <main class="flex-1 pt-30">
+    <slot />
+  </main>
+
+  <!-- Add bottom padding on mobile so content isn't hidden behind sticky CTA bar -->
+  <div class="pb-16 md:pb-0"></div>
+
+  <Footer lang={lang} />
+  <MobileCTABar lang={lang} />
+</BaseLayout>

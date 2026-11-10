@@ -1,0 +1,111 @@
+---
+// src/components/sections/BeforeAfter.astro
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const cases = [
+  { before: '/images/ba-1-before.jpg', after: '/images/ba-1-after.jpg',
+    ar: { title: 'صالة رخام فيلا فاخرة',       loc: 'حي العزيزية'   },
+    en: { title: 'Luxury Villa Marble Hall',      loc: 'Al-Aziziyah District' } },
+  { before: '/images/ba-2-before.jpg', after: '/images/ba-2-after.jpg',
+    ar: { title: 'ترويبة بورسلان مستعمل',        loc: 'حي الخالدية'  },
+    en: { title: 'Restored Porcelain Living Room', loc: 'Al-Khalidiyah District' } },
+  { before: '/images/ba-3-before.jpg', after: '/images/ba-3-after.jpg',
+    ar: { title: 'فناء حديقة وطرق خارجية',      loc: 'حي المحمدية'  },
+    en: { title: 'Outdoor Patio & Terrace Floor',  loc: 'Al-Muhammadiyah District' } },
+];
+---
+
+<section id="our-work" class="w-full bg-[#fcf9f2] py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fedb98] text-[#785f28] text-xs font-bold font-['Inter'] mb-4">
+        <span class="material-symbols-outlined text-[15px]">compare</span>
+        {isAr ? 'معرض مقارنة قبل وبعد' : 'Before & After Gallery'}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
+        {isAr ? 'شاهد نتيجة الجلي الكريستالي' : 'See the Crystal Polish Results'}
+      </h2>
+      <p class="text-lg text-[#44474e] max-w-2xl mx-auto">
+        {isAr
+          ? 'نتائج حقيقية منفذة في أحياء حفر الباطن — اسحب الشريط لترى الفرق بنفسك.'
+          : 'Real results executed in Hafar Al-Batin — drag the slider to see the transformation yourself.'}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {cases.map((c, i) => (
+        <div class="rounded-xl overflow-hidden shadow-md border border-[rgba(200,169,106,0.2)]">
+          <!-- Before/After slider container -->
+          <div class="before-after-container h-64 relative cursor-ew-resize" data-index={i}>
+            <!-- AFTER image (bottom layer, full width) -->
+            <div class="absolute inset-0 bg-[#1c1c18]">
+              <img src={c.after}
+                   alt={isAr ? `بعد الجلي — ${c.ar.title}` : `After polish — ${c.en.title}`}
+                   class="w-full h-full object-cover"
+                   loading="lazy"
+                   onerror="this.parentElement.style.background='linear-gradient(135deg,#001026,#0b2545)'" />
+            </div>
+            <!-- BEFORE image (top layer, clipped) -->
+            <div class="absolute inset-0 overflow-hidden ba-before-clip" style="clip-path: inset(0 50% 0 0);">
+              <div class="absolute inset-0 bg-[#44474e]">
+                <img src={c.before}
+                     alt={isAr ? `قبل الجلي — ${c.ar.title}` : `Before polish — ${c.en.title}`}
+                     class="w-full h-full object-cover"
+                     loading="lazy"
+                     onerror="this.parentElement.style.background='linear-gradient(135deg,#44474e,#1c1c18)'" />
+              </div>
+            </div>
+            <!-- Labels -->
+            <div class="absolute top-3 start-3 bg-[#1c1c18]/75 text-white text-[10px] font-bold font-['Inter'] px-2 py-1 rounded backdrop-blur-sm">
+              {isAr ? 'قبل' : 'BEFORE'}
+            </div>
+            <div class="absolute top-3 end-3 bg-[#735b24]/90 text-white text-[10px] font-bold font-['Inter'] px-2 py-1 rounded backdrop-blur-sm">
+              {isAr ? 'بعد' : 'AFTER'}
+            </div>
+            <!-- Drag handle -->
+            <div class="before-after-handle ba-handle" style="left:50%">
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[rgba(200,169,106,0.9)] material-symbols-outlined text-[20px]">drag_indicator</span>
+            </div>
+          </div>
+          <!-- Card info -->
+          <div class="bg-white px-5 py-4">
+            <div class="font-bold text-[#001026] text-sm">{isAr ? c.ar.title : c.en.title}</div>
+            <div class="text-xs text-[#44474e] flex items-center gap-1 mt-1">
+              <span class="material-symbols-outlined text-[13px]">location_on</span>
+              {isAr ? c.ar.loc : c.en.loc}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Before/After drag slider
+  document.querySelectorAll<HTMLElement>('.before-after-container').forEach(container => {
+    const handle   = container.querySelector<HTMLElement>('.ba-handle')!;
+    const clipEl   = container.querySelector<HTMLElement>('.ba-before-clip')!;
+    let dragging   = false;
+
+    function setPos(x: number) {
+      const rect = container.getBoundingClientRect();
+      let pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+      handle.style.left = `${pct}%`;
+      clipEl.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    }
+
+    handle.addEventListener('mousedown', () => { dragging = true; });
+    handle.addEventListener('touchstart', () => { dragging = true; }, { passive: true });
+    document.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+    document.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('mouseup',  () => { dragging = false; });
+    document.addEventListener('touchend', () => { dragging = false; });
+  });
+</script>

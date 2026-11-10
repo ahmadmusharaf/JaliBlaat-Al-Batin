@@ -1,0 +1,32 @@
+---
+// src/pages/en/pricing.astro  — English Pricing Guide Page
+import PageLayout     from '../../layouts/PageLayout.astro';
+import PricingHero    from '../../components/sections/PricingHero.astro';
+import PricingTable   from '../../components/sections/PricingTable.astro';
+import FAQ            from '../../components/sections/FAQ.astro';
+import ContactForm    from '../../components/sections/ContactForm.astro';
+import { SITE }       from '../../data/site';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How much does tile and marble polishing cost in Hafar Al-Batin?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Polishing costs range from 12 to 35 SAR per m² depending on material type and floor condition." } },
+    { "@type": "Question", "name": "Is the inspection free in Hafar Al-Batin?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free — including an on-site visit and a 1 m² test sample before you commit." } }
+  ]
+});
+---
+
+<PageLayout
+  title="Tile & Marble Polishing Cost in Hafar Al-Batin 2025 | Complete Price Guide"
+  description="Transparent, complete guide to tile and marble polishing prices in Hafar Al-Batin 2025. From 12–35 SAR per m². Free inspection, written warranty."
+  lang="en"
+  schemaJson={schema}
+>
+  <PricingHero  lang="en" />
+  <PricingTable lang="en" />
+  <FAQ          lang="en" />
+  <ContactForm  lang="en" />
+</PageLayout>

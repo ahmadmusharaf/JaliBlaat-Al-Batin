@@ -1,0 +1,148 @@
+---
+// src/components/Footer.astro
+import { SITE, waLink } from '../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+---
+
+<footer class="bg-[#001026] text-white/85">
+
+  <!-- Main footer grid -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+      <!-- Brand column -->
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center font-bold text-white text-sm">JB</div>
+          <div>
+            <div class="font-bold text-white">{isAr ? 'جلي بلاط حفرالباطن' : 'JaliBlaat Al Batin'}</div>
+            <div class="text-[10px] text-[#ffdf9f] uppercase tracking-widest font-semibold">
+              {isAr ? 'JaliBlaat Al Batin' : 'Luxury Stoneworks'}
+            </div>
+          </div>
+        </div>
+        <p class="text-sm text-white/65 leading-relaxed">
+          {isAr
+            ? 'المؤسسة الرائدة في جلي وتلميع البلاط، الرخام، والأرضيات بحفر الباطن والمنطقة الشرقية.'
+            : 'The leading tile & marble polishing specialist in Hafar Al-Batin, Eastern Province.'}
+        </p>
+        <div class="flex gap-3">
+          <a href={waLink(lang)} target="_blank" rel="noopener"
+             class="flex items-center gap-2 bg-[#25D366] text-white px-3 py-2 rounded text-xs font-bold font-['Inter']">
+            <span class="material-symbols-outlined text-[16px]">chat</span>
+            WhatsApp
+          </a>
+          <a href={`tel:${SITE.phone}`}
+             class="flex items-center gap-2 bg-white/10 text-white px-3 py-2 rounded text-xs font-bold font-['Inter'] hover:bg-white/20 transition-colors">
+            <span class="material-symbols-outlined text-[16px]">call</span>
+            {isAr ? 'اتصل' : 'Call'}
+          </a>
+        </div>
+      </div>
+
+      <!-- Services column -->
+      <div>
+        <h3 class="text-[#ffdf9f] font-bold text-sm uppercase tracking-wider font-['Inter'] mb-5">
+          {isAr ? 'خدمات الجلي المتخصصة' : 'Specialized Services'}
+        </h3>
+        <ul class="flex flex-col gap-2.5 text-sm text-white/70">
+          {(isAr
+            ? ['جلي الرخام الطبيعي والكريستال','جلي البلاط والسيراميك والبورسلان','تنظيف الأرضيات العميق','إصلاح الفواصل والشقوق بالإيبوكسي','تلميع الحجر الطبيعي والغرانيت','طلاء النانو للحماية']
+            : ['Natural Marble Polish & Crystal','Tile, Ceramic & Porcelain Restoration','Deep Floor Scrubbing & Stripping','Grout & Crack Epoxy Repair','Natural Stone & Granite Polish','Nano Protective Coating']
+          ).map(s => (
+            <li class="flex items-center gap-2">
+              <span class="w-1 h-1 rounded-full bg-[#ffdf9f] shrink-0"></span>
+              {s}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Districts column -->
+      <div>
+        <h3 class="text-[#ffdf9f] font-bold text-sm uppercase tracking-wider font-['Inter'] mb-5">
+          {isAr ? 'أحياء حفر الباطن المخدومة' : 'Hafar Al-Batin Districts'}
+        </h3>
+        <ul class="flex flex-col gap-2 text-sm text-white/70">
+          {(isAr ? SITE.districts.ar : SITE.districts.en).map(d => (
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[13px] text-[#ffdf9f]">location_on</span>
+              {d}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact column -->
+      <div>
+        <h3 class="text-[#ffdf9f] font-bold text-sm uppercase tracking-wider font-['Inter'] mb-5">
+          {isAr ? 'تواصل معنا' : 'Direct Contact'}
+        </h3>
+        <ul class="flex flex-col gap-4 text-sm text-white/80">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-[18px] text-[#ffdf9f] mt-0.5">call</span>
+            <div>
+              <div class="text-white/50 text-xs mb-0.5">{isAr ? 'الهاتف المباشر' : 'Direct Line'}</div>
+              <a href={`tel:${SITE.phone}`} dir="ltr" class="text-white font-semibold hover:text-[#ffdf9f] transition-colors">
+                {SITE.phoneDisplay}
+              </a>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-[18px] text-[#66ff8e] mt-0.5">chat</span>
+            <div>
+              <div class="text-white/50 text-xs mb-0.5">WhatsApp</div>
+              <a href={waLink(lang)} target="_blank" rel="noopener"
+                 class="text-white font-semibold hover:text-[#66ff8e] transition-colors">
+                {isAr ? 'ارسل رسالة الآن' : 'Message Us Now'}
+              </a>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-[18px] text-[#ffdf9f] mt-0.5">schedule</span>
+            <div>
+              <div class="text-white/50 text-xs mb-0.5">{isAr ? 'ساعات العمل' : 'Working Hours'}</div>
+              <div>{isAr ? SITE.hours : SITE.hoursEn}</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-[18px] text-[#ffdf9f] mt-0.5">location_on</span>
+            <div>
+              <div class="text-white/50 text-xs mb-0.5">{isAr ? 'الموقع' : 'Location'}</div>
+              <div>{isAr ? `${SITE.address.city}، ${SITE.address.region}` : 'Hafar Al-Batin, Eastern Province, KSA'}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
+      <span>
+        {isAr
+          ? `© ${new Date().getFullYear()} جلي بلاط حفرالباطن — جميع الحقوق محفوظة`
+          : `© ${new Date().getFullYear()} JaliBlaat Al Batin — All rights reserved`}
+      </span>
+      <div class="flex items-center gap-4">
+        <a href={isAr ? '/' : '/en/'} class="hover:text-white/70 transition-colors">
+          {isAr ? 'الرئيسية' : 'Home'}
+        </a>
+        <a href={isAr ? '/ar/pricing/' : '/en/pricing/'} class="hover:text-white/70 transition-colors">
+          {isAr ? 'الأسعار' : 'Pricing'}
+        </a>
+        <a href={isAr ? '/en/' : '/'} class="hover:text-white/70 transition-colors">
+          {isAr ? 'English' : 'العربية'}
+        </a>
+      </div>
+    </div>
+  </div>
+
+</footer>

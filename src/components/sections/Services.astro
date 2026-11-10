@@ -1,0 +1,93 @@
+---
+// src/components/sections/Services.astro
+import { waLink } from '../../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const services = [
+  {
+    icon: 'diamond',
+    ar: { title: 'جلي الرخام الطبيعي والكريستال', desc: 'جلي وتلميع رخام كريم ماربل، تراورتين، كريستال بالكريستلايزر الإيطالي وأقراص الألماس المائي لإعطاء لمعان فندقي يدوم لسنوات.' },
+    en: { title: 'Marble Polish & Crystallization', desc: 'Italian crystallizer and water-diamond disc polishing for Crema Marfil, travertine, and crystal marble — hotel-grade shine lasting years.' },
+  },
+  {
+    icon: 'cleaning_services',
+    ar: { title: 'جلي البلاط والسيراميك والبورسلان', desc: 'تنظيف عميق وجلي البلاط والسيراميك والبورسلان بمواد مخصصة مع تلميع الفواصل وإعادة ترويبتها بشكل احترافي.' },
+    en: { title: 'Tile, Ceramic & Porcelain Restoration', desc: 'Deep cleaning and professional polishing of tiles, ceramics, and porcelain — including grout recoloring and sealant application.' },
+  },
+  {
+    icon: 'mop',
+    ar: { title: 'تنظيف الأرضيات العميق وتجريد الطلاء', desc: 'إزالة الطلاءات القديمة، الدهون، والبقع العنيدة بمواد صناعية آمنة وأجهزة ضغط ماء حراري متخصصة.' },
+    en: { title: 'Deep Floor Scrubbing & Stripping', desc: 'Removal of old coatings, grease, and stubborn stains using safe industrial chemicals and specialized hot-water pressure equipment.' },
+  },
+  {
+    icon: 'build',
+    ar: { title: 'إصلاح الفواصل والشقوق بالإيبوكسي', desc: 'تعبئة الشقوق وتجديد الفواصل بمواد الإيبوكسي المتينة والمضادة للرطوبة لضمان متانة وجمال الأرضية على المدى البعيد.' },
+    en: { title: 'Grout & Crack Epoxy Repair', desc: 'Filling cracks and renewing grout lines with durable, moisture-resistant epoxy materials for long-term floor beauty and structural integrity.' },
+  },
+  {
+    icon: 'shield',
+    ar: { title: 'طلاء الحماية بالنانو الإيطالي', desc: 'تطبيق طبقات النانو الإيطالية الشفافة التي تحمي السطح من الخدوش والرطوبة وتُبقي اللمعان ناصعاً لأكثر من 10 سنوات.' },
+    en: { title: 'Nano Protective Coating', desc: 'Application of transparent Italian nano layers that protect surfaces from scratches and moisture — maintaining brilliance for over 10 years.' },
+  },
+  {
+    icon: 'foundation',
+    ar: { title: 'تلميع الحجر الطبيعي والغرانيت', desc: 'جلي الحجر الطبيعي والغرانيت بمراحل متعددة من المطرقة الألماسية وصولاً إلى الكريستلايزر لإخراج الجمال الطبيعي للحجر.' },
+    en: { title: 'Natural Stone & Granite Polish', desc: 'Multi-stage diamond and crystallizer polishing of natural stone and granite — revealing the material\'s natural beauty and deep luster.' },
+  },
+];
+---
+
+<section id="services" class="w-full bg-[#fcf9f2] py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fedb98] text-[#785f28] text-xs font-bold font-['Inter'] mb-4">
+        <span class="material-symbols-outlined text-[15px]">auto_awesome</span>
+        {isAr ? 'خدمة متكاملة لشتى أنواع الأرضيات' : 'Complete service for all floor types'}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
+        {isAr ? 'خدمات جلي متخصصة لأرضياتك' : 'Specialized Floor Polishing Services'}
+      </h2>
+      <p class="text-lg text-[#44474e] max-w-2xl mx-auto">
+        {isAr
+          ? 'نقدم حلولاً متكاملة لجلي وترميم جميع أنواع الأرضيات بمعايير فندقية باستخدام أحدث المعدات الإيطالية.'
+          : 'We deliver complete floor polishing and restoration solutions using the latest Italian equipment to hotel-grade standards.'}
+      </p>
+    </div>
+
+    <!-- Services grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map(svc => (
+        <div class="group bg-white border border-[rgba(200,169,106,0.2)] rounded-xl p-6 shadow-sm
+                    hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(200,169,106,0.5)]
+                    transition-all duration-200">
+          <!-- Icon -->
+          <div class="w-12 h-12 rounded-lg bg-[#f6f3ec] flex items-center justify-center text-[#735b24] mb-5
+                      group-hover:bg-[#fedb98] transition-colors">
+            <span class="material-symbols-outlined text-[26px]">{svc.icon}</span>
+          </div>
+          <!-- Content -->
+          <h3 class="font-bold text-[#001026] text-lg mb-3">
+            {isAr ? svc.ar.title : svc.en.title}
+          </h3>
+          <p class="text-sm text-[#44474e] leading-relaxed mb-5">
+            {isAr ? svc.ar.desc : svc.en.desc}
+          </p>
+          <!-- CTA -->
+          <a href={waLink(lang)} target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 text-sm font-bold font-['Inter'] text-[#735b24] hover:text-[#001026] transition-colors">
+            <span class="material-symbols-outlined text-[16px]">chat</span>
+            {isAr ? 'استفسر عبر واتساب' : 'Inquire via WhatsApp'}
+          </a>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
