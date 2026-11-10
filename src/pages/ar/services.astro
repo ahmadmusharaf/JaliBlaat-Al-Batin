@@ -1,4 +1,4 @@
-﻿---
+---
 // src/pages/ar/services.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
@@ -103,7 +103,8 @@ const services = [
 
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((svc, i) => (
-            <article class={`reveal stagger-${(i % 3) + 1} group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}>
+            <article class={`reveal stagger-${(i % 3) + 1} tap-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}>
+              <a href={waLink('ar')} target="_blank" rel="noopener" class="tap-link" aria-label={`واتساب عن ${svc.name}`}></a>
               <div class="bg-gradient-to-br from-[#001026] to-[#0b2545] p-6">
                 <div class="flex items-center justify-between mb-3">
                   <span class="material-symbols-outlined text-[#ffdf9f] text-3xl">{svc.icon}</span>

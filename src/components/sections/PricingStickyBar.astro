@@ -1,0 +1,43 @@
+﻿---
+// src/components/sections/PricingStickyBar.astro
+// Mobile-only sticky bottom pricing strip shown on pricing pages
+import { waLink } from '../../data/site';
+export interface Props { lang?: 'ar' | 'en'; }
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+---
+
+<div class="pricing-sticky-bar" id="pricing-sticky-bar" role="complementary" aria-label={isAr ? 'عرض سعر سريع' : 'Quick price strip'}>
+  <div class="flex flex-col leading-tight">
+    <span class="text-[#ffdf9f] text-[10px] font-semibold uppercase tracking-widest">
+      {isAr ? 'الأسعار تبدأ من' : 'Prices from'}
+    </span>
+    <span class="text-white font-bold text-lg font-['Inter']">
+      {isAr ? '١٢ ر.س/م²' : '12 SAR/m²'}
+    </span>
+  </div>
+
+  <div class="flex gap-2">
+    <a href={waLink(lang)} target="_blank" rel="noopener"
+       class="flex items-center gap-1.5 bg-[#002c0f] text-[#66ff8e] px-4 py-2.5 rounded-lg font-bold text-xs wa-pulse">
+      <span class="material-symbols-outlined text-[16px]">chat</span>
+      {isAr ? 'احصل على عرض' : 'Get Quote'}
+    </a>
+  </div>
+</div>
+
+<!-- Auto-hide when user scrolls to contact form -->
+<script>
+  const bar = document.getElementById('pricing-sticky-bar');
+  if (bar) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        bar.style.transform = entry.isIntersecting ? 'translateY(100%)' : 'translateY(0)';
+        bar.style.transition = 'transform 0.3s ease';
+      },
+      { threshold: 0.1 }
+    );
+    const contactSection = document.querySelector('#contact-section, form');
+    if (contactSection) observer.observe(contactSection);
+  }
+</script>
