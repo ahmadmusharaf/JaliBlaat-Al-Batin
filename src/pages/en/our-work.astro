@@ -1,0 +1,307 @@
+﻿---
+// src/pages/en/our-work.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCTABar from '../../components/MobileCTABar.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import { SITE, waLink } from '../../data/site';
+
+const lang = 'en';
+const title = 'Our Work — Floor Polishing Projects in Hafar Al-Batin | JaliBlaat';
+const description = 'See our completed marble polishing, tile restoration, and terrazzo grinding projects across Hafar Al-Batin. Before & after gallery showcasing real results.';
+
+const projects = [
+  {
+    id: 1,
+    category: 'marble',
+    title: 'Villa Marble Restoration — Al-Aziziyah',
+    desc: 'Complete restoration of heavily scratched Italian marble across a 280 m² villa. Included crack injection, diamond grinding through 7 grits, and mirror-finish crystallisation.',
+    area: '280 m²',
+    district: 'Al-Aziziyah',
+    duration: '3 days',
+    img: '/images/project-marble-1.jpg',
+    tags: ['Marble', 'Residential'],
+  },
+  {
+    id: 2,
+    category: 'tile',
+    title: 'Commercial Tile Deep-Polish — Al-Khalidiyah',
+    desc: 'Deep cleaning and high-gloss polishing of 450 m² porcelain tile in a commercial showroom. Grout rehabilitation and anti-slip treatment applied throughout.',
+    area: '450 m²',
+    district: 'Al-Khalidiyah',
+    duration: '4 days',
+    img: '/images/project-tile-1.jpg',
+    tags: ['Tile', 'Commercial'],
+  },
+  {
+    id: 3,
+    category: 'terrazzo',
+    title: 'Terrazzo Grinding & Polish — Al-Rawdah',
+    desc: 'Full wet-grinding restoration of original terrazzo floors in a 1990s villa. Surface levelled, hairline cracks filled, and mirror finish achieved.',
+    area: '160 m²',
+    district: 'Al-Rawdah',
+    duration: '2 days',
+    img: '/images/project-terrazzo-1.jpg',
+    tags: ['Terrazzo', 'Residential'],
+  },
+  {
+    id: 4,
+    category: 'granite',
+    title: 'Granite Kitchen & Bathroom — Al-Muhammadiyah',
+    desc: 'Polishing and sealing of granite countertops, bathroom floors, and stair risers in a modern villa. Deep lustre restored; oil-resistant penetrating sealant applied.',
+    area: '90 m²',
+    district: 'Al-Muhammadiyah',
+    duration: '1 day',
+    img: '/images/project-granite-1.jpg',
+    tags: ['Granite', 'Residential'],
+  },
+  {
+    id: 5,
+    category: 'marble',
+    title: 'Apartment Complex Lobby — Al-Faisaliyah',
+    desc: 'Lobby and corridor marble restoration across 12-apartment complex. Uniform shine achieved across all common areas.',
+    area: '320 m²',
+    district: 'Al-Faisaliyah',
+    duration: '3 days',
+    img: '/images/project-marble-2.jpg',
+    tags: ['Marble', 'Commercial'],
+  },
+  {
+    id: 6,
+    category: 'tile',
+    title: 'Mosque Tile Restoration — Al-Baladiyah',
+    desc: 'Careful deep-cleaning and polishing of prayer hall porcelain tiles. Non-slip finish applied to all wet areas. Work completed outside prayer times.',
+    area: '600 m²',
+    district: 'Al-Baladiyah',
+    duration: '5 days',
+    img: '/images/project-tile-2.jpg',
+    tags: ['Tile', 'Religious'],
+  },
+];
+
+const categories = ['All', 'Marble', 'Tile', 'Terrazzo', 'Granite'];
+---
+
+<BaseLayout {title} {description} lang="en" canonical={SITE.url + '/en/our-work/'}>
+  <Header lang="en" currentPage="our-work" />
+
+  <PageHero
+    lang="en"
+    title="Our Completed Projects"
+    subtitle="Real results, real clients, real craftsmanship. Browse our portfolio of completed floor polishing and restoration projects across Hafar Al-Batin."
+    badge="Portfolio Gallery"
+    accentIcon="photo_library"
+    breadcrumb={[
+      { label: 'Home', href: '/en/' },
+      { label: 'Our Work' },
+    ]}
+  />
+
+  <main>
+    <!-- ── Stats Strip ── -->
+    <section class="bg-[#0b2545] py-10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+        {[
+          { n:'500+', l:'Projects Completed', icon:'check_circle' },
+          { n:'98%',  l:'Client Satisfaction', icon:'thumb_up' },
+          { n:'12',   l:'Districts Served', icon:'location_on' },
+          { n:'8+',   l:'Years Experience', icon:'workspace_premium' },
+        ].map(s => (
+          <div class="reveal">
+            <span class="material-symbols-outlined text-[#ffdf9f] text-3xl mb-2 block">{s.icon}</span>
+            <div class="text-3xl font-bold text-white font-['Inter'] mb-1">{s.n}</div>
+            <div class="text-white/50 text-sm">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Filter + Grid ── -->
+    <section class="py-20 bg-[#fcf9f2]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+        <!-- Filter buttons -->
+        <div class="flex flex-wrap gap-2 justify-center mb-12 reveal" id="filter-bar">
+          {categories.map(cat => (
+            <button
+              data-filter={cat.toLowerCase()}
+              class={`filter-btn px-5 py-2 rounded-full text-sm font-semibold border transition-all ${
+                cat === 'All'
+                  ? 'bg-[#001026] text-white border-[#001026]'
+                  : 'bg-white text-[#44474e] border-[#e5e2db] hover:border-[#001026] hover:text-[#001026]'
+              }`}>
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <!-- Project cards -->
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="projects-grid">
+          {projects.map((p, i) => (
+            <article
+              data-category={p.category}
+              class={`reveal stagger-${(i % 3) + 1} project-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+
+              <!-- Image placeholder -->
+              <div class="relative h-52 bg-gradient-to-br from-[#0b2545] to-[#001026] overflow-hidden">
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-[#ffdf9f] text-5xl opacity-60">photo_camera</span>
+                  <span class="text-white/40 text-xs font-medium">{p.tags.join(' · ')}</span>
+                </div>
+                <!-- Tags -->
+                <div class="absolute top-3 left-3 flex gap-2">
+                  {p.tags.map(tag => (
+                    <span class="bg-[#735b24] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">{tag}</span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="p-6">
+                <h3 class="font-bold text-[#001026] text-base mb-2 leading-snug">{p.title}</h3>
+                <p class="text-[#44474e] text-sm leading-relaxed mb-4">{p.desc}</p>
+
+                <!-- Meta -->
+                <div class="flex flex-wrap gap-4 text-xs text-[#44474e] border-t border-[#e5e2db] pt-4">
+                  <span class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[14px] text-[#735b24]">location_on</span>
+                    {p.district}
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[14px] text-[#735b24]">square_foot</span>
+                    {p.area}
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[14px] text-[#735b24]">schedule</span>
+                    {p.duration}
+                  </span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-center text-[#44474e]/60 text-xs mt-10 italic reveal">
+          Note: Project photos will be replaced with real client photography. All project details reflect actual completed work.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Before / After Feature ── -->
+    <section class="py-20 bg-[#f6f3ec]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-14 reveal">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-3">Transformation</p>
+          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-4">See the Difference</h2>
+          <p class="text-[#44474e] max-w-xl mx-auto">Our before-and-after results speak for themselves. Drag the slider to compare.</p>
+        </div>
+
+        <!-- Slider -->
+        <div class="max-w-2xl mx-auto reveal">
+          <div class="relative h-80 rounded-2xl overflow-hidden border border-[#e5e2db] shadow-lg" id="ba-slider">
+            <!-- Before -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#2a1e00] to-[#1a1200] flex items-center justify-center">
+              <div class="text-center">
+                <span class="material-symbols-outlined text-[#735b24]/40 text-7xl">texture</span>
+                <p class="text-white/30 text-sm mt-2">Before — Dull, Scratched Surface</p>
+              </div>
+            </div>
+            <!-- After -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#001026] to-[#0b2545] flex items-center justify-center clip-after">
+              <div class="text-center">
+                <span class="material-symbols-outlined text-[#ffdf9f] text-7xl">diamond</span>
+                <p class="text-white/50 text-sm mt-2">After — Mirror Shine Restored</p>
+              </div>
+            </div>
+            <!-- Divider line -->
+            <div class="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-20 pointer-events-none" id="ba-line" style="left:50%"></div>
+            <!-- Handle -->
+            <div class="absolute top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-xl border-2 border-[#735b24] flex items-center justify-center z-30 cursor-ew-resize" id="ba-handle" style="left:calc(50% - 20px)">
+              <span class="material-symbols-outlined text-[#735b24] text-lg select-none">swap_horiz</span>
+            </div>
+            <!-- Labels -->
+            <div class="absolute bottom-4 left-4 bg-black/50 text-white text-xs font-bold px-3 py-1 rounded z-10">BEFORE</div>
+            <div class="absolute bottom-4 right-4 bg-[#735b24] text-white text-xs font-bold px-3 py-1 rounded z-10">AFTER</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="py-20 bg-gradient-to-r from-[#001026] to-[#0b2545]">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Want Similar Results?</h2>
+        <p class="text-white/70 text-lg mb-8">Request a free inspection for your property — we serve all Hafar Al-Batin districts.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={waLink('en')} target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] px-8 py-4 rounded-xl font-bold transition-all">
+            <span class="material-symbols-outlined">chat</span> Request Free Inspection
+          </a>
+          <a href="/en/services/"
+             class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold transition-all">
+            View All Services →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer lang="en" />
+  <MobileCTABar lang="en" />
+</BaseLayout>
+
+<style>
+  .clip-after { clip-path: inset(0 50% 0 0); }
+</style>
+
+<script>
+  // Before/After slider
+  const slider  = document.getElementById('ba-slider');
+  const handle  = document.getElementById('ba-handle');
+  const line    = document.getElementById('ba-line');
+  const after   = slider?.querySelector('.clip-after') as HTMLElement | null;
+
+  let dragging = false;
+
+  function setPos(x: number) {
+    if (!slider || !handle || !line || !after) return;
+    const rect  = slider.getBoundingClientRect();
+    const pct   = Math.min(Math.max((x - rect.left) / rect.width, 0.02), 0.98);
+    const pctStr = `${pct * 100}%`;
+    handle.style.left = `calc(${pctStr} - 20px)`;
+    line.style.left   = pctStr;
+    after.style.clipPath = `inset(0 ${(1 - pct) * 100}% 0 0)`;
+  }
+
+  handle?.addEventListener('mousedown',  () => { dragging = true; });
+  handle?.addEventListener('touchstart', () => { dragging = true; }, { passive: true });
+  window.addEventListener('mousemove',  e => { if (dragging) setPos(e.clientX); });
+  window.addEventListener('touchmove',  e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener('mouseup',   () => { dragging = false; });
+  window.addEventListener('touchend',  () => { dragging = false; });
+
+  // Portfolio filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = (btn as HTMLElement).dataset.filter!;
+
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-[#001026]','text-white','border-[#001026]');
+        b.classList.add('bg-white','text-[#44474e]','border-[#e5e2db]');
+      });
+      btn.classList.remove('bg-white','text-[#44474e]','border-[#e5e2db]');
+      btn.classList.add('bg-[#001026]','text-white','border-[#001026]');
+
+      cards.forEach(card => {
+        const matches = filter === 'all' || card.dataset.category === filter;
+        card.style.display = matches ? '' : 'none';
+      });
+    });
+  });
+</script>

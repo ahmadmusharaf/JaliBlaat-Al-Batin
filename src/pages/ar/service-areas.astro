@@ -1,0 +1,113 @@
+﻿---
+// src/pages/ar/service-areas.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCTABar from '../../components/MobileCTABar.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import { SITE, waLink } from '../../data/site';
+
+const title = 'مناطق خدمة جلي الأرضيات — جميع أحياء حفر الباطن | جلي بلاط حفرالباطن';
+const description = 'نقدم خدمات جلي الرخام وترميم الأرضيات في جميع أحياء حفر الباطن الـ 12. استجابة فورية، تغطية كاملة للمنازل والمنشآت التجارية.';
+
+const districts = [
+  { name:'العزيزية',           nameEn:'Al-Aziziyah',       desc:'من أكبر الأحياء السكنية في حفر الباطن. نخدم الفلل والمجمعات السكنية والمنشآت التجارية في العزيزية.', icon:'home' },
+  { name:'الخالدية',           nameEn:'Al-Khalidiyah',     desc:'حي سكني راقٍ يضم فللاً فاخرة بأرضيات رخام مستوردة. خدمات ترميم وجلي رخام متكاملة متاحة.', icon:'diamond' },
+  { name:'المحمدية',           nameEn:'Al-Muhammadiyah',   desc:'حي سكني وتجاري مختلط. نتعامل مع ترميم أرضيات المنازل والمنشآت مع تقليل الإزعاج للعمليات اليومية.', icon:'business' },
+  { name:'البلدية',            nameEn:'Al-Baladiyah',      desc:'حي وسط المدينة. متخصصون في جلي الأرضيات التجارية، المكاتب، وترميم حجر المباني التراثية.', icon:'location_city' },
+  { name:'أبو موسى الأشعري',  nameEn:'Abu Musa',          desc:'حي سكني قائم يضم أرضيات تيرازو وبلاط أصلي. خدمة ترميم تيرازو متخصصة متاحة.', icon:'texture' },
+  { name:'الروضة',             nameEn:'Al-Rawdah',         desc:'حي سكني خضراء يفضله العائلات. نخدم الفلل والمنازل والشقق بباقات عناية شاملة بالأرضيات.', icon:'park' },
+  { name:'الربوة',             nameEn:'Al-Rabwah',         desc:'منطقة سكنية مرتفعة بعقارات راقية. برامج صيانة دورية للأرضيات متاحة لأصحاب المنازل.', icon:'star' },
+  { name:'الفيصلية',           nameEn:'Al-Faisaliyah',     desc:'حي نشط يضم مباني شقق ومحلات تجارية. تخصص في جلي وتنظيف بلاط المباني التجارية.', icon:'apartment' },
+  { name:'التلال',             nameEn:'Al-Tilal',          desc:'منطقة تطوير حديثة بمبانٍ جديدة وأرضيات رخام مفروشة حديثاً. خدمات التنظيف العميق بعد الإنشاء.', icon:'construction' },
+  { name:'النزهة',             nameEn:'Al-Naifiyah',       desc:'حي سكني بأنماط سكن متنوعة. جدولة مرنة وأسعار تنافسية لجميع أنواع الأرضيات.', icon:'schedule' },
+  { name:'الواحة',             nameEn:'Al-Wahat',          desc:'حي سكني هادئ. نقدم خدمة احترافية وهادئة مع أدنى إزعاج لمنزلك.', icon:'spa' },
+  { name:'الريان',             nameEn:'Al-Rayyan',         desc:'حي متنامٍ بمشاريع سكنية جديدة. باقات ترميم أرضيات للمرة الأولى وتشطيبات المباني الجديدة.', icon:'foundation' },
+];
+---
+
+<BaseLayout {title} {description} lang="ar" canonical={SITE.url + '/ar/service-areas/'}>
+  <Header lang="ar" currentPage="areas" />
+
+  <PageHero
+    lang="ar"
+    title="تغطية كاملة لجميع أحياء حفر الباطن"
+    subtitle="نقدم خدمات جلي الأرضيات وترميم الأحجار في جميع الأحياء الـ 12 الرئيسية بحفر الباطن، المنطقة الشرقية."
+    badge="١٢ حي مغطى"
+    bg="warm"
+    accentIcon="location_on"
+    breadcrumb={[
+      { label: 'الرئيسية', href: '/' },
+      { label: 'مناطق الخدمة' },
+    ]}
+  />
+
+  <main>
+    <section class="py-16 bg-[#fcf9f2] border-b border-[#e5e2db]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          {[
+            { icon:'location_on', n:'12', l:'حي نخدمه', c:'جميع أحياء حفر الباطن الرئيسية' },
+            { icon:'directions_car', n:'< ساعة', l:'وقت الاستجابة', c:'وصول سريع للموقع في أي مكان' },
+            { icon:'check_circle', n:'100%', l:'التغطية', c:'السكنية والتجارية والمؤسسية' },
+          ].map(s => (
+            <div class="reveal">
+              <div class="w-16 h-16 rounded-2xl bg-[#0b2545] flex items-center justify-center mx-auto mb-4">
+                <span class="material-symbols-outlined text-[#ffdf9f] text-3xl">{s.icon}</span>
+              </div>
+              <div class="text-3xl font-bold text-[#001026] font-['Inter'] mb-1">{s.n}</div>
+              <div class="font-semibold text-[#001026] mb-2">{s.l}</div>
+              <div class="text-[#44474e] text-sm">{s.c}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-[#f6f3ec]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-14 reveal">
+          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-4">جميع أحياء حفر الباطن</h2>
+          <p class="text-[#44474e] max-w-2xl mx-auto">كل حي، كل منطقة — نفس المعيار الاحترافي، نفس النتائج المضمونة.</p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {districts.map((d, i) => (
+            <div class={`reveal stagger-${(i % 4) + 1} bg-white rounded-2xl border border-[#e5e2db] p-5 hover:border-[#735b24]/50 hover:shadow-md transition-all group`}>
+              <div class="flex items-start gap-4 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-[#ffdf9f] text-xl">{d.icon}</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-[#001026]">{d.name}</h3>
+                  <p class="text-[#735b24] text-xs font-medium">{d.nameEn}</p>
+                </div>
+              </div>
+              <p class="text-[#44474e] text-sm leading-relaxed">{d.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-r from-[#001026] to-[#0b2545]">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+        <h2 class="text-3xl font-bold text-white mb-4">احصل على عرض سعر لحيّك الآن</h2>
+        <p class="text-white/70 mb-8">تواصل معنا عبر واتساب أو الهاتف للحصول على معاينة مجانية.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={waLink('ar')} target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] px-8 py-4 rounded-xl font-bold transition-all">
+            <span class="material-symbols-outlined">chat</span> واتساب فوري
+          </a>
+          <a href={`tel:${SITE.phone}`}
+             class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold transition-all">
+            <span class="material-symbols-outlined">call</span> اتصل بنا
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="ar" />
+  <MobileCTABar lang="ar" />
+</BaseLayout>

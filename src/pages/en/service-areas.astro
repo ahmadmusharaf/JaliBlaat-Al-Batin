@@ -1,0 +1,311 @@
+﻿---
+// src/pages/en/service-areas.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCTABar from '../../components/MobileCTABar.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import { SITE, waLink } from '../../data/site';
+
+const title = 'Floor Polishing Service Areas — All Hafar Al-Batin Districts | JaliBlaat';
+const description = 'JaliBlaat Al Batin provides marble polishing and tile restoration across all 12 Hafar Al-Batin districts. Same-day response, all residential & commercial areas covered.';
+
+const districts = [
+  {
+    name: 'Al-Aziziyah',
+    name_ar: 'العزيزية',
+    desc: 'One of the largest residential districts in Hafar Al-Batin. We serve villas, apartment complexes, and commercial properties throughout Al-Aziziyah.',
+    highlight: 'Marble & Tile Specialists',
+    icon: 'home',
+  },
+  {
+    name: 'Al-Khalidiyah',
+    name_ar: 'الخالدية',
+    desc: 'Premium residential district with many luxury villas featuring imported marble. Full marble restoration and sealing services available.',
+    highlight: 'Luxury Marble Experts',
+    icon: 'diamond',
+  },
+  {
+    name: 'Al-Muhammadiyah',
+    name_ar: 'المحمدية',
+    desc: 'Mixed residential and commercial district. We handle both home and business floor restoration with minimal disruption to daily operations.',
+    highlight: 'Residential & Commercial',
+    icon: 'business',
+  },
+  {
+    name: 'Al-Baladiyah',
+    name_ar: 'البلدية',
+    desc: 'The city centre district. Specialised in commercial floor polishing, office spaces, and heritage building stone restoration.',
+    highlight: 'City Centre Coverage',
+    icon: 'location_city',
+  },
+  {
+    name: 'Abu Musa Al-Ashari',
+    name_ar: 'أبو موسى الأشعري',
+    desc: 'Established residential neighbourhood with many terrazzo and original tile floors. Expert terrazzo restoration service available.',
+    highlight: 'Terrazzo Restoration',
+    icon: 'texture',
+  },
+  {
+    name: 'Al-Rawdah',
+    name_ar: 'الروضة',
+    desc: 'Green residential district popular with families. We serve villas, town homes, and apartment blocks with comprehensive floor care packages.',
+    highlight: 'Full Floor Packages',
+    icon: 'park',
+  },
+  {
+    name: 'Al-Rabwah',
+    name_ar: 'الربوة',
+    desc: 'Elevated residential area with premium properties. Regular floor maintenance programs available for homeowners.',
+    highlight: 'Premium Maintenance',
+    icon: 'star',
+  },
+  {
+    name: 'Al-Faisaliyah',
+    name_ar: 'الفيصلية',
+    desc: 'Busy district with apartment blocks and retail spaces. Commercial tile polishing and deep-cleaning specialisation.',
+    highlight: 'Apartment Specialists',
+    icon: 'apartment',
+  },
+  {
+    name: 'Al-Tilal',
+    name_ar: 'التلال',
+    desc: 'Modern development area with new construction and newly laid marble floors. Post-construction deep-clean and first-polish services.',
+    highlight: 'New Construction Ready',
+    icon: 'construction',
+  },
+  {
+    name: 'Al-Naifiyah',
+    name_ar: 'النزهة',
+    desc: 'Residential area with mixed housing styles. Flexible scheduling and competitive pricing for all floor types.',
+    highlight: 'Flexible Scheduling',
+    icon: 'schedule',
+  },
+  {
+    name: 'Al-Wahat',
+    name_ar: 'الواحة',
+    desc: 'Quiet residential oasis district. We provide discreet, professional service with minimal disruption to your household.',
+    highlight: 'Quiet, Professional Service',
+    icon: 'spa',
+  },
+  {
+    name: 'Al-Rayyan',
+    name_ar: 'الريان',
+    desc: 'Growing district with new residential developments. First-time floor restoration packages and new-build finishes available.',
+    highlight: 'New Development Ready',
+    icon: 'foundation',
+  },
+];
+
+const schema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: SITE.nameEn,
+  url: SITE.url + '/en/',
+  telephone: SITE.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: 'Hafar Al-Batin',
+    addressRegion: SITE.address.region,
+    postalCode: SITE.address.zip,
+    addressCountry: 'SA',
+  },
+  areaServed: SITE.districts.en.map(d => ({
+    '@type': 'City',
+    name: d + ', Hafar Al-Batin, Saudi Arabia',
+  })),
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.address.lat,
+    longitude: SITE.address.lng,
+  },
+});
+---
+
+<BaseLayout title={title} description={description} lang="en"
+  canonical={SITE.url + '/en/service-areas/'} schemaJson={schema}>
+  <Header lang="en" currentPage="areas" />
+
+  <PageHero
+    lang="en"
+    title="Hafar Al-Batin — Full District Coverage"
+    subtitle="We provide professional floor polishing and stone restoration services across all 12 major districts of Hafar Al-Batin, Eastern Province, Saudi Arabia."
+    badge="12 Districts Covered"
+    bg="warm"
+    accentIcon="location_on"
+    breadcrumb={[
+      { label: 'Home', href: '/en/' },
+      { label: 'Service Areas' },
+    ]}
+  />
+
+  <main>
+
+    <!-- ── Coverage Summary ── -->
+    <section class="py-16 bg-[#fcf9f2] border-b border-[#e5e2db]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          {[
+            { icon: 'location_on', n: '12', l: 'Districts Served', c: 'All major Hafar Al-Batin neighbourhoods' },
+            { icon: 'directions_car', n: '< 1 hr', l: 'Response Time', c: 'Fast on-site arrival anywhere in the city' },
+            { icon: 'check_circle', n: '100%', l: 'Coverage', c: 'Residential, commercial, and institutional' },
+          ].map(s => (
+            <div class="reveal">
+              <div class="w-16 h-16 rounded-2xl bg-[#0b2545] flex items-center justify-center mx-auto mb-4">
+                <span class="material-symbols-outlined text-[#ffdf9f] text-3xl">{s.icon}</span>
+              </div>
+              <div class="text-3xl font-bold text-[#001026] font-['Inter'] mb-1">{s.n}</div>
+              <div class="font-semibold text-[#001026] mb-2">{s.l}</div>
+              <div class="text-[#44474e] text-sm">{s.c}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Districts Grid ── -->
+    <section class="py-20 bg-[#f6f3ec]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-14 reveal">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-3">Coverage Map</p>
+          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-4">All Hafar Al-Batin Districts</h2>
+          <p class="text-[#44474e] max-w-2xl mx-auto">Every district, every neighbourhood — same professional standard, same guaranteed results.</p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {districts.map((d, i) => (
+            <div class={`reveal stagger-${(i % 4) + 1} bg-white rounded-2xl border border-[#e5e2db] p-5 hover:border-[#735b24]/50 hover:shadow-md transition-all group`}>
+              <div class="flex items-start gap-4 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-[#ffdf9f] text-xl">{d.icon}</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-[#001026] leading-snug">{d.name}</h3>
+                  <p class="text-[#735b24] text-xs font-medium arabic-name">{d.name_ar}</p>
+                </div>
+              </div>
+              <p class="text-[#44474e] text-sm leading-relaxed mb-3">{d.desc}</p>
+              <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#735b24] bg-[#fedb98]/40 px-2.5 py-1 rounded-full">
+                <span class="material-symbols-outlined text-[11px]">verified</span>
+                {d.highlight}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Response Time Guarantee ── -->
+    <section class="py-20 bg-gradient-to-br from-[#001026] to-[#0b2545]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="reveal">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#ffdf9f] mb-4">Our Commitment</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">Same-Day Response Guarantee</h2>
+            <p class="text-white/70 text-lg leading-relaxed mb-8">
+              Contact us before 2:00 PM and we will have a technician at your property for a free inspection the same day — anywhere in Hafar Al-Batin.
+            </p>
+            <div class="space-y-4">
+              {[
+                { icon: 'call', t: 'Instant Phone Response', d: 'Answer guaranteed within 2 rings during business hours' },
+                { icon: 'chat', t: 'WhatsApp in 5 Minutes', d: 'WhatsApp message answered within 5 minutes' },
+                { icon: 'directions_car', t: 'On-Site in Under 1 Hour', d: 'Technician dispatched immediately after confirmation' },
+                { icon: 'check_circle', t: 'Free Inspection, No Obligation', d: 'Full quote provided at no cost — no commitment required' },
+              ].map(item => (
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-[#735b24]/20 border border-[#735b24]/30 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[#ffdf9f] text-xl">{item.icon}</span>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-white">{item.t}</p>
+                    <p class="text-white/50 text-sm">{item.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <h3 class="text-white font-bold text-xl mb-6">Get a Free Quote Now</h3>
+              <div class="space-y-4 mb-6">
+                <div>
+                  <label class="text-white/60 text-sm font-medium block mb-2">Your District</label>
+                  <select class="w-full bg-white/10 border border-white/20 text-white rounded-xl px-4 py-3 text-sm appearance-none focus:outline-none focus:border-[#735b24]" id="district-select">
+                    <option value="" class="text-[#001026]">Select your district…</option>
+                    {districts.map(d => (
+                      <option value={d.name} class="text-[#001026]">{d.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label class="text-white/60 text-sm font-medium block mb-2">Floor Type</label>
+                  <select class="w-full bg-white/10 border border-white/20 text-white rounded-xl px-4 py-3 text-sm appearance-none focus:outline-none focus:border-[#735b24]" id="floor-type-select">
+                    <option value="" class="text-[#001026]">Select floor type…</option>
+                    {['Marble','Ceramic Tile','Terrazzo','Granite','Limestone','Other'].map(f => (
+                      <option value={f} class="text-[#001026]">{f}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <a href="#" id="wa-cta-btn"
+                 class="block w-full text-center bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-6 py-4 rounded-xl font-bold">
+                Send WhatsApp Quote Request →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Area FAQ ── -->
+    <section class="py-20 bg-[#fcf9f2]">
+      <div class="max-w-3xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-3xl font-bold text-[#001026]">Service Area FAQ</h2>
+        </div>
+        <div class="space-y-3 reveal">
+          {[
+            { q:'Do you charge extra for travel within Hafar Al-Batin?', a:'No. Travel within Hafar Al-Batin city limits is included in our standard service rates. No hidden fees or fuel surcharges.' },
+            { q:'Can you handle large commercial properties?', a:'Yes. We have handled commercial spaces up to 1,500 m² including shopping centres, mosques, hospitals, and office buildings. We work after hours to avoid disruption.' },
+            { q:'Do you work outside Hafar Al-Batin?', a:'For projects 50+ km outside the city, a small travel fee may apply. Contact us to discuss — we are flexible for large projects.' },
+            { q:'How do I know if my area is covered?', a:'All 12 districts listed on this page are fully covered. If your neighbourhood is not listed, contact us — we likely still cover it.' },
+          ].map(faq => (
+            <details class="group bg-white rounded-xl border border-[#e5e2db] overflow-hidden">
+              <summary class="flex justify-between items-center px-6 py-5 cursor-pointer list-none font-semibold text-[#001026] hover:bg-[#f0eee7] transition-colors gap-4">
+                <span>{faq.q}</span>
+                <span class="material-symbols-outlined text-[#735b24] text-[20px] shrink-0 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-5 text-[#44474e] leading-relaxed text-sm border-t border-[#e5e2db]">
+                <div class="pt-4">{faq.a}</div>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer lang="en" />
+  <MobileCTABar lang="en" />
+</BaseLayout>
+
+<script>
+  const districtSel = document.getElementById('district-select') as HTMLSelectElement;
+  const floorSel    = document.getElementById('floor-type-select') as HTMLSelectElement;
+  const waBtn       = document.getElementById('wa-cta-btn') as HTMLAnchorElement;
+  const waNum       = '966500000000';
+
+  function updateWaLink() {
+    const d = districtSel?.value;
+    const f = floorSel?.value;
+    const msg = `Hello, I would like a free floor polishing quote${d ? ' for ' + d + ' district' : ''}${f ? ' (' + f + ' floor)' : ''} in Hafar Al-Batin.`;
+    waBtn.href = `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
+  }
+
+  districtSel?.addEventListener('change', updateWaLink);
+  floorSel?.addEventListener('change', updateWaLink);
+  updateWaLink();
+</script>

@@ -1,0 +1,255 @@
+﻿---
+// src/pages/en/contact.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCTABar from '../../components/MobileCTABar.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import { SITE, waLink } from '../../data/site';
+
+const title = 'Contact JaliBlaat Al Batin — Free Floor Inspection in Hafar Al-Batin';
+const description = 'Contact JaliBlaat Al Batin for a free marble polishing or tile restoration inspection. Fast response, all Hafar Al-Batin districts covered. WhatsApp or call.';
+---
+
+<BaseLayout {title} description={title} lang="en" canonical={SITE.url + '/en/contact/'}>
+  <Header lang="en" currentPage="contact" />
+
+  <PageHero
+    lang="en"
+    title="Get in Touch — Free Inspection"
+    subtitle="Request your free floor inspection today. Same-day response guaranteed. We cover all Hafar Al-Batin districts."
+    badge="Free Inspection"
+    accentIcon="phone_in_talk"
+    breadcrumb={[
+      { label: 'Home', href: '/en/' },
+      { label: 'Contact' },
+    ]}
+  />
+
+  <main>
+
+    <!-- ── Contact Cards ── -->
+    <section class="py-16 bg-[#fcf9f2]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: 'call',
+              title: 'Call Us',
+              value: SITE.phoneDisplay,
+              sub: SITE.hoursEn,
+              href: `tel:${SITE.phone}`,
+              cta: 'Call Now',
+              color: 'from-[#001026] to-[#0b2545]',
+              textColor: 'text-white',
+            },
+            {
+              icon: 'chat',
+              title: 'WhatsApp',
+              value: 'Instant Response',
+              sub: 'Message us — reply within 5 minutes',
+              href: waLink('en'),
+              cta: 'Open WhatsApp',
+              color: 'from-[#001404] to-[#002c0f]',
+              textColor: 'text-[#66ff8e]',
+            },
+            {
+              icon: 'schedule',
+              title: 'Business Hours',
+              value: 'Daily 7 AM – 11 PM',
+              sub: 'Open every day including weekends & holidays',
+              href: null,
+              cta: null,
+              color: 'from-[#1a1200] to-[#2a1e00]',
+              textColor: 'text-[#ffdf9f]',
+            },
+          ].map(card => (
+            <div class={`reveal rounded-2xl bg-gradient-to-br ${card.color} p-8 text-center`}>
+              <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-5">
+                <span class={`material-symbols-outlined ${card.textColor} text-3xl`}>{card.icon}</span>
+              </div>
+              <h3 class="text-white font-bold text-lg mb-2">{card.title}</h3>
+              <p class={`${card.textColor} font-semibold text-xl mb-2 font-['Inter']`}>{card.value}</p>
+              <p class="text-white/50 text-sm mb-6">{card.sub}</p>
+              {card.href && card.cta && (
+                <a href={card.href} target={card.href.startsWith('http') ? '_blank' : undefined} rel="noopener"
+                   class={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm ${card.textColor} bg-white/10 hover:bg-white/20 transition-all border border-white/20`}>
+                  {card.cta} →
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Contact Form ── -->
+    <section class="py-20 bg-[#f6f3ec]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+          <!-- Left — info -->
+          <div class="reveal">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-4">Free Quote Request</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-6 leading-tight">Tell Us About Your Floors</h2>
+            <p class="text-[#44474e] leading-relaxed mb-8">
+              Fill in the details below and we will prepare a custom quote for your property. No obligation — inspection and quotation are always free.
+            </p>
+
+            <!-- What to expect -->
+            <div class="space-y-4 mb-10">
+              {[
+                { icon: 'person', t: 'Dedicated Technician', d: 'The same expert visits for inspection and project delivery.' },
+                { icon: 'receipt', t: 'Itemised Written Quote', d: 'Full breakdown by area, service type, and materials.' },
+                { icon: 'update', t: 'Flexible Scheduling', d: 'Morning, afternoon, or evening — we work around you.' },
+                { icon: 'verified', t: 'Satisfaction Guarantee', d: 'If you are not satisfied, we return and re-do at no extra charge.' },
+              ].map(item => (
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-[#0b2545] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[#ffdf9f] text-xl">{item.icon}</span>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-[#001026]">{item.t}</p>
+                    <p class="text-[#44474e] text-sm">{item.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Address / hours card -->
+            <div class="bg-white rounded-2xl border border-[#e5e2db] p-6">
+              <h4 class="font-bold text-[#001026] mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#735b24] text-xl">location_on</span>
+                Location & Hours
+              </h4>
+              <dl class="space-y-2 text-sm text-[#44474e]">
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Address</dt><dd>{SITE.address.street}, {SITE.address.city}</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Region</dt><dd>Eastern Province, Saudi Arabia</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Hours</dt><dd>{SITE.hoursEn}</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Phone</dt><dd dir="ltr">{SITE.phoneDisplay}</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <!-- Right — form -->
+          <div class="reveal">
+            <form id="contact-form" class="bg-white rounded-2xl border border-[#e5e2db] p-8 shadow-sm space-y-5">
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="cf-name" class="block text-sm font-semibold text-[#001026] mb-2">Full Name *</label>
+                  <input id="cf-name" name="name" type="text" required placeholder="Your name"
+                         class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] focus:ring-1 focus:ring-[#735b24]/30 transition-colors" />
+                </div>
+                <div>
+                  <label for="cf-phone" class="block text-sm font-semibold text-[#001026] mb-2">Phone Number *</label>
+                  <input id="cf-phone" name="phone" type="tel" required placeholder="+966 5X XXX XXXX" dir="ltr"
+                         class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] focus:ring-1 focus:ring-[#735b24]/30 transition-colors" />
+                </div>
+              </div>
+
+              <div>
+                <label for="cf-email" class="block text-sm font-semibold text-[#001026] mb-2">Email (optional)</label>
+                <input id="cf-email" name="email" type="email" placeholder="your@email.com"
+                       class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] focus:ring-1 focus:ring-[#735b24]/30 transition-colors" />
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="cf-service" class="block text-sm font-semibold text-[#001026] mb-2">Service Type *</label>
+                  <select id="cf-service" name="service" required
+                          class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] focus:outline-none focus:border-[#735b24] appearance-none">
+                    <option value="">Select service…</option>
+                    <option>Marble Polishing</option>
+                    <option>Tile Polishing</option>
+                    <option>Terrazzo Restoration</option>
+                    <option>Granite Sealing</option>
+                    <option>Limestone Restoration</option>
+                    <option>Epoxy Coating</option>
+                    <option>Not Sure — Need Assessment</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="cf-district" class="block text-sm font-semibold text-[#001026] mb-2">District *</label>
+                  <select id="cf-district" name="district" required
+                          class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] focus:outline-none focus:border-[#735b24] appearance-none">
+                    <option value="">Select district…</option>
+                    {['Al-Aziziyah','Al-Khalidiyah','Al-Muhammadiyah','Al-Baladiyah','Abu Musa Al-Ashari','Al-Rawdah','Al-Rabwah','Al-Faisaliyah','Al-Tilal','Al-Naifiyah','Al-Wahat','Al-Rayyan'].map(d => (
+                      <option>{d}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="cf-area" class="block text-sm font-semibold text-[#001026] mb-2">Approximate Floor Area (m²)</label>
+                <input id="cf-area" name="area" type="number" min="1" placeholder="e.g. 150"
+                       class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] focus:ring-1 focus:ring-[#735b24]/30 transition-colors" />
+              </div>
+
+              <div>
+                <label for="cf-msg" class="block text-sm font-semibold text-[#001026] mb-2">Additional Notes</label>
+                <textarea id="cf-msg" name="message" rows="4" placeholder="Describe your floors, any damage, special requirements…"
+                          class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] focus:ring-1 focus:ring-[#735b24]/30 transition-colors resize-none"></textarea>
+              </div>
+
+              <!-- Error display -->
+              <div id="cf-error" class="hidden bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm"></div>
+
+              <button type="submit"
+                      class="w-full flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-6 py-4 rounded-xl font-bold text-base shadow-sm">
+                <span class="material-symbols-outlined">chat</span>
+                Send via WhatsApp
+              </button>
+              <p class="text-center text-xs text-[#44474e]/60">
+                Your details open a WhatsApp message — no data is stored on our servers.
+              </p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer lang="en" />
+  <MobileCTABar lang="en" />
+</BaseLayout>
+
+<script>
+  const form      = document.getElementById('contact-form') as HTMLFormElement;
+  const errBox    = document.getElementById('cf-error') as HTMLDivElement;
+  const waNum     = '966500000000';
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name    = (document.getElementById('cf-name')     as HTMLInputElement).value.trim();
+    const phone   = (document.getElementById('cf-phone')    as HTMLInputElement).value.trim();
+    const email   = (document.getElementById('cf-email')    as HTMLInputElement).value.trim();
+    const service = (document.getElementById('cf-service')  as HTMLSelectElement).value;
+    const district= (document.getElementById('cf-district') as HTMLSelectElement).value;
+    const area    = (document.getElementById('cf-area')     as HTMLInputElement).value.trim();
+    const msg     = (document.getElementById('cf-msg')      as HTMLTextAreaElement).value.trim();
+
+    if (!name || !phone || !service || !district) {
+      errBox.textContent = 'Please fill in all required fields (Name, Phone, Service, District).';
+      errBox.classList.remove('hidden');
+      return;
+    }
+    errBox.classList.add('hidden');
+
+    const waMsg = [
+      `Hello JaliBlaat Al Batin, I would like to request a free floor inspection.`,
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      email ? `Email: ${email}` : '',
+      `Service: ${service}`,
+      `District: ${district}`,
+      area ? `Area: ${area} m²` : '',
+      msg ? `Notes: ${msg}` : '',
+    ].filter(Boolean).join('\n');
+
+    window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(waMsg)}`, '_blank');
+  });
+</script>

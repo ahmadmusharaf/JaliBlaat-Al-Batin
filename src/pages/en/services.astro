@@ -1,0 +1,273 @@
+﻿---
+// src/pages/en/services.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCTABar from '../../components/MobileCTABar.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import { SITE, waLink } from '../../data/site';
+
+const lang = 'en';
+const title = 'Floor Polishing & Marble Restoration Services | JaliBlaat Al Batin';
+const description = 'Professional marble polishing, tile restoration, terrazzo grinding, and granite sealing services in Hafar Al-Batin. Expert craftsmen, guaranteed results.';
+
+const services = [
+  {
+    icon: 'diamond',
+    name: 'Marble Polishing & Restoration',
+    tagline: 'Revive the natural brilliance of your marble',
+    desc: 'Our diamond-grinding process removes scratches, stains, and dullness from marble surfaces — restoring the deep mirror shine of Italian and local marble floors, walls, and countertops.',
+    steps: ['Surface inspection & scratch mapping', 'Diamond disc grinding (coarse → fine)', 'Crystallisation & resin sealing', 'Mirror-finish buffing'],
+    benefits: ['Mirror-like shine', 'Scratch & stain removal', 'UV-stable sealant', '3–5 year protection'],
+    duration: '4–8 hours per 100 m²',
+    icon2: 'verified',
+  },
+  {
+    icon: 'crop_square',
+    name: 'Ceramic & Porcelain Tile Polishing',
+    tagline: 'Deep clean and polish for all tile types',
+    desc: 'Specialised cleaning and polishing for ceramic, porcelain, and glazed tiles. We remove grout haze, calcium build-up, and old wax layers, leaving tiles bright and hygienic.',
+    steps: ['Tile assessment', 'Deep alkaline cleaning', 'Grout rehabilitation', 'Surface polishing & sealing'],
+    benefits: ['Restored original colour', 'Grout whitening', 'Anti-slip treatment available', 'Easy-clean surface'],
+    duration: '3–6 hours per 100 m²',
+    icon2: 'cleaning_services',
+  },
+  {
+    icon: 'texture',
+    name: 'Terrazzo Grinding & Polishing',
+    tagline: 'The art of restoring terrazzo beauty',
+    desc: 'Terrazzo floors age beautifully when properly maintained. Our wet-grinding process levels uneven surfaces, removes cracks, and delivers a flawless polished finish.',
+    steps: ['Level assessment & crack filling', 'Wet diamond grinding', 'Surface honing', 'High-gloss crystallisation'],
+    benefits: ['Perfectly flat surface', 'Crack repair included', 'Hygienic surface', 'Eco-friendly process'],
+    duration: '5–10 hours per 100 m²',
+    icon2: 'auto_awesome',
+  },
+  {
+    icon: 'panorama_horizontal',
+    name: 'Granite Polishing & Sealing',
+    tagline: 'Protect your premium granite investment',
+    desc: 'Granite is durable but porous. Our polishing and sealing process brings back the deep lustre of granite surfaces while applying penetrating sealants that protect against oil, water, and stains.',
+    steps: ['Stain removal pre-treatment', 'Diamond polishing', 'pH-balanced cleaning', 'Penetrating sealant application'],
+    benefits: ['Deep colour restoration', 'Stain-proof sealant', 'Oil & water resistant', 'Extends granite life'],
+    duration: '3–5 hours per 100 m²',
+    icon2: 'shield',
+  },
+  {
+    icon: 'square_foot',
+    name: 'Limestone & Travertine Restoration',
+    tagline: 'Sensitive stone, expert treatment',
+    desc: 'Limestone and travertine require gentle handling. We use specialised low-pH compounds and soft-grit discs to polish without damaging the delicate crystal structure of these natural stones.',
+    steps: ['pH testing', 'Gentle honing process', 'Void filling (travertine)', 'Surface sealing'],
+    benefits: ['Safe for soft stone', 'Void & hole filling', 'Natural-look finish', 'Breathable sealant'],
+    duration: '5–8 hours per 100 m²',
+    icon2: 'eco',
+  },
+  {
+    icon: 'foundation',
+    name: 'Epoxy Floor Coating & Repair',
+    tagline: 'Industrial durability, residential beauty',
+    desc: 'Transform worn concrete or tile floors with professional epoxy coatings. Perfect for garages, service areas, and commercial spaces — durable, seamless, and easy to maintain.',
+    steps: ['Surface grinding & profiling', 'Crack injection', 'Primer coat application', 'Decorative epoxy finish'],
+    benefits: ['Chemical resistant', 'Seamless surface', '10+ year lifespan', 'Custom colours'],
+    duration: '1–2 days per 100 m²',
+    icon2: 'construction',
+  },
+];
+
+const schema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'JaliBlaat Al Batin Services',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: s.name,
+      description: s.desc,
+      provider: { '@type': 'LocalBusiness', name: SITE.nameEn },
+    },
+  })),
+});
+---
+
+<BaseLayout {title} {description} lang="en" schemaJson={schema}
+  canonical={SITE.url + '/en/services/'}>
+  <Header lang="en" currentPage="services" />
+
+  <PageHero
+    lang="en"
+    title="Professional Floor & Stone Services"
+    subtitle="Expert marble polishing, tile restoration, terrazzo grinding, and granite sealing across all Hafar Al-Batin districts. Certified craftsmen, premium equipment, guaranteed results."
+    badge="6 Specialist Services"
+    accentIcon="construction"
+    breadcrumb={[
+      { label: 'Home', href: '/en/' },
+      { label: 'Services' },
+    ]}
+  />
+
+  <main class="pt-0">
+
+    <!-- ── Services Grid ── -->
+    <section class="py-20 bg-[#fcf9f2]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-14 reveal">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-3">What We Do</p>
+          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-4">Every Surface, Expertly Restored</h2>
+          <p class="text-[#44474e] max-w-2xl mx-auto leading-relaxed">
+            From centuries-old marble to modern porcelain, we restore every stone and tile surface to its original glory — or better.
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((svc, i) => (
+            <article class={`reveal stagger-${(i % 3) + 1} group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}>
+              <!-- Card header -->
+              <div class="bg-gradient-to-br from-[#001026] to-[#0b2545] p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="material-symbols-outlined text-[#ffdf9f] text-3xl">{svc.icon}</span>
+                  <span class="material-symbols-outlined text-[#735b24]/60 text-xl">{svc.icon2}</span>
+                </div>
+                <h3 class="text-white font-bold text-lg leading-snug mb-1">{svc.name}</h3>
+                <p class="text-[#ffdf9f] text-xs font-medium">{svc.tagline}</p>
+              </div>
+
+              <!-- Card body -->
+              <div class="p-6 flex flex-col gap-5">
+                <p class="text-[#44474e] text-sm leading-relaxed">{svc.desc}</p>
+
+                <!-- Process steps -->
+                <div>
+                  <p class="text-[#001026] font-semibold text-xs uppercase tracking-wider mb-3">Our Process</p>
+                  <ol class="space-y-2">
+                    {svc.steps.map((step, si) => (
+                      <li class="flex items-start gap-3 text-sm text-[#44474e]">
+                        <span class="shrink-0 w-5 h-5 rounded-full bg-[#0b2545] text-white text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <!-- Benefits -->
+                <div class="bg-[#f6f3ec] rounded-xl p-4">
+                  <p class="text-[#001026] font-semibold text-xs uppercase tracking-wider mb-3">Key Benefits</p>
+                  <ul class="grid grid-cols-2 gap-2">
+                    {svc.benefits.map(b => (
+                      <li class="flex items-center gap-2 text-xs text-[#44474e]">
+                        <span class="material-symbols-outlined text-[#735b24] text-[14px]">check_circle</span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <!-- Duration + CTA -->
+                <div class="flex items-center justify-between pt-2 border-t border-[#e5e2db]">
+                  <span class="text-xs text-[#44474e] flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[14px] text-[#735b24]">schedule</span>
+                    {svc.duration}
+                  </span>
+                  <a href={waLink('en')} target="_blank" rel="noopener"
+                     class="text-xs font-bold text-[#002c0f] bg-[#66ff8e]/20 hover:bg-[#002c0f] hover:text-[#66ff8e] border border-[#002c0f]/20 px-3 py-1.5 rounded-lg transition-all">
+                    Get Quote →
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Methodology ── -->
+    <section class="py-20 bg-gradient-to-br from-[#001026] to-[#0b2545]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-14 reveal">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#ffdf9f] mb-3">How We Work</p>
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Our 6-Stage Restoration Methodology</h2>
+          <p class="text-white/60 max-w-2xl mx-auto">Every project follows the same rigorous process — no shortcuts, no guesswork.</p>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { n:'01', icon:'search', t:'Site Inspection', d:'Free on-site assessment of stone type, damage level, and surface area.' },
+            { n:'02', icon:'science', t:'Surface Testing', d:'pH and hardness testing to select the right compounds and disc grits.' },
+            { n:'03', icon:'build', t:'Diamond Grinding', d:'Progressive diamond disc grinding from coarse to ultra-fine grits.' },
+            { n:'04', icon:'water_drop', t:'Deep Cleaning', d:'pH-balanced chemical cleaning to remove all residue and compounds.' },
+            { n:'05', icon:'auto_fix_high', t:'Polishing & Crystallisation', d:'Final polishing with crystallisation powder or resin for maximum shine.' },
+            { n:'06', icon:'shield', t:'Sealing & Handover', d:'Penetrating sealant applied; full walkthrough with client before sign-off.' },
+          ].map((step, i) => (
+            <div class={`reveal stagger-${(i % 3) + 1} flex gap-4 bg-white/5 rounded-2xl p-6 border border-white/10 hover:border-[#735b24]/50 transition-colors`}>
+              <div class="shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-[#735b24]/20 border border-[#735b24]/30 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[#ffdf9f] text-xl">{step.icon}</span>
+                </div>
+              </div>
+              <div>
+                <p class="text-[#ffdf9f] text-xs font-bold font-['Inter'] mb-1">{step.n}</p>
+                <h3 class="text-white font-semibold mb-2">{step.t}</h3>
+                <p class="text-white/50 text-sm leading-relaxed">{step.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="py-20 bg-[#f6f3ec]">
+      <div class="max-w-3xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-12 reveal">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-3">Common Questions</p>
+          <h2 class="text-3xl font-bold text-[#001026]">Services FAQ</h2>
+        </div>
+        <div class="space-y-3 reveal">
+          {[
+            { q:'How long does marble polishing take?', a:'For a standard 100 m² area, marble polishing typically takes 4–8 hours. Larger spaces or heavily damaged surfaces may require 2 days. We always provide a time estimate after the initial inspection.' },
+            { q:'Is the polishing process dusty or noisy?', a:'Our wet-grinding process significantly reduces dust. We use industrial vacuum attachments to capture residue at the source. Some noise from diamond grinders is unavoidable but we work efficiently to minimise disruption.' },
+            { q:'Do you work on walls and countertops too?', a:'Yes. We polish marble and granite on walls, countertops, stair risers, and bathroom surfaces — not just floors. Contact us for a full surface assessment.' },
+            { q:'How often should floors be polished?', a:'For residential marble, every 2–3 years is ideal depending on foot traffic. We apply a protective sealant after each polish that extends the shine significantly.' },
+            { q:'Can you remove deep scratches?', a:'In most cases, yes. Our diamond-grinding system can remove scratches up to 2mm deep. Very deep scratches or chips may require stone filling before polishing — we assess this at no charge.' },
+            { q:'Do you serve all Hafar Al-Batin districts?', a:'Yes. We serve all 12 major districts including Al-Aziziyah, Al-Khalidiyah, Al-Muhammadiyah, Al-Rawdah, and more. See our Service Areas page for the full list.' },
+          ].map(faq => (
+            <details class="group bg-white rounded-xl border border-[#e5e2db] overflow-hidden">
+              <summary class="flex justify-between items-center px-6 py-5 cursor-pointer list-none font-semibold text-[#001026] hover:bg-[#f0eee7] transition-colors gap-4">
+                <span>{faq.q}</span>
+                <span class="material-symbols-outlined text-[#735b24] text-[20px] shrink-0 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-5 text-[#44474e] leading-relaxed text-sm border-t border-[#e5e2db]">
+                <div class="pt-4">{faq.a}</div>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Banner ── -->
+    <section class="py-20 bg-gradient-to-r from-[#735b24] to-[#5a4518]">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+        <span class="material-symbols-outlined text-[#ffdf9f] text-5xl mb-4 block">diamond</span>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Restore Your Floors?</h2>
+        <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">Get a free inspection and quotation — no obligation. We cover all Hafar Al-Batin districts.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={waLink('en')} target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-8 py-4 rounded-xl font-bold text-base shadow-lg">
+            <span class="material-symbols-outlined">chat</span>
+            WhatsApp for Free Quote
+          </a>
+          <a href={`tel:${SITE.phone}`}
+             class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 transition-all px-8 py-4 rounded-xl font-bold text-base">
+            <span class="material-symbols-outlined">call</span>
+            Call Us Now
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer lang="en" />
+  <MobileCTABar lang="en" />
+</BaseLayout>

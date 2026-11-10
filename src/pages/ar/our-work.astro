@@ -1,0 +1,99 @@
+﻿---
+// src/pages/ar/our-work.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCTABar from '../../components/MobileCTABar.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import { SITE, waLink } from '../../data/site';
+
+const title = 'أعمالنا — مشاريع جلي الأرضيات في حفر الباطن | جلي بلاط حفرالباطن';
+const description = 'استعرض مشاريع جلي الرخام والبلاط والتيرازو التي أنجزناها في حفر الباطن. معرض صور قبل وبعد يعكس نتائج حقيقية.';
+
+const projects = [
+  { id:1, cat:'marble',   t:'ترميم رخام فيلا — العزيزية', d:'ترميم كامل لرخام إيطالي متآكل في فيلا بمساحة 280 م². شمل حقن الشقوق، جلي ماسي، وبلورة بلمعة مرآتية.', area:'280 م²', dist:'العزيزية', dur:'3 أيام' },
+  { id:2, cat:'tile',     t:'جلي بلاط تجاري — الخالدية',  d:'تنظيف عميق وتلميع 450 م² بورسلان في صالة عرض تجارية. ترميم الفاصل ومعالجة مضادة للانزلاق.',          area:'450 م²', dist:'الخالدية', dur:'4 أيام' },
+  { id:3, cat:'terrazzo', t:'طحن وتلميع تيرازو — الروضة', d:'ترميم كامل لأرضيات تيرازو في فيلا تسعينيات. تسوية الأسطح، معالجة الشقوق، لمعة مرآتية.',              area:'160 م²', dist:'الروضة',   dur:'يومان' },
+  { id:4, cat:'granite',  t:'مطبخ وحمام جرانيت — المحمدية', d:'جلي وتغليف سطح مطبخ وأرضية حمام ودرج من الجرانيت. بريق عميق وطبقة حماية مضادة للزيوت.',            area:'90 م²',  dist:'المحمدية', dur:'يوم واحد' },
+  { id:5, cat:'marble',   t:'بهو مجمع سكني — الفيصلية',   d:'ترميم رخام البهو والممرات في مجمع من 12 شقة. لمعة موحدة في جميع المناطق المشتركة.',                   area:'320 م²', dist:'الفيصلية', dur:'3 أيام' },
+  { id:6, cat:'tile',     t:'ترميم بلاط مسجد — البلدية',   d:'تنظيف وتلميع بلاط قاعة الصلاة بمساحة 600 م². تشطيب مضاد للانزلاق في المناطق الرطبة.',               area:'600 م²', dist:'البلدية',  dur:'5 أيام' },
+];
+---
+
+<BaseLayout {title} {description} lang="ar" canonical={SITE.url + '/ar/our-work/'}>
+  <Header lang="ar" currentPage="our-work" />
+
+  <PageHero
+    lang="ar"
+    title="أعمالنا المنجزة"
+    subtitle="نتائج حقيقية، عملاء حقيقيون، حرفية حقيقية. استعرض معرض مشاريع جلي وترميم الأرضيات المنجزة في حفر الباطن."
+    badge="معرض المشاريع"
+    accentIcon="photo_library"
+    breadcrumb={[
+      { label: 'الرئيسية', href: '/' },
+      { label: 'أعمالنا' },
+    ]}
+  />
+
+  <main>
+    <section class="bg-[#0b2545] py-10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+        {[
+          { n:'+500', l:'مشروع منجز', icon:'check_circle' },
+          { n:'98%',  l:'رضا العملاء',   icon:'thumb_up' },
+          { n:'12',   l:'حي نخدمه',      icon:'location_on' },
+          { n:'+8',   l:'سنوات خبرة',   icon:'workspace_premium' },
+        ].map(s => (
+          <div class="reveal">
+            <span class="material-symbols-outlined text-[#ffdf9f] text-3xl mb-2 block">{s.icon}</span>
+            <div class="text-3xl font-bold text-white font-['Inter'] mb-1">{s.n}</div>
+            <div class="text-white/50 text-sm">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="py-20 bg-[#fcf9f2]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((p, i) => (
+            <article class={`reveal stagger-${(i % 3) + 1} group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+              <div class="relative h-52 bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center">
+                <span class="material-symbols-outlined text-[#ffdf9f] text-5xl opacity-60">photo_camera</span>
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-[#001026] text-base mb-2">{p.t}</h3>
+                <p class="text-[#44474e] text-sm leading-relaxed mb-4">{p.d}</p>
+                <div class="flex flex-wrap gap-4 text-xs text-[#44474e] border-t border-[#e5e2db] pt-4">
+                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-[#735b24]">location_on</span>{p.dist}</span>
+                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-[#735b24]">square_foot</span>{p.area}</span>
+                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-[#735b24]">schedule</span>{p.dur}</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-r from-[#001026] to-[#0b2545]">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">هل تريد نتائج مماثلة؟</h2>
+        <p class="text-white/70 text-lg mb-8">اطلب معاينة مجانية لعقارك — نخدم جميع أحياء حفر الباطن.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={waLink('ar')} target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] px-8 py-4 rounded-xl font-bold transition-all">
+            <span class="material-symbols-outlined">chat</span> طلب معاينة مجانية
+          </a>
+          <a href="/ar/services/"
+             class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold transition-all">
+            استعرض جميع الخدمات ←
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="ar" />
+  <MobileCTABar lang="ar" />
+</BaseLayout>

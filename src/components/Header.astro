@@ -1,32 +1,32 @@
----
+﻿---
 // src/components/Header.astro
 // Bilingual sticky header — renders Arabic or English version based on `lang` prop
 import { SITE, waLink } from '../data/site';
 
 export interface Props {
   lang?: 'ar' | 'en';
-  currentPath?: string;
+  currentPage?: string;
 }
 
-const { lang = 'ar', currentPath = '/' } = Astro.props;
+const { lang = 'ar', currentPage = 'home' } = Astro.props;
 const isAr = lang === 'ar';
 
 const navLinks = isAr
   ? [
-      { href: '/',             label: 'الرئيسية',       key: 'home' },
-      { href: '/#services',    label: 'خدماتنا',        key: 'services' },
-      { href: '/#our-work',    label: 'أعمالنا',        key: 'our-work' },
-      { href: '/ar/pricing/',  label: 'أسعار الجلي',    key: 'pricing' },
-      { href: '/#service-areas', label: 'مناطق الخدمة', key: 'areas' },
-      { href: '/#contact',     label: 'اتصل بنا',       key: 'contact' },
+      { href: '/',                  label: 'الرئيسية',       key: 'home' },
+      { href: '/ar/services/',      label: 'خدماتنا',        key: 'services' },
+      { href: '/ar/our-work/',      label: 'أعمالنا',        key: 'our-work' },
+      { href: '/ar/pricing/',       label: 'أسعار الجلي',    key: 'pricing' },
+      { href: '/ar/service-areas/', label: 'مناطق الخدمة',  key: 'areas' },
+      { href: '/ar/contact/',       label: 'اتصل بنا',       key: 'contact' },
     ]
   : [
-      { href: '/en/',             label: 'Home',          key: 'home' },
-      { href: '/en/#services',    label: 'Services',      key: 'services' },
-      { href: '/en/#our-work',    label: 'Our Work',      key: 'our-work' },
-      { href: '/en/pricing/',     label: 'Pricing',       key: 'pricing' },
-      { href: '/en/#service-areas', label: 'Service Areas', key: 'areas' },
-      { href: '/en/#contact',     label: 'Contact',       key: 'contact' },
+      { href: '/en/',               label: 'Home',          key: 'home' },
+      { href: '/en/services/',      label: 'Services',      key: 'services' },
+      { href: '/en/our-work/',      label: 'Our Work',      key: 'our-work' },
+      { href: '/en/pricing/',       label: 'Pricing',       key: 'pricing' },
+      { href: '/en/service-areas/', label: 'Service Areas', key: 'areas' },
+      { href: '/en/contact/',       label: 'Contact',       key: 'contact' },
     ];
 
 const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', label: 'العربية' };
@@ -73,12 +73,12 @@ const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', labe
   </div>
 
   <!-- ── Main nav bar ── -->
-  <div class="bg-[#fcf9f2]/92 backdrop-blur-xl border-b border-[#e5e2db]/50">
+  <div class="bg-[#fcf9f2]/95 backdrop-blur-xl border-b border-[#e5e2db]/50">
     <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
 
       <!-- Logo -->
       <a href={isAr ? '/' : '/en/'} class="flex items-center gap-3 shrink-0 group">
-        <div class="w-9 h-9 rounded-lg bg-[#0b2545] flex items-center justify-center text-white font-bold text-sm shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-md group-hover:scale-105 transition-transform">
           JB
         </div>
         <div class="flex flex-col leading-none">
@@ -92,10 +92,14 @@ const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', labe
       </a>
 
       <!-- Desktop nav -->
-      <nav class="hidden xl:flex items-center gap-6 text-sm font-semibold font-['Inter']">
+      <nav class="hidden xl:flex items-center gap-1 text-sm font-semibold font-['Inter']">
         {navLinks.map(link => (
           <a href={link.href}
-             class="text-[#44474e] hover:text-[#001026] transition-colors py-2 border-b-2 border-transparent hover:border-[#735b24]">
+             class={`px-3 py-2 rounded-lg transition-all border-b-2 ${
+               currentPage === link.key
+                 ? 'text-[#001026] border-[#735b24] bg-[#f6f3ec]'
+                 : 'text-[#44474e] border-transparent hover:text-[#001026] hover:border-[#735b24] hover:bg-[#f6f3ec]'
+             }`}>
             {link.label}
           </a>
         ))}
@@ -105,22 +109,22 @@ const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', labe
       <div class="flex items-center gap-3 shrink-0">
         <!-- WhatsApp CTA -->
         <a href={waLink(lang)} target="_blank" rel="noopener"
-           class="hidden sm:inline-flex items-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-colors px-4 py-2.5 rounded text-xs font-bold font-['Inter'] shadow-sm wa-pulse">
+           class="hidden sm:inline-flex items-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-4 py-2.5 rounded-lg text-xs font-bold font-['Inter'] shadow-sm wa-pulse">
           <span class="material-symbols-outlined text-[17px]">chat</span>
           <span>{isAr ? 'معاينة مجانية' : 'Free Inspection'}</span>
         </a>
         <!-- Call CTA -->
         <a href={`tel:${SITE.phone}`}
-           class="inline-flex items-center gap-2 bg-[#001026] text-white hover:bg-[#0b2545] transition-colors px-4 py-2.5 rounded text-xs font-bold font-['Inter']">
+           class="inline-flex items-center gap-2 bg-[#001026] text-white hover:bg-[#0b2545] transition-all px-4 py-2.5 rounded-lg text-xs font-bold font-['Inter']">
           <span class="material-symbols-outlined text-[17px]">phone_in_talk</span>
           <span class="hidden md:inline">{isAr ? 'اتصال سريع' : 'Call Now'}</span>
         </a>
         <!-- Mobile hamburger -->
-        <button id="menu-toggle" aria-label="Toggle menu"
-                class="xl:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded">
-          <span class="w-5 h-0.5 bg-[#001026] transition-all"></span>
-          <span class="w-5 h-0.5 bg-[#001026] transition-all"></span>
-          <span class="w-5 h-0.5 bg-[#001026] transition-all"></span>
+        <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false"
+                class="xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-[#f0eee7] transition-colors">
+          <span class="ham-line w-5 h-0.5 bg-[#001026] transition-all origin-center"></span>
+          <span class="ham-line w-5 h-0.5 bg-[#001026] transition-all origin-center"></span>
+          <span class="ham-line w-5 h-0.5 bg-[#001026] transition-all origin-center"></span>
         </button>
       </div>
 
@@ -131,20 +135,29 @@ const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', labe
          class="xl:hidden hidden border-t border-[#e5e2db]/60 bg-[#fcf9f2] px-6 py-4 flex flex-col gap-1">
       {navLinks.map(link => (
         <a href={link.href}
-           class="py-3 text-sm font-semibold text-[#44474e] hover:text-[#001026] border-b border-[#e5e2db]/40 transition-colors">
+           class={`py-3 px-3 rounded-lg text-sm font-semibold border-b border-[#e5e2db]/40 transition-colors ${
+             currentPage === link.key
+               ? 'text-[#001026] bg-[#f0eee7]'
+               : 'text-[#44474e] hover:text-[#001026] hover:bg-[#f6f3ec]'
+           }`}>
           {link.label}
         </a>
       ))}
       <div class="pt-3 flex gap-3">
         <a href={waLink(lang)} target="_blank" rel="noopener"
-           class="flex-1 flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] rounded py-3 text-sm font-bold font-['Inter']">
+           class="flex-1 flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] rounded-lg py-3 text-sm font-bold font-['Inter']">
           <span class="material-symbols-outlined text-[18px]">chat</span>
           {isAr ? 'واتساب' : 'WhatsApp'}
         </a>
         <a href={`tel:${SITE.phone}`}
-           class="flex-1 flex items-center justify-center gap-2 bg-[#001026] text-white rounded py-3 text-sm font-bold font-['Inter']">
+           class="flex-1 flex items-center justify-center gap-2 bg-[#001026] text-white rounded-lg py-3 text-sm font-bold font-['Inter']">
           <span class="material-symbols-outlined text-[18px]">call</span>
           {isAr ? 'اتصال' : 'Call'}
+        </a>
+      </div>
+      <div class="pt-2 border-t border-[#e5e2db]/40 mt-1">
+        <a href={switchLang.href} class="block py-2 px-3 text-sm font-semibold text-[#735b24] hover:text-[#001026] transition-colors">
+          🌐 {switchLang.label}
         </a>
       </div>
     </nav>
@@ -155,5 +168,36 @@ const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', labe
 <script>
   const toggle = document.getElementById('menu-toggle');
   const menu   = document.getElementById('mobile-menu');
-  toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+  const lines  = toggle?.querySelectorAll('.ham-line');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    // Animate hamburger → X
+    if (lines && lines.length === 3) {
+      if (!isOpen) {
+        (lines[0] as HTMLElement).style.transform = 'translateY(7px) rotate(45deg)';
+        (lines[1] as HTMLElement).style.opacity = '0';
+        (lines[2] as HTMLElement).style.transform = 'translateY(-7px) rotate(-45deg)';
+      } else {
+        (lines[0] as HTMLElement).style.transform = '';
+        (lines[1] as HTMLElement).style.opacity = '';
+        (lines[2] as HTMLElement).style.transform = '';
+      }
+    }
+  });
+
+  // Close mobile menu when any nav link is clicked
+  menu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      toggle?.setAttribute('aria-expanded', 'false');
+      if (lines && lines.length === 3) {
+        (lines[0] as HTMLElement).style.transform = '';
+        (lines[1] as HTMLElement).style.opacity = '';
+        (lines[2] as HTMLElement).style.transform = '';
+      }
+    });
+  });
 </script>

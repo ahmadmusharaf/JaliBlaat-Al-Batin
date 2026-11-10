@@ -1,0 +1,197 @@
+﻿---
+// src/pages/ar/contact.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCTABar from '../../components/MobileCTABar.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import { SITE, waLink } from '../../data/site';
+
+const title = 'اتصل بنا — معاينة مجانية لأرضياتك في حفر الباطن | جلي بلاط حفرالباطن';
+const description = 'تواصل مع جلي بلاط حفرالباطن للحصول على معاينة مجانية لجلي وترميم الأرضيات. استجابة سريعة، تغطية كاملة لأحياء حفر الباطن.';
+---
+
+<BaseLayout {title} {description} lang="ar" canonical={SITE.url + '/ar/contact/'}>
+  <Header lang="ar" currentPage="contact" />
+
+  <PageHero
+    lang="ar"
+    title="تواصل معنا — معاينة مجانية"
+    subtitle="احصل على معاينة مجانية لأرضياتك اليوم. استجابة فورية مضمونة. نغطي جميع أحياء حفر الباطن."
+    badge="معاينة مجانية"
+    accentIcon="phone_in_talk"
+    breadcrumb={[
+      { label: 'الرئيسية', href: '/' },
+      { label: 'اتصل بنا' },
+    ]}
+  />
+
+  <main>
+    <!-- Contact Cards -->
+    <section class="py-16 bg-[#fcf9f2]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid md:grid-cols-3 gap-6">
+          {[
+            { icon:'call',     t:'اتصل بنا',      v: SITE.phoneDisplay, s: SITE.hours,                   href:`tel:${SITE.phone}`, cta:'اتصل الآن',         color:'from-[#001026] to-[#0b2545]',  tc:'text-white' },
+            { icon:'chat',     t:'واتساب',         v:'استجابة فورية',   s:'رد خلال 5 دقائق على رسائل واتساب', href: waLink('ar'),       cta:'افتح واتساب',      color:'from-[#001404] to-[#002c0f]',  tc:'text-[#66ff8e]' },
+            { icon:'schedule', t:'ساعات العمل',    v:'يومياً 7 ص – 11 م', s:'مفتوح كل يوم بما في ذلك الإجازات',  href: null,               cta: null,              color:'from-[#1a1200] to-[#2a1e00]',  tc:'text-[#ffdf9f]' },
+          ].map(card => (
+            <div class={`reveal rounded-2xl bg-gradient-to-br ${card.color} p-8 text-center`}>
+              <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-5">
+                <span class={`material-symbols-outlined ${card.tc} text-3xl`}>{card.icon}</span>
+              </div>
+              <h3 class="text-white font-bold text-lg mb-2">{card.t}</h3>
+              <p class={`${card.tc} font-semibold text-xl mb-2 font-['Inter']`}>{card.v}</p>
+              <p class="text-white/50 text-sm mb-6">{card.s}</p>
+              {card.href && card.cta && (
+                <a href={card.href} target={card.href.startsWith('http') ? '_blank' : undefined} rel="noopener"
+                   class={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm ${card.tc} bg-white/10 hover:bg-white/20 transition-all border border-white/20`}>
+                  {card.cta} ←
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="py-20 bg-[#f6f3ec]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+          <div class="reveal">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-4">طلب عرض سعر مجاني</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-6 leading-tight">أخبرنا عن أرضياتك</h2>
+            <p class="text-[#44474e] leading-relaxed mb-8">أدخل تفاصيلك وسنعد عرض سعر مخصص لعقارك. بدون التزام — المعاينة والتسعير مجانيان دائماً.</p>
+            <div class="space-y-4 mb-10">
+              {[
+                { icon:'person',   t:'فني مخصص',          d:'نفس الخبير يزور للمعاينة وتسليم المشروع.' },
+                { icon:'receipt',  t:'عرض سعر مكتوب',     d:'تفصيل كامل حسب المساحة ونوع الخدمة.' },
+                { icon:'update',   t:'جدولة مرنة',         d:'صباحاً أو مساءً — نعمل حسب جدولك.' },
+                { icon:'verified', t:'ضمان الجودة',        d:'إذا لم تكن راضياً، نعود ونعيد العمل دون رسوم إضافية.' },
+              ].map(item => (
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-[#0b2545] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[#ffdf9f] text-xl">{item.icon}</span>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-[#001026]">{item.t}</p>
+                    <p class="text-[#44474e] text-sm">{item.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="bg-white rounded-2xl border border-[#e5e2db] p-6">
+              <h4 class="font-bold text-[#001026] mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#735b24] text-xl">location_on</span>
+                الموقع وساعات العمل
+              </h4>
+              <dl class="space-y-2 text-sm text-[#44474e]">
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">العنوان</dt><dd>{SITE.address.street}، {SITE.address.city}</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">المنطقة</dt><dd>{SITE.address.region}، المملكة العربية السعودية</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">ساعات العمل</dt><dd>{SITE.hours}</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">الهاتف</dt><dd dir="ltr">{SITE.phoneDisplay}</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <form id="ar-contact-form" class="bg-white rounded-2xl border border-[#e5e2db] p-8 shadow-sm space-y-5">
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="ar-name" class="block text-sm font-semibold text-[#001026] mb-2">الاسم الكامل *</label>
+                  <input id="ar-name" name="name" type="text" required placeholder="اسمك الكريم"
+                         class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] transition-colors" />
+                </div>
+                <div>
+                  <label for="ar-phone" class="block text-sm font-semibold text-[#001026] mb-2">رقم الهاتف *</label>
+                  <input id="ar-phone" name="phone" type="tel" required placeholder="+966 5X XXX XXXX" dir="ltr"
+                         class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] transition-colors" />
+                </div>
+              </div>
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="ar-service" class="block text-sm font-semibold text-[#001026] mb-2">نوع الخدمة *</label>
+                  <select id="ar-service" name="service" required
+                          class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] focus:outline-none focus:border-[#735b24] appearance-none">
+                    <option value="">اختر الخدمة…</option>
+                    <option>جلي الرخام</option>
+                    <option>تلميع السيراميك</option>
+                    <option>ترميم التيرازو</option>
+                    <option>تغليف الجرانيت</option>
+                    <option>ترميم الحجر الجيري</option>
+                    <option>طلاء الإيبوكسي</option>
+                    <option>غير متأكد — أحتاج تقييم</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="ar-district" class="block text-sm font-semibold text-[#001026] mb-2">الحي *</label>
+                  <select id="ar-district" name="district" required
+                          class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] focus:outline-none focus:border-[#735b24] appearance-none">
+                    <option value="">اختر الحي…</option>
+                    {['العزيزية','الخالدية','المحمدية','البلدية','أبو موسى الأشعري','الروضة','الربوة','الفيصلية','التلال','النزهة','الواحة','الريان'].map(d => (
+                      <option>{d}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for="ar-area" class="block text-sm font-semibold text-[#001026] mb-2">مساحة الأرضية التقريبية (م²)</label>
+                <input id="ar-area" name="area" type="number" min="1" placeholder="مثال: 150"
+                       class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] transition-colors" />
+              </div>
+              <div>
+                <label for="ar-msg" class="block text-sm font-semibold text-[#001026] mb-2">ملاحظات إضافية</label>
+                <textarea id="ar-msg" name="message" rows="4" placeholder="صِف أرضياتك وأي تلف أو متطلبات خاصة…"
+                          class="w-full border border-[#e5e2db] rounded-xl px-4 py-3 text-sm text-[#001026] placeholder-[#44474e]/40 focus:outline-none focus:border-[#735b24] transition-colors resize-none"></textarea>
+              </div>
+              <div id="ar-cf-error" class="hidden bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm"></div>
+              <button type="submit"
+                      class="w-full flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-6 py-4 rounded-xl font-bold text-base">
+                <span class="material-symbols-outlined">chat</span>
+                أرسل عبر واتساب
+              </button>
+              <p class="text-center text-xs text-[#44474e]/60">بياناتك تفتح رسالة واتساب — لا يتم تخزين أي بيانات على خوادمنا.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="ar" />
+  <MobileCTABar lang="ar" />
+</BaseLayout>
+
+<script>
+  const form    = document.getElementById('ar-contact-form') as HTMLFormElement;
+  const errBox  = document.getElementById('ar-cf-error') as HTMLDivElement;
+  const waNum   = '966500000000';
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name    = (document.getElementById('ar-name')     as HTMLInputElement).value.trim();
+    const phone   = (document.getElementById('ar-phone')    as HTMLInputElement).value.trim();
+    const service = (document.getElementById('ar-service')  as HTMLSelectElement).value;
+    const district= (document.getElementById('ar-district') as HTMLSelectElement).value;
+    const area    = (document.getElementById('ar-area')     as HTMLInputElement).value.trim();
+    const msg     = (document.getElementById('ar-msg')      as HTMLTextAreaElement).value.trim();
+
+    if (!name || !phone || !service || !district) {
+      errBox.textContent = 'يرجى تعبئة جميع الحقول المطلوبة (الاسم، الهاتف، الخدمة، الحي).';
+      errBox.classList.remove('hidden');
+      return;
+    }
+    errBox.classList.add('hidden');
+    const waMsg = [
+      `السلام عليكم، أرغب في الاستفسار عن خدمة جلي الأرضيات.`,
+      `الاسم: ${name}`,
+      `الهاتف: ${phone}`,
+      `الخدمة: ${service}`,
+      `الحي: ${district}`,
+      area ? `المساحة: ${area} م²` : '',
+      msg ? `ملاحظات: ${msg}` : '',
+    ].filter(Boolean).join('\n');
+    window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(waMsg)}`, '_blank');
+  });
+</script>
