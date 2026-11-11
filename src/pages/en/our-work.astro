@@ -20,7 +20,7 @@ const projects = [
     area: '280 m²',
     district: 'Al-Aziziyah',
     duration: '3 days',
-    img: '/images/project-marble-1.jpg',
+    img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85',
     tags: ['Marble', 'Residential'],
   },
   {
@@ -31,7 +31,7 @@ const projects = [
     area: '450 m²',
     district: 'Al-Khalidiyah',
     duration: '4 days',
-    img: '/images/project-tile-1.jpg',
+    img: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85',
     tags: ['Tile', 'Commercial'],
   },
   {
@@ -42,7 +42,7 @@ const projects = [
     area: '160 m²',
     district: 'Al-Rawdah',
     duration: '2 days',
-    img: '/images/project-terrazzo-1.jpg',
+    img: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=85',
     tags: ['Terrazzo', 'Residential'],
   },
   {
@@ -53,7 +53,7 @@ const projects = [
     area: '90 m²',
     district: 'Al-Muhammadiyah',
     duration: '1 day',
-    img: '/images/project-granite-1.jpg',
+    img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85',
     tags: ['Granite', 'Residential'],
   },
   {
@@ -64,7 +64,7 @@ const projects = [
     area: '320 m²',
     district: 'Al-Faisaliyah',
     duration: '3 days',
-    img: '/images/project-marble-2.jpg',
+    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85',
     tags: ['Marble', 'Commercial'],
   },
   {
@@ -75,7 +75,7 @@ const projects = [
     area: '600 m²',
     district: 'Al-Baladiyah',
     duration: '5 days',
-    img: '/images/project-tile-2.jpg',
+    img: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85',
     tags: ['Tile', 'Religious'],
   },
 ];
@@ -141,14 +141,16 @@ const categories = ['All', 'Marble', 'Tile', 'Terrazzo', 'Granite'];
           {projects.map((p, i) => (
             <article
               data-category={p.category}
-              class={`swipe-card project-card tap-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+              class={`swipe-card project-card gallery-card tap-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
 
               <!-- Tap-anywhere WhatsApp link -->
               <a href={waLink('en')} target="_blank" rel="noopener" class="tap-link" aria-label={`WhatsApp about ${p.title}`}></a>
 
               <!-- Image placeholder -->
               <div class="relative h-52 bg-gradient-to-br from-[#0b2545] to-[#001026] overflow-hidden">
-                <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                <img src={p.img} alt={p.title} loading="lazy" class="gallery-media absolute inset-0" />
+                <div class="gallery-scrim"></div>
+                <div class="hidden">
                   <span class="material-symbols-outlined text-[#ffdf9f] text-5xl opacity-60">photo_camera</span>
                   <span class="text-white/40 text-xs font-medium">{p.tags.join(' · ')}</span>
                 </div>
@@ -215,15 +217,19 @@ const categories = ['All', 'Marble', 'Tile', 'Terrazzo', 'Granite'];
         <!-- Slider -->
         <div class="max-w-2xl mx-auto reveal">
           <div class="relative h-80 rounded-2xl overflow-hidden border border-[#e5e2db] shadow-lg" id="ba-slider">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85" alt="Dull floor before polishing" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 overflow-hidden clip-after">
+              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85" alt="Polished floor after restoration" class="h-full w-full object-cover" />
+            </div>
             <!-- Before -->
-            <div class="absolute inset-0 bg-gradient-to-br from-[#2a1e00] to-[#1a1200] flex items-center justify-center">
+            <div class="hidden">
               <div class="text-center">
                 <span class="material-symbols-outlined text-[#735b24]/40 text-7xl">texture</span>
                 <p class="text-white/30 text-sm mt-2">Before — Dull, Scratched Surface</p>
               </div>
             </div>
             <!-- After -->
-            <div class="absolute inset-0 bg-gradient-to-br from-[#001026] to-[#0b2545] flex items-center justify-center clip-after">
+            <div class="hidden">
               <div class="text-center">
                 <span class="material-symbols-outlined text-[#ffdf9f] text-7xl">diamond</span>
                 <p class="text-white/50 text-sm mt-2">After — Mirror Shine Restored</p>

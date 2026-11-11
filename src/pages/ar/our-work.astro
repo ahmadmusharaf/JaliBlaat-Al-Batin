@@ -11,12 +11,12 @@ const title = 'أعمالنا — مشاريع جلي الأرضيات في حف
 const description = 'استعرض مشاريع جلي الرخام والبلاط والتيرازو التي أنجزناها في حفر الباطن. معرض صور قبل وبعد يعكس نتائج حقيقية.';
 
 const projects = [
-  { id:1, cat:'marble',   t:'ترميم رخام فيلا — العزيزية', d:'ترميم كامل لرخام إيطالي متآكل في فيلا بمساحة 280 م². شمل حقن الشقوق، جلي ماسي، وبلورة بلمعة مرآتية.', area:'280 م²', dist:'العزيزية', dur:'3 أيام' },
-  { id:2, cat:'tile',     t:'جلي بلاط تجاري — الخالدية',  d:'تنظيف عميق وتلميع 450 م² بورسلان في صالة عرض تجارية. ترميم الفاصل ومعالجة مضادة للانزلاق.',          area:'450 م²', dist:'الخالدية', dur:'4 أيام' },
-  { id:3, cat:'terrazzo', t:'طحن وتلميع تيرازو — الروضة', d:'ترميم كامل لأرضيات تيرازو في فيلا تسعينيات. تسوية الأسطح، معالجة الشقوق، لمعة مرآتية.',              area:'160 م²', dist:'الروضة',   dur:'يومان' },
-  { id:4, cat:'granite',  t:'مطبخ وحمام جرانيت — المحمدية', d:'جلي وتغليف سطح مطبخ وأرضية حمام ودرج من الجرانيت. بريق عميق وطبقة حماية مضادة للزيوت.',            area:'90 م²',  dist:'المحمدية', dur:'يوم واحد' },
-  { id:5, cat:'marble',   t:'بهو مجمع سكني — الفيصلية',   d:'ترميم رخام البهو والممرات في مجمع من 12 شقة. لمعة موحدة في جميع المناطق المشتركة.',                   area:'320 م²', dist:'الفيصلية', dur:'3 أيام' },
-  { id:6, cat:'tile',     t:'ترميم بلاط مسجد — البلدية',   d:'تنظيف وتلميع بلاط قاعة الصلاة بمساحة 600 م². تشطيب مضاد للانزلاق في المناطق الرطبة.',               area:'600 م²', dist:'البلدية',  dur:'5 أيام' },
+  { id:1, cat:'marble',   t:'ترميم رخام فيلا — العزيزية', d:'ترميم كامل لرخام إيطالي متآكل في فيلا بمساحة 280 م². شمل حقن الشقوق، جلي ماسي، وبلورة بلمعة مرآتية.', area:'280 م²', dist:'العزيزية', dur:'3 أيام', img:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85' },
+  { id:2, cat:'tile',     t:'جلي بلاط تجاري — الخالدية',  d:'تنظيف عميق وتلميع 450 م² بورسلان في صالة عرض تجارية. ترميم الفاصل ومعالجة مضادة للانزلاق.',          area:'450 م²', dist:'الخالدية', dur:'4 أيام', img:'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85' },
+  { id:3, cat:'terrazzo', t:'طحن وتلميع تيرازو — الروضة', d:'ترميم كامل لأرضيات تيرازو في فيلا تسعينيات. تسوية الأسطح، معالجة الشقوق، لمعة مرآتية.',              area:'160 م²', dist:'الروضة',   dur:'يومان', img:'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=85' },
+  { id:4, cat:'granite',  t:'مطبخ وحمام جرانيت — المحمدية', d:'جلي وتغليف سطح مطبخ وأرضية حمام ودرج من الجرانيت. بريق عميق وطبقة حماية مضادة للزيوت.',            area:'90 م²',  dist:'المحمدية', dur:'يوم واحد', img:'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85' },
+  { id:5, cat:'marble',   t:'بهو مجمع سكني — الفيصلية',   d:'ترميم رخام البهو والممرات في مجمع من 12 شقة. لمعة موحدة في جميع المناطق المشتركة.',                   area:'320 م²', dist:'الفيصلية', dur:'3 أيام', img:'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85' },
+  { id:6, cat:'tile',     t:'ترميم بلاط مسجد — البلدية',   d:'تنظيف وتلميع بلاط قاعة الصلاة بمساحة 600 م². تشطيب مضاد للانزلاق في المناطق الرطبة.',               area:'600 م²', dist:'البلدية',  dur:'5 أيام', img:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85' },
 ];
 ---
 
@@ -57,9 +57,10 @@ const projects = [
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
-            <article class={`reveal stagger-${(i % 3) + 1} group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
-              <div class="relative h-52 bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center">
-                <span class="material-symbols-outlined text-[#ffdf9f] text-5xl opacity-60">photo_camera</span>
+            <article class={`reveal stagger-${(i % 3) + 1} gallery-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+              <div class="relative h-52 bg-gradient-to-br from-[#0b2545] to-[#001026] overflow-hidden">
+                <img src={p.img} alt={p.t} loading="lazy" class="gallery-media" />
+                <div class="gallery-scrim"></div>
               </div>
               <div class="p-6">
                 <h3 class="font-bold text-[#001026] text-base mb-2">{p.t}</h3>

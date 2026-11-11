@@ -72,6 +72,20 @@ const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', labe
     </div>
   </div>
 
+  <!-- ── Mobile contact + language bar ── -->
+  <div class="md:hidden bg-[#0b2545] text-white border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 h-9 flex items-center justify-between gap-3 text-[11px] font-semibold font-['Inter']">
+      <a href={`tel:${SITE.phone}`} dir="ltr" class="inline-flex min-w-0 items-center gap-1.5 text-[#ffdf9f] hover:text-white transition-colors">
+        <span class="material-symbols-outlined text-[15px]">call</span>
+        <span class="truncate">{isAr ? 'اتصل بنا' : 'Call us'} · {SITE.phoneDisplay}</span>
+      </a>
+      <a href={switchLang.href} class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#ffdf9f]/40 px-2.5 py-1 text-[#ffdf9f] hover:bg-white/10 transition-colors">
+        <span aria-hidden="true">🌐</span>
+        <span>{switchLang.label}</span>
+      </a>
+    </div>
+  </div>
+
   <!-- ── Main nav bar ── -->
   <div class="bg-[#fcf9f2]/95 backdrop-blur-xl border-b border-[#e5e2db]/50">
     <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
