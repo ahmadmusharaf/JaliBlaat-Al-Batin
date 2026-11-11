@@ -6,6 +6,9 @@ dist/
 # dependencies
 node_modules/
 
+# accidental nested clone
+/JaliBlaat-Al-Batin/
+
 # logs
 npm-debug.log*
 yarn-debug.log*
