@@ -1,34 +1,14 @@
-# Cloudflare Pages configuration
-# https://developers.cloudflare.com/pages/
+# Cloudflare Pages / Assets Headers
+# https://developers.cloudflare.com/pages/configuration/headers/
 
-[build]
-  command = "pnpm run build"
-  publish = "dist"
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-[[redirects]]
-  from = "/pricing"
-  to   = "/ar/pricing/"
-  status = 301
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
 
-[[redirects]]
-  from = "/en/pricing"
-  to   = "/en/pricing/"
-  status = 301
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-
-[[headers]]
-  for = "/images/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/_astro/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

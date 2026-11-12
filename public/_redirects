@@ -1,0 +1,5 @@
+# Cloudflare Pages / Assets Redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+/pricing     /ar/pricing/     301
+/en/pricing  /en/pricing/     301
