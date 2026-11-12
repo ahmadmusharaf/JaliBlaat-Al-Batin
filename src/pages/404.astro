@@ -1,7 +1,7 @@
 ---
 // src/pages/404.astro
 import PageLayout from '../layouts/PageLayout.astro';
-import { SITE, waLink } from '../data/site';
+import { SITE, sitePath, waLink } from '../data/site';
 
 // Detect language from URL prefix
 const isEn = Astro.url.pathname.startsWith('/en');
@@ -26,7 +26,7 @@ const lang = isEn ? 'en' : 'ar';
           : 'الصفحة التي تبحث عنها غير موجودة. جرّب الرئيسية أو تواصل معنا عبر الواتساب.'}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={isEn ? '/en/' : '/'}
+        <a href={isEn ? sitePath('/en/') : sitePath('/')}
            class="inline-flex items-center justify-center gap-2 bg-[#001026] text-white px-6 py-3 rounded font-bold text-sm font-['Inter'] hover:bg-[#0b2545] transition-colors">
           <span class="material-symbols-outlined text-[18px]">home</span>
           {isEn ? 'Go Home' : 'الرئيسية'}

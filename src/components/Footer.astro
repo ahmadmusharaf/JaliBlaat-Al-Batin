@@ -1,6 +1,6 @@
 ---
 // src/components/Footer.astro
-import { SITE, waLink } from '../data/site';
+import { SITE, sitePath, waLink } from '../data/site';
 
 export interface Props {
   lang?: 'ar' | 'en';
@@ -132,13 +132,13 @@ const isAr = lang === 'ar';
           : `© ${new Date().getFullYear()} JaliBlaat Al Batin — All rights reserved`}
       </span>
       <div class="flex items-center gap-4">
-        <a href={isAr ? '/' : '/en/'} class="hover:text-white/70 transition-colors">
+        <a href={isAr ? sitePath('/') : sitePath('/en/')} class="hover:text-white/70 transition-colors">
           {isAr ? 'الرئيسية' : 'Home'}
         </a>
-        <a href={isAr ? '/ar/pricing/' : '/en/pricing/'} class="hover:text-white/70 transition-colors">
+        <a href={isAr ? sitePath('/ar/pricing/') : sitePath('/en/pricing/')} class="hover:text-white/70 transition-colors">
           {isAr ? 'الأسعار' : 'Pricing'}
         </a>
-        <a href={isAr ? '/en/' : '/'} class="hover:text-white/70 transition-colors">
+        <a href={isAr ? sitePath('/en/') : sitePath('/')} class="hover:text-white/70 transition-colors">
           {isAr ? 'English' : 'العربية'}
         </a>
       </div>

@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import MobileCTABar from '../../components/MobileCTABar.astro';
 import PageHero from '../../components/sections/PageHero.astro';
-import { SITE, waLink } from '../../data/site';
+import { SITE, sitePath, waLink } from '../../data/site';
 
 const title = 'Contact JaliBlaat Al Batin — Free Floor Inspection in Hafar Al-Batin';
 const description = 'Contact JaliBlaat Al Batin for a free marble polishing or tile restoration inspection. Fast response, all Hafar Al-Batin districts covered. WhatsApp or call.';
@@ -21,7 +21,7 @@ const description = 'Contact JaliBlaat Al Batin for a free marble polishing or t
     badge="Free Inspection"
     accentIcon="phone_in_talk"
     breadcrumb={[
-      { label: 'Home', href: '/en/' },
+      { label: 'Home', href: sitePath('/en/') },
       { label: 'Contact' },
     ]}
   />
@@ -52,6 +52,16 @@ const description = 'Contact JaliBlaat Al Batin for a free marble polishing or t
               cta: 'Open WhatsApp',
               color: 'from-[#001404] to-[#002c0f]',
               textColor: 'text-[#66ff8e]',
+            },
+            {
+              icon: 'phone_in_talk',
+              title: 'Additional Phone',
+              value: SITE.phoneAltDisplay,
+              sub: 'Direct phone contact',
+              href: `tel:${SITE.phoneAlt}`,
+              cta: 'Call Now',
+              color: 'from-[#0b2545] to-[#163b69]',
+              textColor: 'text-white',
             },
             {
               icon: 'schedule',
@@ -127,6 +137,9 @@ const description = 'Contact JaliBlaat Al Batin for a free marble polishing or t
                 <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Region</dt><dd>Eastern Province, Saudi Arabia</dd></div>
                 <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Hours</dt><dd>{SITE.hoursEn}</dd></div>
                 <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Phone</dt><dd dir="ltr">{SITE.phoneDisplay}</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Additional phone</dt><dd dir="ltr">{SITE.phoneAltDisplay}</dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Email</dt><dd><a href={`mailto:${SITE.email}`} class="hover:text-[#735b24] break-all">{SITE.email}</a></dd></div>
+                <div class="flex gap-3"><dt class="font-medium text-[#001026] w-24 shrink-0">Additional email</dt><dd><a href={`mailto:${SITE.emailAlt}`} class="hover:text-[#735b24] break-all">{SITE.emailAlt}</a></dd></div>
               </dl>
             </div>
           </div>

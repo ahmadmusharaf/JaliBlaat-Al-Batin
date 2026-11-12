@@ -48,6 +48,22 @@ const isAr = lang === 'ar';
               <div class="text-sm text-white/70">{isAr ? SITE.hours : SITE.hoursEn}</div>
             </div>
           </a>
+          <a href={`tel:${SITE.phoneAlt}`}
+             class="flex items-center gap-4 bg-[#0b2545] text-white px-6 py-5 rounded-xl shadow-md hover:bg-[#163b69] transition-all">
+            <span class="material-symbols-outlined text-[32px]">phone_in_talk</span>
+            <div>
+              <div class="font-bold text-base" dir="ltr">{SITE.phoneAltDisplay}</div>
+              <div class="text-sm text-white/70">{isAr ? 'رقم اتصال إضافي' : 'Additional phone number'}</div>
+            </div>
+          </a>
+          <a href={`mailto:${SITE.email}`}
+             class="flex items-center gap-4 bg-white border border-[rgba(200,169,106,0.3)] px-6 py-5 rounded-xl hover:border-[#735b24] transition-all">
+            <span class="material-symbols-outlined text-[#735b24] text-[32px]">mail</span>
+            <div>
+              <div class="font-bold text-[#001026] text-base break-all">{SITE.email}</div>
+              <div class="text-sm text-[#44474e]">{isAr ? 'راسلنا عبر البريد الإلكتروني' : 'Email us'}</div>
+            </div>
+          </a>
           <div class="flex items-center gap-4 bg-white border border-[rgba(200,169,106,0.3)] px-6 py-5 rounded-xl">
             <span class="material-symbols-outlined text-[#735b24] text-[32px]">location_on</span>
             <div>

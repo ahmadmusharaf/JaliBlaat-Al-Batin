@@ -8,9 +8,13 @@ export const SITE = {
   tagline:      'خدمات جلي وتلميع الرخام والأرضيات — حفر الباطن',
   taglineEn:    'Luxury Marble & Floor Restoration — Hafar Al-Batin',
   url:          'https://jaliblaatalbatin.com',
-  phone:        '+966500000000',          // ← replace with real number
-  phoneDisplay: '+966 5X XXX XXXX',       // ← shown to users
-  waNumber:     '966500000000',           // ← WhatsApp number (no +)
+  phone:        '+966508866324',          // primary phone number
+  phoneDisplay: '+966 50 886 6324',       // shown to users
+  phoneAlt:     '+966539811299',          // alternate phone number
+  phoneAltDisplay: '+966 53 981 1299',
+  email:        'jaly.balat.hafar@gmail.com',
+  emailAlt:     'aamirwafa89@gmail.com',
+  waNumber:     '966508866324',           // WhatsApp number (no +)
   waMessageAr:  'السلام عليكم، أرغب في الاستفسار عن خدمة جلي الأرضيات في حفر الباطن',
   waMessageEn:  'Hello, I would like to inquire about tile polishing services in Hafar Al-Batin',
   hours:        'يومياً: 7:00 ص - 11:00 م',
@@ -33,4 +37,9 @@ export const SITE = {
 export function waLink(lang: 'ar' | 'en' = 'ar') {
   const msg = lang === 'ar' ? SITE.waMessageAr : SITE.waMessageEn;
   return `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
+}
+
+export function sitePath(path: string) {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  return `${base}/${path.replace(/^\/+/, '')}`;
 }

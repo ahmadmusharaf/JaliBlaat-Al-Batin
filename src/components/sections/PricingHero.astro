@@ -1,7 +1,7 @@
 ---
 // src/components/sections/PricingHero.astro
 // Used on the pricing pages (AR + EN)
-import { SITE, waLink } from '../../data/site';
+import { SITE, sitePath, waLink } from '../../data/site';
 
 export interface Props { lang?: 'ar' | 'en'; }
 const { lang = 'ar' } = Astro.props;
@@ -17,7 +17,7 @@ const isAr = lang === 'ar';
 
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-xs text-[#44474e] mb-10 font-['Inter']">
-      <a href={isAr ? '/' : '/en/'} class="hover:text-[#001026] flex items-center gap-1 transition-colors">
+      <a href={isAr ? sitePath('/') : sitePath('/en/')} class="hover:text-[#001026] flex items-center gap-1 transition-colors">
         <span class="material-symbols-outlined text-[14px]">home</span>
         {isAr ? 'الرئيسية' : 'Home'}
       </a>

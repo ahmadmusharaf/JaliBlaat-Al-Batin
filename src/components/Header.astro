@@ -1,7 +1,7 @@
 ﻿---
 // src/components/Header.astro
 // Bilingual sticky header — renders Arabic or English version based on `lang` prop
-import { SITE, waLink } from '../data/site';
+import { SITE, sitePath, waLink } from '../data/site';
 
 export interface Props {
   lang?: 'ar' | 'en';
@@ -13,23 +13,23 @@ const isAr = lang === 'ar';
 
 const navLinks = isAr
   ? [
-      { href: '/',                  label: 'الرئيسية',       key: 'home' },
-      { href: '/ar/services/',      label: 'خدماتنا',        key: 'services' },
-      { href: '/ar/our-work/',      label: 'أعمالنا',        key: 'our-work' },
-      { href: '/ar/pricing/',       label: 'أسعار الجلي',    key: 'pricing' },
-      { href: '/ar/service-areas/', label: 'مناطق الخدمة',  key: 'areas' },
-      { href: '/ar/contact/',       label: 'اتصل بنا',       key: 'contact' },
+      { href: sitePath('/'),                  label: 'الرئيسية',       key: 'home' },
+      { href: sitePath('/ar/services/'),      label: 'خدماتنا',        key: 'services' },
+      { href: sitePath('/ar/our-work/'),      label: 'أعمالنا',         key: 'our-work' },
+      { href: sitePath('/ar/pricing/'),       label: 'أسعار الجلي',    key: 'pricing' },
+      { href: sitePath('/ar/service-areas/'), label: 'مناطق الخدمة',  key: 'areas' },
+      { href: sitePath('/ar/contact/'),       label: 'اتصل بنا',       key: 'contact' },
     ]
   : [
-      { href: '/en/',               label: 'Home',          key: 'home' },
-      { href: '/en/services/',      label: 'Services',      key: 'services' },
-      { href: '/en/our-work/',      label: 'Our Work',      key: 'our-work' },
-      { href: '/en/pricing/',       label: 'Pricing',       key: 'pricing' },
-      { href: '/en/service-areas/', label: 'Service Areas', key: 'areas' },
-      { href: '/en/contact/',       label: 'Contact',       key: 'contact' },
+      { href: sitePath('/en/'),               label: 'Home',          key: 'home' },
+      { href: sitePath('/en/services/'),      label: 'Services',      key: 'services' },
+      { href: sitePath('/en/our-work/'),      label: 'Our Work',      key: 'our-work' },
+      { href: sitePath('/en/pricing/'),       label: 'Pricing',       key: 'pricing' },
+      { href: sitePath('/en/service-areas/'), label: 'Service Areas', key: 'areas' },
+      { href: sitePath('/en/contact/'),       label: 'Contact',       key: 'contact' },
     ];
 
-const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', label: 'العربية' };
+const switchLang = isAr ? { href: sitePath('/en/'), label: 'English' } : { href: sitePath('/'), label: 'العربية' };
 ---
 
 <header class="fixed top-0 inset-x-0 z-50 shadow-[0_1px_8px_rgba(11,37,69,0.06)]">
@@ -91,7 +91,7 @@ const switchLang = isAr ? { href: '/en/', label: 'English' } : { href: '/', labe
     <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
 
       <!-- Logo -->
-      <a href={isAr ? '/' : '/en/'} class="flex items-center gap-3 shrink-0 group">
+      <a href={isAr ? sitePath('/') : sitePath('/en/')} class="flex items-center gap-3 shrink-0 group">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-md group-hover:scale-105 transition-transform">
           JB
         </div>

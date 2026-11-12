@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import MobileCTABar from '../../components/MobileCTABar.astro';
 import PageHero from '../../components/sections/PageHero.astro';
-import { SITE, waLink } from '../../data/site';
+import { SITE, sitePath, waLink } from '../../data/site';
 
 const lang = 'en';
 const title = 'Our Work — Floor Polishing Projects in Hafar Al-Batin | JaliBlaat';
@@ -93,7 +93,7 @@ const categories = ['All', 'Marble', 'Tile', 'Terrazzo', 'Granite'];
     badge="Portfolio Gallery"
     accentIcon="photo_library"
     breadcrumb={[
-      { label: 'Home', href: '/en/' },
+      { label: 'Home', href: sitePath('/en/') },
       { label: 'Our Work' },
     ]}
   />
@@ -259,7 +259,7 @@ const categories = ['All', 'Marble', 'Tile', 'Terrazzo', 'Granite'];
              class="inline-flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] px-8 py-4 rounded-xl font-bold transition-all">
             <span class="material-symbols-outlined">chat</span> Request Free Inspection
           </a>
-          <a href="/en/services/"
+          <a href={sitePath('/en/services/')}
              class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold transition-all">
             View All Services →
           </a>
