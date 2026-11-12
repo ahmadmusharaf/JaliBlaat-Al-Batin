@@ -1,0 +1,242 @@
+---
+// src/components/sections/TeamShowcase.astro
+// Showcase of CEO Amir Chamkani & the Master Stoneworks Team in Hafar Al-Batin
+import { SITE, waLink } from '../../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const teamMembers = [
+  {
+    name_ar: 'عامر تشامكاني (Amir Chamkani)',
+    name_en: 'Amir Chamkani',
+    role_ar: 'الرئيس التنفيذي والمشرف العام على المشاريع',
+    role_en: 'Chief Executive Officer & Stoneworks Director',
+    isCeo: true,
+    phone: SITE.phone,
+    phoneDisplay: SITE.phoneDisplay,
+    waNumber: SITE.waNumber,
+    badge_ar: 'القيادة الفنية والإشراف الميداني المباشر',
+    badge_en: 'Executive Leadership & Quality Oversight',
+    experience_ar: 'خبرة أكثر من 15 عاماً في صقل الرخام الطبيعي',
+    experience_en: '15+ Years in Luxury Marble & Stone Craftsmanship',
+    bio_ar: 'يشرف الأستاذ عامر تشامكاني مباشرة على معاينة المشاريع السكنية والفلل والقصور والمنشآت التجارية بحفر الباطن. يضمن تطبيق أعلى بروتوكولات الصقل الإيطالي بأقراص الألماس، واعتماد الضمان المكتوب لكل عميل شخصياً.',
+    bio_en: 'Mr. Amir Chamkani personally directs all residential, luxury villa, and commercial stone restoration contracts across Hafar Al-Batin. He oversees adherence to authentic Italian Klindex polishing protocols and signs off on certified written warranties.',
+    specialties_ar: ['معاينة وتحديد نوع الحجر والرخام', 'تخطيط بروتوكول الصقل الحراري', 'الإشراف على الضمان المعتمد والمشاريع الكبرى'],
+    specialties_en: ['Stone Petrography & Lippage Assessment', 'Thermal Crystallization Protocol Planning', 'Certified Warranty & Commercial Contract Oversight']
+  },
+  {
+    name_ar: 'معلم طارق (خبير ماكينات كلياندكس)',
+    name_en: 'Master Tariq (Klindex Specialist)',
+    role_ar: 'كبير معلمي الجلي ورئيس طاقم الماكينات الإيطالية',
+    role_en: 'Head Stonemason & Italian Klindex Machine Master',
+    isCeo: false,
+    phone: SITE.phoneAlt,
+    phoneDisplay: SITE.phoneAltDisplay,
+    waNumber: '966508866324',
+    badge_ar: 'تسوية الفواصل وأقراص الألماس 7 مراحل',
+    badge_en: '7-Stage Diamond Grinding & Joint Leveling',
+    experience_ar: '12 عاماً تشغيل ماكينات Klindex الكوكبية',
+    experience_en: '12+ Years Operating Planetary Grinding Machinery',
+    bio_ar: 'متخصص في تشغيل الماكينات الكوكبية الإيطالية الثقيلة (Klindex Planex). بارع في إزالة الفروقات بين البلاطات (Lippage Removal) وحقن الفواصل التالفة بالإيبوكسي الإيطالي المتطابق مع لون الرخام تماماً.',
+    bio_en: 'Expert in multi-head Italian planetary machines. Masters uneven tile height rectification, hairline crack bonding, and precision color-matched Italian epoxy resin grouting.',
+    specialties_ar: ['تسوية الفواصل والارتفاعات بالمليمتر', 'معالجة الشقوق بخلطات الإيبوكسي', 'جلي خالي تماماً من الغبار بالماء'],
+    specialties_en: ['Millimeter-Grade Floor Lippage Rectification', 'Seamless Epoxy Color Matching', '100% Dust-Free Wet Grinding Method']
+  },
+  {
+    name_ar: 'أخصائي تلميع الكريستال والنانو',
+    name_en: 'Crystallization & Nano Specialist',
+    role_ar: 'خبير التفاعل الكيميائي للكريستال وعزل الحجر',
+    role_en: 'Chemical Crystallization & Nano Sealing Specialist',
+    isCeo: false,
+    phone: SITE.phone,
+    phoneDisplay: SITE.phoneDisplay,
+    waNumber: SITE.waNumber,
+    badge_ar: 'لمعان المرآة وحماية النانو ضد البقع',
+    badge_en: 'Liquid Mirror Gloss & Fluorochemical Seal',
+    experience_ar: 'معتمد في تركيب مواد العزل الإيطالية والألمانية',
+    experience_en: 'Certified in European Hydrophobic Stone Sealants',
+    bio_ar: 'يركز على إنهاء الأرضيات بأعلى درجات اللمعان الزجاجي (Mirror Gloss) باستخدام بودرة الكريستال الحراري مع أقراص الصوف الإيطالي، ثم تطبيق طبقات النانو العازلة التي تمنع امتصاص القهوة، الشاي، والزيوت نهائياً.',
+    bio_en: 'Specializes in final mirror-grade thermochemical crystal buffing with virgin Italian steel-wool discs, followed by penetrating fluorochemical nano-barriers to permanently repel coffee, tea, and oil stains.',
+    specialties_ar: ['تلميع الكريستال الإيطالي فائق اللمعان', 'عزل مسامات الرخام ضد امتصاص السوائل', 'طبقات حماية غير قابلة للانزلاق'],
+    specialties_en: ['Ultra High-Gloss Italian Crystal Buffing', 'Hydrophobic & Oleophobic Stain Sealing', 'Anti-Slip Safety Surface Finishing']
+  },
+  {
+    name_ar: 'منسق المعاينات الميدانية وخدمة الأحياء',
+    name_en: 'District Assessment & Field Coordinator',
+    role_ar: 'مسؤول الجولات الفنية السريعة في أحياء حفر الباطن',
+    role_en: 'Field Inspection & District Service Coordinator',
+    isCeo: false,
+    phone: SITE.phone,
+    phoneDisplay: SITE.phoneDisplay,
+    waNumber: SITE.waNumber,
+    badge_ar: 'معاينة مجانية وعينة حية خلال ساعات',
+    badge_en: 'Rapid Dispatch & Free On-Site Test Patch',
+    experience_ar: 'تغطية شاملة لجميع أحياء حفر الباطن وضواحيها',
+    experience_en: 'Comprehensive Coverage of All Hafar Al-Batin Districts',
+    bio_ar: 'يتولى جدول زيارات المعاينة المجانية في أحياء العزيزية، الخالدية، المحمدية، أبو موسى، الروضة، والفيصلية. يصل إلى موقعك بسيارة مجهزة لإجراء فحص مباشر وتنفيذ عينة تجريبية على متر مربع لترى النتيجة بعينك قبل التعاقد.',
+    bio_en: 'Manages prompt scheduling for free site assessments across Al-Aziziyah, Al-Khalidiyah, Al-Muhammadiyah, and all surrounding areas. Dispatches equipped vehicles to provide immediate on-site test patches.',
+    specialties_ar: ['معاينة فورية مجانية بدون أي التزام', 'عينة تجريبية حية على 1 م² في منزلك', 'حساب التكلفة الحقيقية بدون رسوم خفية'],
+    specialties_en: ['Zero-Obligation Free Diagnostic Visits', 'Live 1 m² Test Polish on Your Floor', 'Exact Cost Calculation with Zero Hidden Fees']
+  }
+];
+---
+
+<section id="our-team" class="w-full bg-[#fcf9f2] py-16 lg:py-24 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute top-1/4 -right-32 w-96 h-96 rounded-full bg-[#fedb98]/20 blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-10 -left-32 w-96 h-96 rounded-full bg-[#0b2545]/10 blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fedb98]/60 text-[#735b24] text-xs font-bold font-['Inter'] uppercase tracking-wider mb-4 border border-[#735b24]/20 shadow-sm animate-pulse">
+        <span class="material-symbols-outlined text-[16px]">groups</span>
+        {isAr ? 'القيادة الفنية وخبرات الميدان المعتمدة' : 'Leadership & Certified Field Stonemasons'}
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold text-[#001026] tracking-tight leading-tight mb-4">
+        {isAr ? 'فريق العمل والقيادة الميدانية بحفر الباطن' : 'Our Leadership Team & Master Stoneworkers'}
+      </h2>
+      <p class="text-base md:text-lg text-[#44474e] leading-relaxed">
+        {isAr
+          ? 'نحن لسنا وسطاء، بل مؤسسة قائمة بأيدي فنية متخصصة ومعدات إيطالية يملكها طاقمنا. تعرّف على قيادة وفريق جلي بلاط حفرالباطن وتواصل معهم مباشرة.'
+          : 'We are direct stonework masters, not middlemen. Equipped with Italian planetary machines, meet our on-site leaders and get in touch directly.'}
+      </p>
+    </div>
+
+    <!-- Team Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      {teamMembers.map((member) => (
+        <div class={`relative rounded-2xl bg-white border ${member.isCeo ? 'border-[#735b24] shadow-xl ring-2 ring-[#735b24]/20' : 'border-[#e5e2db] shadow-md'} p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl group`}>
+          
+          {member.isCeo && (
+            <div class="absolute -top-3.5 inset-x-6 md:inset-x-8 flex justify-between items-center pointer-events-none">
+              <span class="bg-[#001026] text-[#fedb98] text-[11px] font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-md border border-[#735b24]/40 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[14px] text-[#fedb98]">star</span>
+                {isAr ? 'المشرف العام والرئيس التنفيذي' : 'Chief Executive & Founder'}
+              </span>
+              <span class="bg-[#25D366] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                {isAr ? 'متاح للمعاينة المباشرة' : 'Available for Inquiries'}
+              </span>
+            </div>
+          )}
+
+          <div>
+            <!-- Header row with icon & titles -->
+            <div class="flex items-start gap-4 mb-5 pt-2">
+              <div class={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-md ${member.isCeo ? 'bg-[#001026] text-[#fedb98] group-hover:scale-105 transition-transform' : 'bg-[#f0eee7] text-[#001026]'}`}>
+                <span class="material-symbols-outlined text-[30px]">
+                  {member.isCeo ? 'engineering' : 'handyman'}
+                </span>
+              </div>
+              <div class="flex flex-col min-w-0">
+                <h3 class="text-xl md:text-2xl font-bold text-[#001026] leading-snug">
+                  {isAr ? member.name_ar : member.name_en}
+                </h3>
+                <span class="text-sm font-semibold text-[#735b24] mt-0.5">
+                  {isAr ? member.role_ar : member.role_en}
+                </span>
+                <span class="text-xs text-[#74777f] mt-1 flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[13px] text-[#3de273]">verified</span>
+                  {isAr ? member.experience_ar : member.experience_en}
+                </span>
+              </div>
+            </div>
+
+            <!-- Badge Pill -->
+            <div class="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#f6f3ec] text-[#001026] text-xs font-semibold border border-[#e5e2db]">
+              <span class="material-symbols-outlined text-[14px] text-[#735b24]">diamond</span>
+              <span>{isAr ? member.badge_ar : member.badge_en}</span>
+            </div>
+
+            <!-- Bio -->
+            <p class="text-sm text-[#44474e] leading-relaxed mb-6">
+              {isAr ? member.bio_ar : member.bio_en}
+            </p>
+
+            <!-- Key Specializations -->
+            <div class="mb-6 pt-4 border-t border-[#f0eee7]">
+              <div class="text-xs font-bold text-[#001026] uppercase tracking-wider mb-2 font-['Inter']">
+                {isAr ? 'المهام الأساسية وضمانات التنفيذ:' : 'Core Execution & Guarantees:'}
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#44474e]">
+                {(isAr ? member.specialties_ar : member.specialties_en).map((spec) => (
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[14px] text-[#3de273] shrink-0">check_circle</span>
+                    <span>{spec}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Direct Contact Action Buttons -->
+          <div class="pt-4 border-t border-[#f0eee7] flex flex-wrap sm:flex-nowrap items-center gap-3">
+            <a
+              href={`tel:${member.phone}`}
+              class="flex-1 inline-flex items-center justify-center gap-2 bg-[#001026] text-white hover:bg-[#0b2545] transition-all px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm active:scale-95"
+            >
+              <span class="material-symbols-outlined text-[16px]">call</span>
+              <span dir="ltr">{member.phoneDisplay}</span>
+            </a>
+            <a
+              href={`https://wa.me/${member.waNumber}?text=${encodeURIComponent(isAr ? 'السلام عليكم، أود التنسيق مع فريق الجلي لمعاينة أرضية في حفر الباطن' : 'Hello, I would like to schedule a floor inspection in Hafar Al-Batin')}`}
+              target="_blank"
+              rel="noopener"
+              class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a] transition-all px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm active:scale-95"
+            >
+              <span class="material-symbols-outlined text-[16px]">chat</span>
+              <span>{isAr ? 'محادثة واتساب' : 'WhatsApp Chat'}</span>
+            </a>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+    <!-- Transparent Philosophy Note: Why custom estimate vs fixed price -->
+    <div class="p-8 md:p-10 rounded-2xl bg-[#f0eee7] border border-[#c4c6cf]/60 shadow-sm">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8 flex flex-col gap-3">
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-[#735b24] uppercase tracking-wider font-['Inter']">
+            <span class="material-symbols-outlined text-[16px]">info</span>
+            {isAr ? 'لماذا نفضل المعاينة الميدانية الدقيقة على الأسعار التقديرية الثابتة؟' : 'Why We Provide On-Site Assessments Rather Than Rigid Blind Quotes'}
+          </div>
+          <h3 class="text-2xl font-bold text-[#001026]">
+            {isAr ? 'كل أرضية رخام لها خصائص فريدة تستحق تسعيراً عادلاً' : 'Every Marble Floor is Unique & Deserves Fair, Accurate Valuation'}
+          </h3>
+          <p class="text-sm text-[#44474e] leading-relaxed">
+            {isAr
+              ? 'تختلف الأرضيات اختلافاً جوهرياً؛ فالرخام الطبيعي كروما مارفل أو الروز برتغالي يحتاج بروتوكول تلميع وأقراص ألماس تختلف كلياً عن البورسلان أو التيرازو. ونظراً لأن تحديد الأسعار العشوائي عبر الهاتف قد يظلم العميل أو يؤثر على جودة المواد الإيطالية المستخدمة، يلتزم الأستاذ عامر تشامكاني وطاقمنا الفني بتقديم معاينة ميدانية مجانية 100% مع فحص مساحة وحالة الأرضية لتقديم السعر الأدق والأنسب.'
+              : 'Different stone varieties (Crema Marfil, Thassos, Granite, or Terrazzo) require distinct diamond grit sequences and chemical crystallization agents. To ensure you never overpay or receive compromised results, CEO Amir Chamkani and our field specialists conduct 100% free inspections to provide the fairest, most accurate quotation.'}
+          </p>
+        </div>
+        <div class="lg:col-span-4 flex flex-col gap-3">
+          <a
+            href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(isAr ? 'السلام عليكم الأستاذ عامر تشامكاني، أريد إرسال صور الأرضية للحصول على تسعير فوري' : 'Hello Mr. Amir Chamkani, I would like to send floor photos for an instant assessment')}`}
+            target="_blank"
+            rel="noopener"
+            class="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a] transition-all py-3.5 px-6 rounded-xl font-bold text-sm shadow-md"
+          >
+            <span class="material-symbols-outlined text-[18px]">photo_camera</span>
+            <span>{isAr ? 'أرسل صور الأرضية للمعاينة' : 'Send Floor Photos via WhatsApp'}</span>
+          </a>
+          <a
+            href={`tel:${SITE.phone}`}
+            class="w-full flex items-center justify-center gap-2 bg-[#001026] text-white hover:bg-[#0b2545] transition-all py-3.5 px-6 rounded-xl font-bold text-sm shadow-md"
+          >
+            <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+            <span>{isAr ? 'اتصال مباشر بالسيد عامر تشامكاني' : 'Call CEO Amir Chamkani'}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

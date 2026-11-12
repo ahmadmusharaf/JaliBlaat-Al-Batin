@@ -1,0 +1,168 @@
+---
+// src/components/sections/WorkflowDeepDive.astro
+// Detailed 4-Step Technical Workflow of How Amir Chamkani & the Stoneworkers Team Operate
+import { SITE, waLink } from '../../data/site';
+
+export interface Props {
+  lang?: 'ar' | 'en';
+}
+
+const { lang = 'ar' } = Astro.props;
+const isAr = lang === 'ar';
+
+const steps = [
+  {
+    num: '01',
+    icon: 'search_check',
+    title_ar: 'المعاينة الميدانية المجانية وفحص نوع الحجر',
+    title_en: 'Free On-Site Diagnostic & Stone Petrography',
+    subtitle_ar: 'فحص عمق الخدوش وتحديد خطة العمل مع عينة حية 1 م²',
+    subtitle_en: 'Assessing Scratch Depth & 1 m² Live Sample Test',
+    desc_ar: 'يصل فريقنا الفني إلى منزلك أو مشروعك في أي حي بحفر الباطن لفحص نوع الرخام (طبيعي، صناعي، بلدي، إيطالي، روزا، كروما). نقيس فروقات الارتفاع بين البلاطات وعمق البقع، ونقوم بتجربة عينة تلميع مجانية على متر مربع واحد لتشاهد الفرق الحقيقي قبل توقيع أي عقد.',
+    desc_en: 'Our technician visits your villa or commercial property in Hafar Al-Batin to analyze stone hardness, porosity, and lippage. We test a complimentary 1 m² sample patch so you can see the mirror finish firsthand before committing.',
+    highlight_ar: 'عينة مجانية 100% في موقعك',
+    highlight_en: '100% Free Live On-Site Test Patch'
+  },
+  {
+    num: '02',
+    icon: 'construction',
+    title_ar: 'تسوية الفواصل وتعبئة الترويبات بالإيبوكسي الإيطالي',
+    title_en: 'Lippage Removal & Seamless Epoxy Grouting',
+    subtitle_ar: 'إزالة الارتفاعات وجعل الأرضية سطحاً متصلاً قطعة واحدة',
+    subtitle_en: 'Equalizing Tile Heights into a Seamless Glass Slab',
+    desc_ar: 'نقوم بتفريغ الفواصل القديمة المتآكلة بالكامل باستخدام شفرات خاصة وتنظيفها من الأتربة، ثم حقنها بمادة الإيبوكسي الإيطالي المتطابق كيميائياً مع لون الرخام. بعد ذلك نستخدم ماكينات كلياندكس الكوكبية الثقيلة لتسوية أطراف البلاط المرتفعة حتى تصبح الأرضية ملساء ومستوية تماماً كقطعة زجاج واحدة.',
+    desc_en: 'We cleanly rake out deteriorated grout lines and inject color-matched Italian epoxy resin. Heavy planetary Klindex machinery then grinds down uneven tile lips, transforming individual tiles into a continuous, level monolithic surface.',
+    highlight_ar: 'إيبوكسي أصلي مطابق للون الرخام',
+    highlight_en: 'Color-Matched Authentic Italian Epoxy'
+  },
+  {
+    num: '03',
+    icon: 'precision_manufacturing',
+    title_ar: 'الصنفرة التدريجية بـ 7 مراحل من أقراص الألماس بالماء',
+    title_en: '7-Stage Diamond Grinding (100% Dust-Free Wet Method)',
+    subtitle_ar: 'إزالة الخدوش والحفر العميقة وإظهار العروق الطبيعية للرخام',
+    subtitle_en: 'Eradicating Scratches & Awakening Natural Stone Veins',
+    desc_ar: 'نعتمد تقنية الجلي بالماء النقي بدون إثارة أي غبار داخل منزلك. نبدأ بأقراص الألماس الصناعي الخشنة لإزالة الطبقة الصفراء والخدوش السطحية، ثم نتدرج عبر 7 حبيبات ألماس متناهية النعومة (من مقاس 50 حتى مقاس 3000) لإغلاق مسامات الحجر بالكامل وصقل سطحه صقلاً حريرياً قبل مرحلة التلميع.',
+    desc_en: 'Operating clean wet-grinding systems guarantees zero airborne dust in your home. Progressing through 7 calibrated diamond resin grits (50 to 3000 grit), we strip stubborn oxidation and refine the stone pores to silky smoothness.',
+    highlight_ar: 'جلي مائي بدون أي غبار نهائياً',
+    highlight_en: 'Zero Dust Wet Diamond Grinding'
+  },
+  {
+    num: '04',
+    icon: 'auto_awesome',
+    title_ar: 'تلميع الكريستال الإيطالي الحراري والعزل بالنانو',
+    title_en: 'Italian Thermal Crystallization & Fluorochemical Nano Shield',
+    subtitle_ar: 'لمعان المرآة وعزل دائم ضد امتصاص القهوة والزيوت',
+    subtitle_en: 'Liquid Mirror Reflection & Permanent Stain Repellence',
+    desc_ar: 'نطبق مسحوق الكريستال الإيطالي الفاخر باستخدام أقراص الصوف الإيطالي، حيث يحدث تفاعل كيميائي حراري يعيد بناء بلورات الكالسيوم السطحية للرخام ويمنحها لمعان الزجاج السائل مع مقاومة عالية للاحتكاك. ثم نضع طبقة النانو شيلد العازلة التي تمنع تغلغل السوائل وتسهل عملية التنظيف اليومي.',
+    desc_en: 'We apply genuine Italian thermo-chemical crystallization powder buffed with natural steel-wool pads, triggering calcium densification that yields a gleaming liquid-glass reflection. A fluorochemical nano-sealant is then applied to resist liquids.',
+    highlight_ar: 'ضمان مكتوب ومعتمد يدوم لسنوات',
+    highlight_en: 'Certified Written Warranty on Shine'
+  }
+];
+---
+
+<section id="how-we-work" class="w-full bg-[#f6f3ec] py-16 lg:py-24 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#001026] text-[#fedb98] text-xs font-bold font-['Inter'] uppercase tracking-wider mb-4 shadow-sm">
+        <span class="material-symbols-outlined text-[16px]">timeline</span>
+        {isAr ? 'مراحل العمل الفني خطوة بخطوة' : 'Our Step-by-Step Precision Protocol'}
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold text-[#001026] tracking-tight leading-tight mb-4">
+        {isAr ? 'كيف يعمل فريقنا الميداني في حفر الباطن؟' : 'How Our Specialized Field Team Operates'}
+      </h2>
+      <p class="text-base md:text-lg text-[#44474e] leading-relaxed">
+        {isAr
+          ? 'بروتوكول هندسي دقيق يتم تطبيقه في كل فيلا أو مجلس أو صالة تجارية لضمان أعلى معايير الجودة واللمعان الفائق.'
+          : 'An engineered, disciplined stone restoration method applied to every villa, majlis, and commercial showroom for guaranteed brilliance.'}
+      </p>
+    </div>
+
+    <!-- Steps Timeline Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      {steps.map((step, idx) => (
+        <div class="relative bg-white rounded-2xl p-6 md:p-7 border border-[#e5e2db] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group">
+          
+          <div>
+            <!-- Top Step Number & Icon -->
+            <div class="flex items-center justify-between mb-5">
+              <span class="w-12 h-12 rounded-xl bg-[#001026] text-[#fedb98] flex items-center justify-center font-bold text-lg font-['Inter'] group-hover:scale-110 transition-transform shadow-md">
+                {step.num}
+              </span>
+              <div class="w-10 h-10 rounded-xl bg-[#f0eee7] text-[#735b24] flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]">{step.icon}</span>
+              </div>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-lg font-bold text-[#001026] leading-snug mb-2 group-hover:text-[#735b24] transition-colors">
+              {isAr ? step.title_ar : step.title_en}
+            </h3>
+            <p class="text-xs font-semibold text-[#735b24] mb-4">
+              {isAr ? step.subtitle_ar : step.subtitle_en}
+            </p>
+
+            <!-- Detailed Body -->
+            <p class="text-xs md:text-sm text-[#44474e] leading-relaxed mb-6">
+              {isAr ? step.desc_ar : step.desc_en}
+            </p>
+          </div>
+
+          <!-- Bottom Highlight Pill -->
+          <div class="pt-4 border-t border-[#f0eee7] flex items-center gap-1.5 text-xs font-bold text-[#001026]">
+            <span class="material-symbols-outlined text-[15px] text-[#3de273]">verified</span>
+            <span>{isAr ? step.highlight_ar : step.highlight_en}</span>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+    <!-- Trust banner with direct call to Amir Chamkani -->
+    <div class="bg-gradient-to-r from-[#001026] to-[#0b2545] text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#fedb98]/10 blur-3xl pointer-events-none"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        <div class="lg:col-span-8 flex flex-col gap-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#fedb98] text-xs font-bold w-fit">
+            <span class="material-symbols-outlined text-[16px]">verified_user</span>
+            {isAr ? 'ضمان رسمي معتمد ومتابعة شخصية' : 'Personal Oversight & Certified Guarantee'}
+          </div>
+          <h3 class="text-2xl md:text-4xl font-bold tracking-tight text-white leading-snug">
+            {isAr
+              ? 'جاهزون لمعاينة أرضيتك وتحديد متطلبات الصقل فوراً'
+              : 'Ready for Your Free Stone Diagnostic in Hafar Al-Batin'}
+          </h3>
+          <p class="text-white/80 text-sm md:text-base leading-relaxed max-w-2xl">
+            {isAr
+              ? 'تواصل مباشرة مع الأستاذ عامر تشامكاني وفريق المعاينة الفنية. نصلك في جميع أحياء حفر الباطن لفحص الأرضية وتحديد السعر النهائي الشفاف بدون أي رسوم خفية.'
+              : 'Contact CEO Amir Chamkani and our field diagnostics unit directly. We arrive at your location across Hafar Al-Batin to inspect your floor and provide an exact, fair quote.'}
+          </p>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+          <a
+            href={`tel:${SITE.phone}`}
+            class="flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#fedb98] text-[#001026] hover:bg-white transition-all font-bold text-sm shadow-lg text-center"
+          >
+            <span class="material-symbols-outlined text-[20px]">phone_in_talk</span>
+            <span>{isAr ? 'اتصل الآن: 0539811299' : 'Call: 053 981 1299'}</span>
+          </a>
+          <a
+            href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(isAr ? 'السلام عليكم، أريد طلب معاينة مجانية لأرضية في حفر الباطن' : 'Hello, I would like to book a free stone inspection in Hafar Al-Batin')}`}
+            target="_blank"
+            rel="noopener"
+            class="flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#25D366] text-white hover:bg-[#20bd5a] transition-all font-bold text-sm shadow-md text-center"
+          >
+            <span class="material-symbols-outlined text-[20px]">chat</span>
+            <span>{isAr ? 'تنسيق المعاينة عبر الواتساب' : 'Coordinate via WhatsApp'}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

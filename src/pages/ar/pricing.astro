@@ -1,34 +1,55 @@
 ---
-// src/pages/ar/pricing.astro  — Arabic Pricing Guide Page
-import PageLayout     from '../../layouts/PageLayout.astro';
-import PricingHero    from '../../components/sections/PricingHero.astro';
-import PricingTable   from '../../components/sections/PricingTable.astro';
-import PricingStickyBar from '../../components/sections/PricingStickyBar.astro';
-import FAQ            from '../../components/sections/FAQ.astro';
-import ContactForm    from '../../components/sections/ContactForm.astro';
-import { SITE }       from '../../data/site';
+// src/pages/ar/pricing.astro — صفحة فريق العمل، القيادة، وطريقة التنفيذ والمعاينة
+import PageLayout        from '../../layouts/PageLayout.astro';
+import PageHero          from '../../components/sections/PageHero.astro';
+import TeamShowcase      from '../../components/sections/TeamShowcase.astro';
+import WorkflowDeepDive  from '../../components/sections/WorkflowDeepDive.astro';
+import Districts         from '../../components/sections/Districts.astro';
+import FAQ               from '../../components/sections/FAQ.astro';
+import ContactForm       from '../../components/sections/ContactForm.astro';
+import PricingStickyBar  from '../../components/sections/PricingStickyBar.astro';
+import { SITE }          from '../../data/site';
 
 const schema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "ما هو سعر جلي الرخام والبلاط في حفر الباطن؟",
-      "acceptedAnswer": { "@type": "Answer", "text": "يتراوح سعر جلي الرخام والبلاط بين 12 و35 ريال سعودي للمتر المربع حسب نوع المادة وحالة الأرضية." } },
-    { "@type": "Question", "name": "هل المعاينة مجانية في حفر الباطن؟",
-      "acceptedAnswer": { "@type": "Answer", "text": "نعم، المعاينة مجانية 100% وتشمل زيارة ميدانية وعينة تجريبية على متر مربع." } }
-  ]
+  "@type": "HomeAndConstructionBusiness",
+  "name": "جلي بلاط حفرالباطن | فريق العمل والقيادة الميدانية",
+  "founder": {
+    "@type": "Person",
+    "name": "Amir Chamkani (عامر تشامكاني)",
+    "jobTitle": "Chief Executive Officer & Operations Director",
+    "telephone": SITE.phone
+  },
+  "telephone": SITE.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": SITE.address.street,
+    "addressLocality": SITE.address.city,
+    "addressRegion": SITE.address.region,
+    "addressCountry": SITE.address.country
+  },
+  "areaServed": SITE.districts.ar,
+  "description": "فريق عمل جلي وتلميع الرخام والبلاط بحفر الباطن بقيادة الأستاذ عامر تشامكاني. معاينة ميدانية مجانية، فحص نوع الحجر، وماكينات كلياندكس الإيطالية."
 });
 ---
 
 <PageLayout
-  title="سعر جلي البلاط والرخام في حفر الباطن 2025 | دليل الأسعار الشامل"
-  description="دليل شامل وشفاف لأسعار جلي وتلميع البلاط والرخام في حفر الباطن 2025. من 12 إلى 35 ريال للمتر. معاينة مجانية، ضمان مكتوب."
+  title="فريق العمل وطريقة التنفيذ بحفر الباطن | إشراف عامر تشامكاني | جلي بلاط الباطن"
+  description="تعرّف على طاقم عمل ومعلمي جلي وتلميع الرخام والبلاط بحفر الباطن بقيادة الأستاذ عامر تشامكاني. خطوات العمل، فحص نوع الحجر، معاينة مجانية وضمان معتمد."
   lang="ar"
   schemaJson={schema}
 >
-  <PricingHero  lang="ar" />
-  <PricingTable lang="ar" />
-  <FAQ          lang="ar" />
-  <ContactForm  lang="ar" />
+  <PageHero
+    lang="ar"
+    badge="القيادة الميدانية وفريق العمل المعتمد"
+    title="فريق العمل والقيادة الميدانية وطريقة التنفيذ"
+    subtitle="نؤمن بأن جودة صقل وتلميع الرخام تعتمد على براعة الفني وأحدث ماكينات كلياندكس الإيطالية. ولأن كل أرضية تتطلب فحصاً خاصاً لنوع الحجر، يقدم الأستاذ عامر تشامكاني وطاقمنا الفني معاينة ميدانية مجانية 100% مع عينة تجريبية حية."
+  />
+
+  <TeamShowcase     lang="ar" />
+  <WorkflowDeepDive lang="ar" />
+  <Districts        lang="ar" />
+  <FAQ              lang="ar" />
+  <ContactForm      lang="ar" />
   <PricingStickyBar lang="ar" />
 </PageLayout>
