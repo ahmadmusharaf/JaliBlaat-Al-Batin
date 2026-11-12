@@ -7,7 +7,7 @@ export const SITE = {
   nameEn:       'JaliBlaat Al Batin',
   tagline:      'خدمات جلي وتلميع الرخام والأرضيات — حفر الباطن',
   taglineEn:    'Luxury Marble & Floor Restoration — Hafar Al-Batin',
-  url:          'https://jaliblaatalbatin.com',
+  url:          'https://jaliblaathafar.com',
   phone:        '+966539811299',          // primary phone number
   phoneDisplay: '+966 53 981 1299',       // shown to users
   phoneAlt:     '+966508866324',          // alternate/offline phone number

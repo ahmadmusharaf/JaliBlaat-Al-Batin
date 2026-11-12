@@ -6,8 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ahmadmusharaf.github.io',
-  base: '/JaliBlaat-Al-Batin',
+  site: 'https://jaliblaathafar.com',
 
   vite: {
     plugins: [tailwindcss()],
