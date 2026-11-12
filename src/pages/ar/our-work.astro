@@ -1,5 +1,5 @@
 ﻿---
-// src/pages/ar/our-work.astro
+// src/pages/ar/our-work.astro — معرض أعمالنا الحقيقية بحفر الباطن
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -7,16 +7,162 @@ import MobileCTABar from '../../components/MobileCTABar.astro';
 import PageHero from '../../components/sections/PageHero.astro';
 import { SITE, sitePath, waLink } from '../../data/site';
 
-const title = 'أعمالنا — مشاريع جلي الأرضيات في حفر الباطن | جلي بلاط حفرالباطن';
-const description = 'استعرض مشاريع جلي الرخام والبلاط والتيرازو التي أنجزناها في حفر الباطن. معرض صور قبل وبعد يعكس نتائج حقيقية.';
+const title = 'معرض أعمالنا ومشاريعنا الحقيقية بحفر الباطن | jaliblaathafar.com';
+const description = 'استعرض صور وفيديوهات مشاريع جلي وتلميع الرخام، البلاط، والتيرازو، والأحواش المنفذة بأيدي فريقنا الميداني في جميع أحياء حفر الباطن بضمان حقيقي.';
+
+const categories = [
+  { key: 'all', label: 'كافة المشاريع' },
+  { key: 'marble', label: 'جلي وتلميع الرخام' },
+  { key: 'tile', label: 'السيراميك والبورسلان' },
+  { key: 'exterior', label: 'الأحواش والمساحات الخارجية' },
+  { key: 'commercial', label: 'المشاريع التجارية والمعارض' },
+];
 
 const projects = [
-  { id:1, cat:'marble',   t:'ترميم رخام فيلا — العزيزية', d:'ترميم كامل لرخام إيطالي متآكل في فيلا بمساحة 280 م². شمل حقن الشقوق، جلي ماسي، وبلورة بلمعة مرآتية.', area:'280 م²', dist:'العزيزية', dur:'3 أيام', img:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85' },
-  { id:2, cat:'tile',     t:'جلي بلاط تجاري — الخالدية',  d:'تنظيف عميق وتلميع 450 م² بورسلان في صالة عرض تجارية. ترميم الفاصل ومعالجة مضادة للانزلاق.',          area:'450 م²', dist:'الخالدية', dur:'4 أيام', img:'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85' },
-  { id:3, cat:'terrazzo', t:'طحن وتلميع تيرازو — الروضة', d:'ترميم كامل لأرضيات تيرازو في فيلا تسعينيات. تسوية الأسطح، معالجة الشقوق، لمعة مرآتية.',              area:'160 م²', dist:'الروضة',   dur:'يومان', img:'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=85' },
-  { id:4, cat:'granite',  t:'مطبخ وحمام جرانيت — المحمدية', d:'جلي وتغليف سطح مطبخ وأرضية حمام ودرج من الجرانيت. بريق عميق وطبقة حماية مضادة للزيوت.',            area:'90 م²',  dist:'المحمدية', dur:'يوم واحد', img:'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85' },
-  { id:5, cat:'marble',   t:'بهو مجمع سكني — الفيصلية',   d:'ترميم رخام البهو والممرات في مجمع من 12 شقة. لمعة موحدة في جميع المناطق المشتركة.',                   area:'320 م²', dist:'الفيصلية', dur:'3 أيام', img:'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85' },
-  { id:6, cat:'tile',     t:'ترميم بلاط مسجد — البلدية',   d:'تنظيف وتلميع بلاط قاعة الصلاة بمساحة 600 م². تشطيب مضاد للانزلاق في المناطق الرطبة.',               area:'600 م²', dist:'البلدية',  dur:'5 أيام', img:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85' },
+  {
+    id: 1,
+    cat: 'marble',
+    catLabel: 'رخام طبيعي',
+    t: 'جلي وتلميع رخام صالة استقبال فيلا فاخرة — حي العزيزية',
+    d: 'تسوية الفواصل المرتفعة ومعالجة الترويبات القديمة بالإيبوكسي الإيطالي المتطابق، يليه صقل بـ 7 مراحل ألماس حتى الوصول للمعان الزجاج السائل.',
+    area: '280 م²',
+    dist: 'العزيزية',
+    dur: '3 أيام',
+    img: '/images/projects/project-villa-marble.jpg',
+    tag: 'رخام إيطالي • بلورة كريستال'
+  },
+  {
+    id: 2,
+    cat: 'marble',
+    catLabel: 'مجلس فاخر',
+    t: 'صقل وتلميع رخام مجلس رجال — حي الخالدية',
+    d: 'إزالة الخدوش وتوحيد درجات السطح مع بلورة الكريستال الحراري وعزل مسامات الرخام ضد بقع القهوة والزيوت والشاي بحماية نانو معتمدة.',
+    area: '220 م²',
+    dist: 'الخالدية',
+    dur: 'يومان',
+    img: '/images/projects/project-luxury-majlis.jpg',
+    tag: 'معالجة فواصل • عزل نانو'
+  },
+  {
+    id: 3,
+    cat: 'tile',
+    catLabel: 'بورسلان وسيراميك',
+    t: 'جلي وتجديد سيراميك وبورسلان فيلا سكنية — حي المحمدية',
+    d: 'تنظيف كيميائي قلوي متخصص وتبييض الترويبة الإسمنتية وإزالة طبقات الشمع والاصفرار مع تطبيق معالجة ناعمة مانعة للانزلاق.',
+    area: '340 م²',
+    dist: 'المحمدية',
+    dur: '3 أيام',
+    img: '/images/projects/project-best-tiles.jpg',
+    tag: 'تبييض ترويبة • مانع انزلاق'
+  },
+  {
+    id: 4,
+    cat: 'commercial',
+    catLabel: 'تجاري ومعارض',
+    t: 'جلي وتلميع أرضيات معرض تجاري وصالة عرض — حي البلدية',
+    d: 'تسوية فروقات البلاط وإزالة الأتربة والزيوت المستعصية بماكينات كلياندكس الكوكبية الثقيلة مع صقل ماسي فائق التحمل لحركة الزوار الكثيفة.',
+    area: '520 م²',
+    dist: 'البلدية',
+    dur: '4 أيام',
+    img: '/images/projects/project-commercial-showroom.jpg',
+    tag: 'حركة كثيفة • كلياندكس إيطالي'
+  },
+  {
+    id: 5,
+    cat: 'exterior',
+    catLabel: 'أحواش وخارجي',
+    t: 'تنظيف وجلي بلاط الحوش الخارجي والمدخل الرئيسي — حي أبو موسى الأشعري',
+    d: 'إزالة بقايا الأسمنت والدهانات والترسبات البيئية الصعبة من بلاط الحوش والدرج الخارجي مع وضع مادة عازلة لحماية البلاط من حرارة الشمس ومياه الأمطار.',
+    area: '190 م²',
+    dist: 'أبو موسى',
+    dur: 'يومان',
+    img: '/images/projects/project-outer-courtyard.jpg',
+    tag: 'إزالة أسمنت • عزل مائي'
+  },
+  {
+    id: 6,
+    cat: 'exterior',
+    catLabel: 'أحواش وخارجي',
+    t: 'ترميم وصقل أرضيات فناء خارجي وممرات حديقة — حي الروضة',
+    d: 'معالجة فواصل التمدد بمواد إيبوكسي عازلة وتلميع السطح الخشن ليصبح مقاوماً لتجمع الأتربة وسهل الشطف والغسيل اليومي.',
+    area: '250 م²',
+    dist: 'الروضة',
+    dur: '3 أيام',
+    img: '/images/projects/project-exterior-tiles.jpg',
+    tag: 'مقاومة للأتربة • تنظيف سهل'
+  },
+  {
+    id: 7,
+    cat: 'marble',
+    catLabel: 'رخام طبيعي',
+    t: 'تلميع كريستال إيطالي فائق اللمعان لأرضية ممر وصالات — حي الفيصلية',
+    d: 'تفاعل حراري بمسحوق الكريستال الإيطالي يمنح الرخام انعكاساً مرآتياً مبهراً كالإضاءة مع طبقة حماية هيدروفوبية تمنع تسرب السوائل.',
+    area: '180 م²',
+    dist: 'الفيصلية',
+    dur: 'يومان',
+    img: '/images/projects/project-mirror-shine.jpg',
+    tag: 'لمعان مرآتي • بلورة إيطالية'
+  },
+  {
+    id: 8,
+    cat: 'tile',
+    catLabel: 'بورسلان وسيراميك',
+    t: 'تنظيف عميق وترميم ترويبات بلاط مطابخ وصالات معيشة — حي التلال',
+    d: 'تفريغ الفواصل التالفة وحقنها بإيبوكسي صلب عالي المقاومة للرطوبة وتلميع السطح السيراميكي لبريق متجانس وحماية ضد البكتيريا.',
+    area: '160 م²',
+    dist: 'التلال',
+    dur: 'يومان',
+    img: '/images/projects/project-deep-grout-cleaning.jpg',
+    tag: 'حقن إيبوكسي • تنظيف عميق'
+  },
+  {
+    id: 9,
+    cat: 'exterior',
+    catLabel: 'أحواش وخارجي',
+    t: 'جلي وصقل بلاط الأسطح والتراسات الخارجية — حي النزهة',
+    d: 'إزالة التكلسات الناتجة عن مياه الأمطار والرطوبة وعزل الفواصل بمادة مقاومة للأشعة فوق البنفسجية وحرارة الصيف القاسية بحفر الباطن.',
+    area: '210 م²',
+    dist: 'النزهة',
+    dur: 'يومان',
+    img: '/images/projects/project-terrace-restoration.jpg',
+    tag: 'مقاومة للشمس • عزل فواصل'
+  },
+  {
+    id: 10,
+    cat: 'marble',
+    catLabel: 'سلالم وبهو',
+    t: 'صقل وتنعيم ممرات بهو وسلالم رخامية متدرجة — حي الواحة',
+    d: 'جلي متقن للحواف والزوايا بماكينات يدوية إيطالية مخصصة للدرج مع تلميع الكريستال وإضافة خطوط حماية ضد الانزلاق.',
+    area: '130 م²',
+    dist: 'الواحة',
+    dur: 'يوم ونصف',
+    img: '/images/projects/project-hallway-refinement.jpg',
+    tag: 'جلي درج • حواف أمان'
+  },
+  {
+    id: 11,
+    cat: 'marble',
+    catLabel: 'قصور وفلل',
+    t: 'بلورة نهائية وحماية نانو لأرضية قصر سكني — حي الربوة',
+    d: 'إغلاق مسامات الرخام الطبيعي بنسبة 100% وإعطاء حماية دائمة ضد تغلغل السوائل والقهوة مع تسليم شهادة الضمان المعتمد.',
+    area: '420 م²',
+    dist: 'الربوة',
+    dur: '4 أيام',
+    img: '/images/projects/project-premium-crystallization.jpg',
+    tag: 'ضمان معتمد • عزل كامل'
+  },
+  {
+    id: 12,
+    cat: 'tile',
+    catLabel: 'تسوية بالألماس',
+    t: 'تسوية فروقات ارتفاع البلاط بالأقراص الماسية — حي الريان',
+    d: 'إزالة البروزات والحواف الحادة بين البلاطات بماكينات كلياندكس الكوكبية لتصبح الأرضية مستوية تماماً كقطعة حجر واحدة ملساء.',
+    area: '310 م²',
+    dist: 'الريان',
+    dur: '3 أيام',
+    img: '/images/projects/project-diamond-leveling.jpg',
+    tag: 'تسوية Lippage • كلياندكس'
+  }
 ];
 ---
 
@@ -25,10 +171,10 @@ const projects = [
 
   <PageHero
     lang="ar"
-    title="أعمالنا المنجزة"
-    subtitle="نتائج حقيقية، عملاء حقيقيون، حرفية حقيقية. استعرض معرض مشاريع جلي وترميم الأرضيات المنجزة في حفر الباطن."
-    badge="معرض المشاريع"
-    accentIcon="photo_library"
+    title="معرض مشاريعنا وأعمالنا الميدانية"
+    subtitle="جميع الصور المعروضة تم التقاطها حياً من مواقع عملنا في فلل وقصور ومنازل عملائنا الكرام في كافة أحياء حفر الباطن. حرفية مشهودة بأيدي فنيينا وماكينات كلياندكس الإيطالية."
+    badge="أعمال ميدانية موثقة 100%"
+    accentIcon="photo_camera"
     breadcrumb={[
       { label: 'الرئيسية', href: sitePath('/') },
       { label: 'أعمالنا' },
@@ -36,63 +182,241 @@ const projects = [
   />
 
   <main>
-    <section class="bg-[#0b2545] py-10">
+    <!-- ── Live Proof Counter Bar ── -->
+    <section class="bg-[#0b2545] py-10 border-y border-white/10">
       <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
         {[
-          { n:'+500', l:'مشروع منجز', icon:'check_circle' },
-          { n:'98%',  l:'رضا العملاء',   icon:'thumb_up' },
-          { n:'12',   l:'حي نخدمه',      icon:'location_on' },
-          { n:'+8',   l:'سنوات خبرة',   icon:'workspace_premium' },
+          { n: '+500', l: 'مشروع منجز بحفر الباطن', icon: 'check_circle' },
+          { n: '100%', l: 'صور حقيقية من مواقع العمل', icon: 'photo_camera' },
+          { n: '12', l: 'حياً نغطيه بمعاينة فورية', icon: 'location_on' },
+          { n: '10', l: 'سنوات ضمان جودة الكريستال', icon: 'workspace_premium' },
         ].map(s => (
-          <div class="reveal">
+          <div>
             <span class="material-symbols-outlined text-[#ffdf9f] text-3xl mb-2 block">{s.icon}</span>
             <div class="text-3xl font-bold text-white font-['Inter'] mb-1">{s.n}</div>
-            <div class="text-white/50 text-sm">{s.l}</div>
+            <div class="text-white/70 text-xs font-semibold">{s.l}</div>
           </div>
         ))}
       </div>
     </section>
 
-    <section class="py-20 bg-[#fcf9f2]">
+    <!-- ── Featured Before & After Real Showcase ── -->
+    <section class="py-16 bg-[#f0eee7] border-b border-[#e5e2db]">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p, i) => (
-            <article class={`reveal stagger-${(i % 3) + 1} gallery-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
-              <div class="relative h-52 bg-gradient-to-br from-[#0b2545] to-[#001026] overflow-hidden">
-                <img src={p.img} alt={p.t} loading="lazy" class="gallery-media" />
-                <div class="gallery-scrim"></div>
-              </div>
-              <div class="p-6">
-                <h3 class="font-bold text-[#001026] text-base mb-2">{p.t}</h3>
-                <p class="text-[#44474e] text-sm leading-relaxed mb-4">{p.d}</p>
-                <div class="flex flex-wrap gap-4 text-xs text-[#44474e] border-t border-[#e5e2db] pt-4">
-                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-[#735b24]">location_on</span>{p.dist}</span>
-                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-[#735b24]">square_foot</span>{p.area}</span>
-                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-[#735b24]">schedule</span>{p.dur}</span>
-                </div>
-              </div>
-            </article>
-          ))}
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fedb98] text-[#785f28] text-xs font-bold font-['Inter'] mb-3">
+            <span class="material-symbols-outlined text-[15px]">compare</span>
+            مقارنة حقيقية من واقع الموقع
+          </span>
+          <h2 class="text-2xl md:text-4xl font-bold text-[#001026] mb-3">
+            شاهد الفارق الملموس قبل وبعد الجلي
+          </h2>
+          <p class="text-sm text-[#44474e]">
+            صورة حية من مشروع جلي وتلميع وتبييض الترويبة بحفر الباطن تبيّن إزالة الأوساخ المستعصية واستعادة لمعة ونظافة البلاط الأصلية.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <!-- Before Card -->
+          <div class="relative rounded-2xl overflow-hidden border border-[#e5e2db] shadow-md bg-white">
+            <div class="relative h-64 sm:h-72">
+              <img src="/images/projects/project-before-state.jpg" alt="حالة الأرضية قبل الجلي" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-black/20"></div>
+              <span class="absolute top-4 right-4 bg-[#ba1a1a] text-white text-xs font-bold px-3 py-1 rounded-lg shadow-md flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">cancel</span>
+                قبل الجلي (بهتان وترسبات)
+              </span>
+            </div>
+            <div class="p-4 bg-white text-xs text-[#44474e] border-t border-[#e5e2db]">
+              أرضية قديمة بها اصفرار وتكلسات وتآكل في الفواصل الإسمنتية.
+            </div>
+          </div>
+
+          <!-- After Card -->
+          <div class="relative rounded-2xl overflow-hidden border-2 border-[#735b24] shadow-lg bg-white ring-2 ring-[#735b24]/20">
+            <div class="relative h-64 sm:h-72">
+              <img src="/images/projects/project-after-finish.jpg" alt="حالة الأرضية بعد الجلي والكريستال" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              <span class="absolute top-4 right-4 bg-[#002c0f] text-[#66ff8e] text-xs font-bold px-3 py-1 rounded-lg shadow-md flex items-center gap-1 border border-[#66ff8e]/30">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                بعد الجلي والتلميع (بريق مرآتي)
+              </span>
+            </div>
+            <div class="p-4 bg-white text-xs font-semibold text-[#001026] border-t border-[#e5e2db] flex items-center justify-between">
+              <span>تبييض الفواصل وصقل ماسي مائي ولمعان زجاجي ناصع.</span>
+              <span class="text-[#735b24] font-bold">ضمان معتمد</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="py-20 bg-gradient-to-r from-[#001026] to-[#0b2545]">
-      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
-        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">هل تريد نتائج مماثلة؟</h2>
-        <p class="text-white/70 text-lg mb-8">اطلب معاينة مجانية لعقارك — نخدم جميع أحياء حفر الباطن.</p>
+    <!-- ── Filter Tabs & Main Gallery ── -->
+    <section class="py-20 bg-[#fcf9f2]" id="gallery-grid">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-10">
+          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-3">
+            سجل مشاريعنا المنفذة بالأحياء
+          </h2>
+          <p class="text-sm md:text-base text-[#44474e] max-w-2xl mx-auto">
+            تصفح نماذج من أعمالنا الموثقة في الفلل، القصور، الاستراحات، والمعارض التجارية بحفر الباطن.
+          </p>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+          {categories.map((c, i) => (
+            <button
+              class={`filter-btn px-4 py-2 rounded-xl text-xs font-bold font-['Inter'] transition-all ${i === 0 ? 'bg-[#001026] text-white shadow-md' : 'bg-white text-[#44474e] border border-[#e5e2db] hover:border-[#735b24] hover:text-[#001026]'}`}
+              data-cat={c.key}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+
+        <!-- Projects Cards Grid -->
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="projects-container">
+          {projects.map((p) => (
+            <article
+              class="project-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+              data-category={p.cat}
+            >
+              <!-- Card Photo Header -->
+              <div class="relative h-60 overflow-hidden bg-[#001026]">
+                <img
+                  src={p.img}
+                  alt={p.t}
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                
+                <!-- Category Badge -->
+                <div class="absolute top-3.5 right-3.5">
+                  <span class="bg-[#001026]/85 backdrop-blur-md text-[#fedb98] text-[11px] font-bold px-3 py-1 rounded-lg border border-white/10 shadow-md">
+                    {p.catLabel}
+                  </span>
+                </div>
+
+                <!-- Verified Stamp -->
+                <div class="absolute bottom-3.5 right-3.5 left-3.5 flex items-center justify-between text-white text-xs">
+                  <span class="bg-[#002c0f]/80 backdrop-blur-md text-[#66ff8e] px-2.5 py-0.5 rounded text-[10px] font-semibold flex items-center gap-1 border border-[#66ff8e]/30">
+                    <span class="material-symbols-outlined text-[13px]">verified</span>
+                    موثق بحفر الباطن
+                  </span>
+                  <span class="text-[#ffdf9f] text-[11px] font-medium drop-shadow">
+                    {p.tag}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="p-6 flex flex-col justify-between flex-1">
+                <div>
+                  <h3 class="font-bold text-[#001026] text-base leading-snug mb-2 group-hover:text-[#735b24] transition-colors">
+                    {p.t}
+                  </h3>
+                  <p class="text-[#44474e] text-xs md:text-sm leading-relaxed mb-4">
+                    {p.d}
+                  </p>
+                </div>
+
+                <div>
+                  <!-- Project Specs Strip -->
+                  <div class="flex items-center justify-between text-xs text-[#74777f] py-3 border-y border-[#f0eee7] mb-4">
+                    <span class="flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[15px] text-[#735b24]">location_on</span>
+                      <span>حي {p.dist}</span>
+                    </span>
+                    <span class="flex items-center gap-1 font-semibold text-[#001026]">
+                      <span class="material-symbols-outlined text-[15px] text-[#735b24]">square_foot</span>
+                      <span>{p.area}</span>
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[15px] text-[#735b24]">schedule</span>
+                      <span>{p.dur}</span>
+                    </span>
+                  </div>
+
+                  <!-- WhatsApp Action Button -->
+                  <a
+                    href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('السلام عليكم، شاهدت مشروع (' + p.t + ') على موقع jaliblaathafar.com وأرغب في الحصول على معاينة وتسعير لنفس النتيجة لأرضيتي')}`}
+                    target="_blank"
+                    rel="noopener"
+                    class="w-full flex items-center justify-center gap-2 bg-[#f6f3ec] hover:bg-[#001026] text-[#001026] hover:text-white py-2.5 px-4 rounded-xl text-xs font-bold transition-all border border-[#e5e2db] group-hover:border-[#001026]"
+                  >
+                    <span class="material-symbols-outlined text-[15px] text-[#25D366]">chat</span>
+                    <span>اطلب نتيجة مماثلة عبر الواتساب</span>
+                  </a>
+                </div>
+              </div>
+
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Interactive Category Filtering Script ── -->
+    <script>
+      const buttons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.project-card');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => {
+            b.classList.remove('bg-[#001026]', 'text-white', 'shadow-md');
+            b.classList.add('bg-white', 'text-[#44474e]', 'border', 'border-[#e5e2db]');
+          });
+          btn.classList.remove('bg-white', 'text-[#44474e]', 'border', 'border-[#e5e2db]');
+          btn.classList.add('bg-[#001026]', 'text-white', 'shadow-md');
+
+          const cat = btn.getAttribute('data-cat');
+          cards.forEach(card => {
+            const cardCat = card.getAttribute('data-category');
+            if (cat === 'all' || cardCat === cat) {
+              (card as HTMLElement).style.display = 'flex';
+            } else {
+              (card as HTMLElement).style.display = 'none';
+            }
+          });
+        });
+      });
+    </script>
+
+    <!-- ── Call To Action ── -->
+    <section class="py-20 bg-gradient-to-r from-[#001026] to-[#0b2545] text-white">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+        <span class="material-symbols-outlined text-[#ffdf9f] text-5xl mb-4 block">diamond</span>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">هل ترغب في الحصول على نفس هذا البريق لمنزلك؟</h2>
+        <p class="text-white/80 text-base md:text-lg mb-8 max-w-2xl mx-auto">
+          نصلك أينما كنت في حفر الباطن لمعاينة الأرضية وتقديم عينة تجريبية حية مجاناً على متر مربع بدون أي التزام مسبق.
+        </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={waLink('ar')} target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] px-8 py-4 rounded-xl font-bold transition-all">
-            <span class="material-symbols-outlined">chat</span> طلب معاينة مجانية
+          <a
+            href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('السلام عليكم، أرغب في حجز موعد معاينة مجانية لأرضية منزلي في حفر الباطن عبر jaliblaathafar.com')}`}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a] transition-all px-8 py-4 rounded-xl font-bold text-base shadow-lg"
+          >
+            <span class="material-symbols-outlined text-2xl">chat</span>
+            <span>واتساب طلب معاينة فورية</span>
           </a>
-          <a href="/ar/services/"
-             class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold transition-all">
-            استعرض جميع الخدمات ←
+          <a
+            href={`tel:${SITE.phone}`}
+            class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 transition-all px-8 py-4 rounded-xl font-bold text-base"
+          >
+            <span class="material-symbols-outlined text-2xl">call</span>
+            <span dir="ltr">{SITE.phoneDisplay}</span>
           </a>
         </div>
       </div>
     </section>
+
   </main>
 
   <Footer lang="ar" />
