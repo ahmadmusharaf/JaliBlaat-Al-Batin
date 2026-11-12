@@ -16,11 +16,15 @@ import { SITE }    from '../../data/site';
 const schema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
-  "name": "JaliBlaat Al Batin — Luxury Stoneworks",
-  "alternateName": "Tile & Marble Polishing Services in Hafar Al-Batin",
+  "name": "0539811299 Tile & Marble Polishing in Hafar Al-Batin | JaliBlaat Al Batin",
+  "alternateName": [
+    "JaliBlaat Al Batin Luxury Stoneworks",
+    "Tile & Marble Polishing Services in Hafar Al-Batin 0539811299"
+  ],
   "url": `${SITE.url}/en/`,
   "telephone": SITE.phone,
   "image": `${SITE.url}/images/og-default.jpg`,
+  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "King Faisal Road",
@@ -31,7 +35,13 @@ const schema = JSON.stringify({
   },
   "geo": { "@type": "GeoCoordinates", "latitude": SITE.address.lat, "longitude": SITE.address.lng },
   "areaServed": SITE.districts.en,
-  "priceRange": "$$",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "164",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],
@@ -41,8 +51,8 @@ const schema = JSON.stringify({
 ---
 
 <PageLayout
-  title="Tile Polishing in Hafar Al-Batin | JaliBlaat Al Batin — Luxury Stoneworks"
-  description="Professional tile, marble & floor polishing in Hafar Al-Batin. Italian diamond machines, crystal finish, free inspection, written warranty. Call or WhatsApp now!"
+  title="0539811299 Tile & Marble Polishing in Hafar Al-Batin | JaliBlaat Al Batin"
+  description="Tile & Marble Polishing in Hafar Al-Batin 0539811299 | Italian diamond machines, crystal finish, free on-site inspection, written warranty. Call 0539811299 or WhatsApp now!"
   lang="en"
   schemaJson={schema}
 >

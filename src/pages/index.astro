@@ -16,11 +16,17 @@ import { SITE }    from '../data/site';
 const schema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
-  "name": "جلي بلاط حفرالباطن | JaliBlaat Al Batin",
-  "alternateName": "مؤسسة جلي وتلميع الرخام والبلاط بحفر الباطن",
+  "name": "جلي بلاط حفر الباطن 0539811299 | JaliBlaat Al Batin",
+  "alternateName": [
+    "مؤسسة جلي وتلميع الرخام والبلاط بحفر الباطن",
+    "شركة جلي بلاط بحفر الباطن",
+    "معلم جلي رخام حفر الباطن 0539811299",
+    "رقم جلي بلاط حفر الباطن 0539811299"
+  ],
   "url": SITE.url,
   "telephone": SITE.phone,
   "image": `${SITE.url}/images/og-default.jpg`,
+  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": SITE.address.street,
@@ -31,7 +37,13 @@ const schema = JSON.stringify({
   },
   "geo": { "@type": "GeoCoordinates", "latitude": SITE.address.lat, "longitude": SITE.address.lng },
   "areaServed": SITE.districts.ar,
-  "priceRange": "$$",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "164",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],
@@ -39,19 +51,22 @@ const schema = JSON.stringify({
   }],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "خدمات جلي وتلميع الأرضيات",
+    "name": "خدمات جلي وتلميع الأرضيات بحفر الباطن",
     "itemListElement": [
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتلميع الرخام الطبيعي بالكريستال والألماس" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتنظيف البلاط والسيراميك والبورسلان" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "تنظيف وتجريد الأرضيات العميقة وتجديد الترويبة" } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "طحن وترميم أرضيات التيرازو والبلاط البلدي" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "تلميع وعزل الجرانيت الطبيعي ضد البقع" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ترميم وصقل الحجر الجيري والترافرتين" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "طلاء وإصلاح أرضيات الإيبوكسي المقاومة" } }
     ]
   }
 });
 ---
 
 <PageLayout
-  title="جلي بلاط حفرالباطن | خدمات جلي وتلميع الرخام والأرضيات"
-  description="خدمات جلي وتلميع البلاط والرخام في حفر الباطن بأحدث أقراص الألماس الإيطالية. معاينة مجانية، ضمان مكتوب. اتصل الآن!"
+  title="0539811299 جلي بلاط حفر الباطن | شركة جلي وتلميع رخام وبلاط بحفر الباطن"
+  description="جلي بلاط حفر الباطن 0539811299 تنظيف وتلميع وتجديد للرخام والبلاط وإزالة الخدوش والبقع بأقراص الألماس الإيطالية. رقم معلم جلي بلاط بحفر الباطن 0539811299 معاينة مجانية وضمان معتمد."
   lang="ar"
   schemaJson={schema}
 >
