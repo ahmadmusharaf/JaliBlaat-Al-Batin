@@ -8,13 +8,13 @@ export const SITE = {
   tagline:      'خدمات جلي وتلميع الرخام والأرضيات — حفر الباطن',
   taglineEn:    'Luxury Marble & Floor Restoration — Hafar Al-Batin',
   url:          'https://jaliblaatalbatin.com',
-  phone:        '+966508866324',          // primary phone number
-  phoneDisplay: '+966 50 886 6324',       // shown to users
-  phoneAlt:     '+966539811299',          // alternate phone number
-  phoneAltDisplay: '+966 53 981 1299',
+  phone:        '+966539811299',          // primary phone number
+  phoneDisplay: '+966 53 981 1299',       // shown to users
+  phoneAlt:     '+966508866324',          // alternate/offline phone number
+  phoneAltDisplay: '+966 50 886 6324',
   email:        'jaly.balat.hafar@gmail.com',
   emailAlt:     'aamirwafa89@gmail.com',
-  waNumber:     '966508866324',           // WhatsApp number (no +)
+  waNumber:     '966539811299',           // WhatsApp number (no +)
   waMessageAr:  'السلام عليكم، أرغب في الاستفسار عن خدمة جلي الأرضيات في حفر الباطن',
   waMessageEn:  'Hello, I would like to inquire about tile polishing services in Hafar Al-Batin',
   hours:        'يومياً: 7:00 ص - 11:00 م',
