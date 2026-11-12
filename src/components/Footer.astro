@@ -26,6 +26,10 @@ const isAr = lang === 'ar';
             </div>
           </div>
         </div>
+        <a href="https://jaliblaathafar.com" class="text-xs text-[#ffdf9f]/90 font-mono hover:text-[#ffdf9f] hover:underline flex items-center gap-1.5 w-fit">
+          <span class="material-symbols-outlined text-[15px] text-[#ffdf9f]">language</span>
+          <span>jaliblaathafar.com</span>
+        </a>
         <p class="text-sm text-white/65 leading-relaxed">
           {isAr
             ? 'المؤسسة الرائدة في جلي وتلميع البلاط، الرخام، والأرضيات بحفر الباطن والمنطقة الشرقية.'
@@ -124,24 +128,53 @@ const isAr = lang === 'ar';
   </div>
 
   <!-- Bottom bar -->
-  <div class="border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
-      <span>
-        {isAr
-          ? `© ${new Date().getFullYear()} جلي بلاط حفرالباطن — جميع الحقوق محفوظة`
-          : `© ${new Date().getFullYear()} JaliBlaat Al Batin — All rights reserved`}
-      </span>
-      <div class="flex items-center gap-4">
-        <a href={isAr ? sitePath('/') : sitePath('/en/')} class="hover:text-white/70 transition-colors">
+  <div class="border-t border-white/10 bg-[#000c1e]/70">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
+      
+      <!-- Domain & Copyright -->
+      <div class="flex flex-wrap items-center gap-2">
+        <span>
+          {isAr
+            ? `© ${new Date().getFullYear()} جلي بلاط حفرالباطن`
+            : `© ${new Date().getFullYear()} JaliBlaat Al Batin`}
+        </span>
+        <span class="opacity-30">•</span>
+        <a href="https://jaliblaathafar.com" class="text-[#ffdf9f] font-semibold hover:underline font-['Inter']">
+          jaliblaathafar.com
+        </a>
+        <span class="opacity-30">•</span>
+        <span>{isAr ? 'جميع الحقوق محفوظة' : 'All rights reserved'}</span>
+      </div>
+
+      <!-- Architect / Engineer Credit -->
+      <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-white/70 shadow-sm">
+        <span class="material-symbols-outlined text-[15px] text-[#ffdf9f]">architecture</span>
+        <span>
+          {isAr ? 'تصميم وتطوير وهندسة المنصة:' : 'Platform Architect & Lead Engineer:'}
+        </span>
+        <a href="https://github.com/ahmadmusharaf" target="_blank" rel="noopener"
+           class="text-[#ffdf9f] font-bold hover:text-white transition-colors flex items-center gap-1 font-['Inter']">
+          <span>Ahmad Musharaf</span>
+          <span class="material-symbols-outlined text-[13px] opacity-70">open_in_new</span>
+        </a>
+      </div>
+
+      <!-- Quick Nav Links -->
+      <div class="flex items-center gap-4 text-white/40">
+        <a href={isAr ? sitePath('/') : sitePath('/en/')} class="hover:text-white/80 transition-colors">
           {isAr ? 'الرئيسية' : 'Home'}
         </a>
-        <a href={isAr ? sitePath('/ar/pricing/') : sitePath('/en/pricing/')} class="hover:text-white/70 transition-colors">
-          {isAr ? 'الأسعار' : 'Pricing'}
+        <a href={isAr ? sitePath('/ar/services/') : sitePath('/en/services/')} class="hover:text-white/80 transition-colors">
+          {isAr ? 'خدماتنا' : 'Services'}
         </a>
-        <a href={isAr ? sitePath('/en/') : sitePath('/')} class="hover:text-white/70 transition-colors">
+        <a href={isAr ? sitePath('/ar/pricing/') : sitePath('/en/pricing/')} class="hover:text-white/80 transition-colors">
+          {isAr ? 'فريقنا وعملنا' : 'Team & Workflow'}
+        </a>
+        <a href={isAr ? sitePath('/en/') : sitePath('/')} class="hover:text-white/80 transition-colors">
           {isAr ? 'English' : 'العربية'}
         </a>
       </div>
+
     </div>
   </div>
 

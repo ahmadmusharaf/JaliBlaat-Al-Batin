@@ -5,71 +5,77 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import MobileCTABar from '../../components/MobileCTABar.astro';
 import PageHero from '../../components/sections/PageHero.astro';
-import { SITE, sitePath, waLink } from '../../data/site';
+import { SITE, sitePath } from '../../data/site';
 
-const title = 'خدمات جلي وتلميع الأرضيات في حفر الباطن | جلي بلاط حفرالباطن';
-const description = 'خدمات جلي الرخام، تلميع السيراميك، ترميم التيرازو وتلميع الجرانيت في حفر الباطن. حرفيون محترفون، معدات متطورة، نتائج مضمونة.';
+const title = 'خدمات جلي وتلميع الأرضيات في حفر الباطن | jaliblaathafar.com';
+const description = 'خدمات جلي الرخام، تلميع السيراميك، طحن التيرازو، تلميع الجرانيت، ترميم الترافرتين، وطلاء الإيبوكسي في حفر الباطن. حرفيون معتمدون ونتائج مضمونة.';
 
 const services = [
   {
     icon: 'diamond',
+    icon2: 'verified',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
     name: 'جلي وترميم الرخام',
     tagline: 'استعادة اللمعة الطبيعية لرخامك',
     desc: 'تقنية الجلي بالأقراص الماسية تزيل الخدوش والبقع والبهتان من أسطح الرخام — مع استعادة اللمعة المرآتية العميقة لأرضيات وجدران الرخام الإيطالي والمحلي.',
     steps: ['فحص السطح ورصد الخدوش', 'جلي بأقراص ماسية (خشن → ناعم)', 'بلورة وتغليف بالراتنج', 'تلميع نهائي بلمعة مرآتية'],
     benefits: ['لمعة كالمرآة', 'إزالة الخدوش والبقع', 'مادة حماية مقاومة للأشعة', 'حماية 3-5 سنوات'],
     duration: '4–8 ساعات لكل 100 م²',
-    icon2: 'verified',
   },
   {
     icon: 'crop_square',
+    icon2: 'cleaning_services',
+    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
     name: 'جلي السيراميك والبورسلان',
     tagline: 'تنظيف عميق وتلميع لجميع أنواع البلاط',
     desc: 'تنظيف وتلميع متخصص للسيراميك والبورسلان والبلاط المصفح. نزيل الأوساخ والترسبات الكلسية وطبقات الشمع القديمة، مع تلميع سطح لامع ومعقم.',
     steps: ['تقييم البلاط', 'تنظيف عميق بالمواد القلوية', 'ترميم الفاصل', 'تلميع السطح وتغليفه'],
     benefits: ['استعادة اللون الأصلي', 'تبييض الفاصل', 'معالجة مضادة للانزلاق متاحة', 'سطح سهل التنظيف'],
     duration: '3–6 ساعات لكل 100 م²',
-    icon2: 'cleaning_services',
   },
   {
     icon: 'texture',
+    icon2: 'auto_awesome',
+    image: 'https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=80',
     name: 'طحن وتلميع التيرازو',
     tagline: 'فن استعادة جمال التيرازو',
     desc: 'أرضيات التيرازو تتألق بالصيانة الصحيحة. عملية الطحن الرطب تسوي الأسطح غير المستوية، تُصلح التشققات، وتمنح لمعة لا تُضاهى.',
     steps: ['تقييم المستوى وحقن الشقوق', 'طحن ماسي رطب', 'صقل السطح', 'بلورة عالية اللمعة'],
     benefits: ['سطح مستوٍ تماماً', 'ترميم الشقوق مشمول', 'سطح صحي', 'عملية صديقة للبيئة'],
     duration: '5–10 ساعات لكل 100 م²',
-    icon2: 'auto_awesome',
   },
   {
     icon: 'panorama_horizontal',
+    icon2: 'shield',
+    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
     name: 'تلميع وتغليف الجرانيت',
     tagline: 'حماية استثمارك في الجرانيت الفاخر',
     desc: 'الجرانيت متين لكنه مسامي. عملية التلميع والتغليف تُعيد البريق العميق للجرانيت مع مواد نفاذة تحميه من الزيوت والماء والبقع.',
     steps: ['معالجة البقع المسبقة', 'تلميع ماسي', 'تنظيف بمادة متعادلة pH', 'تطبيق مادة تغليف نفاذة'],
     benefits: ['استعادة عمق اللون', 'مادة مضادة للبقع', 'مقاوم للزيت والماء', 'يمد عمر الجرانيت'],
     duration: '3–5 ساعات لكل 100 م²',
-    icon2: 'shield',
   },
   {
     icon: 'square_foot',
+    icon2: 'eco',
+    image: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80',
     name: 'ترميم الحجر الجيري والتراورتين',
     tagline: 'حجر حساس، معالجة متخصصة',
     desc: 'الحجر الجيري والتراورتين يتطلبان معاملة حذرة. نستخدم مركبات منخفضة pH وأقراصاً ناعمة لتلميعه دون الإضرار بالبنية البلورية الرقيقة لهذه الأحجار الطبيعية.',
     steps: ['اختبار الحموضة pH', 'عملية صقل لطيفة', 'ملء الفراغات (تراورتين)', 'تغليف السطح'],
     benefits: ['آمن للحجر الليّن', 'ملء الفراغات والثقوب', 'تشطيب طبيعي المظهر', 'مادة تغليف تتنفس'],
     duration: '5–8 ساعات لكل 100 م²',
-    icon2: 'eco',
   },
   {
     icon: 'foundation',
+    icon2: 'construction',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
     name: 'طلاء الإيبوكسي وترميم الأرضيات',
     tagline: 'متانة صناعية بجمال سكني',
     desc: 'حوّل الأرضيات الخرسانية أو البلاط المتآكل بطلاء إيبوكسي احترافي. مثالي للمرائب ومناطق الخدمة والفضاءات التجارية — متين، سلس، وسهل الصيانة.',
     steps: ['طحن السطح وتشكيله', 'حقن الشقوق', 'تطبيق طبقة التأسيس', 'تشطيب إيبوكسي زخرفي'],
     benefits: ['مقاوم للمواد الكيماوية', 'سطح بلا درزات', 'عمر افتراضي +10 سنوات', 'ألوان مخصصة'],
     duration: 'يوم إلى يومين لكل 100 م²',
-    icon2: 'construction',
   },
 ];
 ---
@@ -80,8 +86,8 @@ const services = [
   <PageHero
     lang="ar"
     title="خدمات الجلي والتلميع الاحترافية"
-    subtitle="جلي الرخام، ترميم البلاط، طحن التيرازو، وتلميع الجرانيت في جميع أحياء حفر الباطن. حرفيون معتمدون، معدات متطورة، نتائج مضمونة."
-    badge="٦ خدمات متخصصة"
+    subtitle="جلي الرخام، ترميم البلاط، طحن التيرازو، وتلميع الجرانيت في جميع أحياء حفر الباطن. حرفيون معتمدون، معدات إيطالية متطورة، نتائج مضمونة."
+    badge="٦ خدمات متخصصة معتمدة"
     accentIcon="construction"
     breadcrumb={[
       { label: 'الرئيسية', href: sitePath('/') },
@@ -93,60 +99,94 @@ const services = [
     <!-- ── Services Grid ── -->
     <section class="py-20 bg-[#fcf9f2]">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <div class="text-center mb-14 reveal">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-3">ما نقدمه</p>
-          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-4">كل سطح، بيد خبراء</h2>
+        <div class="text-center mb-14">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#735b24] mb-3">ما نقدمه في jaliblaathafar.com</p>
+          <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] mb-4">كل سطح، بيد خبراء وتقنيات إيطالية</h2>
           <p class="text-[#44474e] max-w-2xl mx-auto leading-relaxed">
-            من الرخام الكلاسيكي إلى البورسلان الحديث، نستعيد كل سطح حجري وبلاط إلى رونقه الأصلي — أو أفضل.
+            من الرخام الطبيعي الفاخر إلى البورسلان والتيرازو والإيبوكسي، نستعيد كل سطح إلى رونقه المرآتي الأصلي مع عزل وحماية تدوم لسنوات.
           </p>
         </div>
 
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((svc, i) => (
-            <article class={`reveal stagger-${(i % 3) + 1} tap-card group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}>
-              <a href={waLink('ar')} target="_blank" rel="noopener" class="tap-link" aria-label={`واتساب عن ${svc.name}`}></a>
-              <div class="bg-gradient-to-br from-[#001026] to-[#0b2545] p-6">
-                <div class="flex items-center justify-between mb-3">
-                  <span class="material-symbols-outlined text-[#ffdf9f] text-3xl">{svc.icon}</span>
-                  <span class="material-symbols-outlined text-[#735b24]/60 text-xl">{svc.icon2}</span>
-                </div>
-                <h3 class="text-white font-bold text-lg leading-snug mb-1">{svc.name}</h3>
-                <p class="text-[#ffdf9f] text-xs font-medium">{svc.tagline}</p>
-              </div>
-              <div class="p-6 flex flex-col gap-5">
-                <p class="text-[#44474e] text-sm leading-relaxed">{svc.desc}</p>
-                <div>
-                  <p class="text-[#001026] font-semibold text-xs uppercase tracking-wider mb-3">طريقة العمل</p>
-                  <ol class="space-y-2">
-                    {svc.steps.map((step, si) => (
-                      <li class="flex items-start gap-3 text-sm text-[#44474e]">
-                        <span class="shrink-0 w-5 h-5 rounded-full bg-[#0b2545] text-white text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
-                        {step}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-                <div class="bg-[#f6f3ec] rounded-xl p-4">
-                  <p class="text-[#001026] font-semibold text-xs uppercase tracking-wider mb-3">المزايا الرئيسية</p>
-                  <ul class="grid grid-cols-2 gap-2">
-                    {svc.benefits.map(b => (
-                      <li class="flex items-center gap-2 text-xs text-[#44474e]">
-                        <span class="material-symbols-outlined text-[#735b24] text-[14px]">check_circle</span>
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div class="flex items-center justify-between pt-2 border-t border-[#e5e2db]">
-                  <span class="text-xs text-[#44474e] flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-[14px] text-[#735b24]">schedule</span>
-                    {svc.duration}
+          {services.map((svc) => (
+            <article class="group bg-white rounded-2xl border border-[#e5e2db] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+              
+              <!-- Card Header with Real Photo -->
+              <div class="relative h-52 overflow-hidden bg-[#001026]">
+                <img
+                  src={svc.image}
+                  alt={svc.name}
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#001026] via-[#001026]/40 to-transparent"></div>
+                
+                <!-- Floating Icons -->
+                <div class="absolute top-4 inset-x-4 flex items-center justify-between pointer-events-none">
+                  <span class="w-10 h-10 rounded-xl bg-[#001026]/80 backdrop-blur-md text-[#ffdf9f] flex items-center justify-center border border-white/10 shadow-md">
+                    <span class="material-symbols-outlined text-2xl">{svc.icon}</span>
                   </span>
-                  <a href={waLink('ar')} target="_blank" rel="noopener"
-                     class="text-xs font-bold text-[#002c0f] bg-[#66ff8e]/20 hover:bg-[#002c0f] hover:text-[#66ff8e] border border-[#002c0f]/20 px-3 py-1.5 rounded-lg transition-all">
-                    اطلب عرض سعر ←
+                  <span class="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md text-[#ffdf9f] flex items-center justify-center border border-white/20 shadow-sm">
+                    <span class="material-symbols-outlined text-base">{svc.icon2}</span>
+                  </span>
+                </div>
+
+                <!-- Title Overlay -->
+                <div class="absolute bottom-4 inset-x-4 pointer-events-none">
+                  <h3 class="text-white font-bold text-xl leading-tight mb-1 drop-shadow-md">{svc.name}</h3>
+                  <p class="text-[#ffdf9f] text-xs font-semibold drop-shadow">{svc.tagline}</p>
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="p-6 flex flex-col gap-5 flex-1 justify-between">
+                <div>
+                  <p class="text-[#44474e] text-sm leading-relaxed mb-4">{svc.desc}</p>
+                  
+                  <!-- Process Steps -->
+                  <div class="mb-5">
+                    <p class="text-[#001026] font-semibold text-xs uppercase tracking-wider mb-2.5">طريقة العمل المعتمدة:</p>
+                    <ol class="space-y-1.5">
+                      {svc.steps.map((step, si) => (
+                        <li class="flex items-start gap-2.5 text-xs text-[#44474e]">
+                          <span class="shrink-0 w-4 h-4 rounded-full bg-[#001026] text-[#fedb98] text-[9px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                          <span>{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+
+                  <!-- Key Benefits -->
+                  <div class="bg-[#f6f3ec] rounded-xl p-3.5 border border-[#e5e2db]">
+                    <p class="text-[#001026] font-semibold text-xs uppercase tracking-wider mb-2">المزايا والضمان:</p>
+                    <ul class="grid grid-cols-2 gap-1.5">
+                      {svc.benefits.map(b => (
+                        <li class="flex items-center gap-1.5 text-xs text-[#44474e]">
+                          <span class="material-symbols-outlined text-[#3de273] text-[14px]">check_circle</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Footer & CTA -->
+                <div class="flex items-center justify-between pt-4 border-t border-[#e5e2db]">
+                  <span class="text-xs text-[#74777f] flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[15px] text-[#735b24]">schedule</span>
+                    <span>{svc.duration}</span>
+                  </span>
+                  <a
+                    href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('السلام عليكم، أود طلب عرض سعر لمعاينة خدمة ' + svc.name + ' بحفر الباطن عبر jaliblaathafar.com')}`}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-xs font-bold text-[#002c0f] bg-[#66ff8e]/20 hover:bg-[#002c0f] hover:text-[#66ff8e] border border-[#002c0f]/20 px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1"
+                  >
+                    <span>اطلب عرض سعر</span>
+                    <span class="material-symbols-outlined text-[13px]">arrow_back</span>
                   </a>
                 </div>
+
               </div>
             </article>
           ))}
@@ -155,21 +195,23 @@ const services = [
     </section>
 
     <!-- ── CTA ── -->
-    <section class="py-20 bg-gradient-to-r from-[#735b24] to-[#5a4518]">
-      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+    <section class="py-20 bg-gradient-to-r from-[#001026] to-[#0b2545] text-white">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
         <span class="material-symbols-outlined text-[#ffdf9f] text-5xl mb-4 block">diamond</span>
-        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">هل أنت مستعد لاستعادة جمال أرضياتك؟</h2>
-        <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">احصل على معاينة مجانية وعرض أسعار — بدون أي التزام. نخدم جميع أحياء حفر الباطن.</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">هل أنت مستعد لاستعادة بريق ولمعان أرضياتك؟</h2>
+        <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+          معاينة مجانية 100% في موقعك بجميع أحياء حفر الباطن مع عينة تجريبية حية على متر مربع.
+        </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={waLink('ar')} target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-2 bg-[#002c0f] text-[#66ff8e] hover:bg-[#001404] transition-all px-8 py-4 rounded-xl font-bold text-base shadow-lg">
+          <a href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('السلام عليكم، أرغب في طلب معاينة مجانية لخدمات الجلي في حفر الباطن عبر jaliblaathafar.com')}`} target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a] transition-all px-8 py-4 rounded-xl font-bold text-base shadow-lg">
             <span class="material-symbols-outlined">chat</span>
-            واتساب للحصول على عرض سعر
+            واتساب للحصول على عرض سعر فوري
           </a>
           <a href={`tel:${SITE.phone}`}
              class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 transition-all px-8 py-4 rounded-xl font-bold text-base">
             <span class="material-symbols-outlined">call</span>
-            اتصل بنا الآن
+            اتصل بنا: 0539811299
           </a>
         </div>
       </div>

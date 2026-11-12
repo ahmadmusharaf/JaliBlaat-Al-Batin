@@ -1,6 +1,6 @@
 ---
 // src/components/sections/Services.astro
-import { waLink } from '../../data/site';
+import { SITE, sitePath } from '../../data/site';
 
 export interface Props {
   lang?: 'ar' | 'en';
@@ -11,33 +11,93 @@ const isAr = lang === 'ar';
 const services = [
   {
     icon: 'diamond',
-    ar: { title: 'جلي الرخام الطبيعي والكريستال', desc: 'جلي وتلميع رخام كريم ماربل، تراورتين، كريستال بالكريستلايزر الإيطالي وأقراص الألماس المائي لإعطاء لمعان فندقي يدوم لسنوات.' },
-    en: { title: 'Marble Polish & Crystallization', desc: 'Italian crystallizer and water-diamond disc polishing for Crema Marfil, travertine, and crystal marble — hotel-grade shine lasting years.' },
+    icon2: 'verified',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    ar: {
+      title: 'جلي وترميم الرخام الطبيعي',
+      desc: 'جلي وتلميع رخام كريم ماربل، تراورتين، وكريستال بأقراص الألماس المائي والكريستلايزر الإيطالي لإعطاء لمعان مرآتي فندقي يدوم لسنوات.',
+      duration: '4–8 ساعات / 100 م²'
+    },
+    en: {
+      title: 'Marble Polishing & Restoration',
+      desc: 'Our diamond-grinding process removes scratches and restores the deep mirror shine of Italian and local marble floors and walls.',
+      duration: '4–8 hours / 100 m²'
+    },
   },
   {
-    icon: 'cleaning_services',
-    ar: { title: 'جلي البلاط والسيراميك والبورسلان', desc: 'تنظيف عميق وجلي البلاط والسيراميك والبورسلان بمواد مخصصة مع تلميع الفواصل وإعادة ترويبتها بشكل احترافي.' },
-    en: { title: 'Tile, Ceramic & Porcelain Restoration', desc: 'Deep cleaning and professional polishing of tiles, ceramics, and porcelain — including grout recoloring and sealant application.' },
+    icon: 'crop_square',
+    icon2: 'cleaning_services',
+    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+    ar: {
+      title: 'جلي السيراميك والبورسلان',
+      desc: 'تنظيف عميق وجلي متخصص للبلاط والسيراميك والبورسلان لإزالة الترسبات الكلسية وتبييض الترويبة وتطبيق معالجة مانعة للانزلاق.',
+      duration: '3–6 ساعات / 100 م²'
+    },
+    en: {
+      title: 'Ceramic & Porcelain Tile Polishing',
+      desc: 'Specialised deep cleaning and polishing for ceramic, porcelain, and glazed tiles, leaving floors bright, hygienic, and easy to clean.',
+      duration: '3–6 hours / 100 m²'
+    },
   },
   {
-    icon: 'mop',
-    ar: { title: 'تنظيف الأرضيات العميق وتجريد الطلاء', desc: 'إزالة الطلاءات القديمة، الدهون، والبقع العنيدة بمواد صناعية آمنة وأجهزة ضغط ماء حراري متخصصة.' },
-    en: { title: 'Deep Floor Scrubbing & Stripping', desc: 'Removal of old coatings, grease, and stubborn stains using safe industrial chemicals and specialized hot-water pressure equipment.' },
+    icon: 'texture',
+    icon2: 'auto_awesome',
+    image: 'https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=80',
+    ar: {
+      title: 'طحن وتلميع التيرازو والبلاط',
+      desc: 'تسوية الأسطح غير المستوية، معالجة التشققات، وطحن ماسي رطب بدون غبار لبلورة أرضيات التيرازو والبلاط إلى أعلى درجات اللمعان.',
+      duration: '5–10 ساعات / 100 م²'
+    },
+    en: {
+      title: 'Terrazzo Grinding & Polishing',
+      desc: 'Wet diamond grinding levels uneven surfaces, repairs cracks, and delivers a flawless, hygienic high-gloss crystallised finish.',
+      duration: '5–10 hours / 100 m²'
+    },
   },
   {
-    icon: 'build',
-    ar: { title: 'إصلاح الفواصل والشقوق بالإيبوكسي', desc: 'تعبئة الشقوق وتجديد الفواصل بمواد الإيبوكسي المتينة والمضادة للرطوبة لضمان متانة وجمال الأرضية على المدى البعيد.' },
-    en: { title: 'Grout & Crack Epoxy Repair', desc: 'Filling cracks and renewing grout lines with durable, moisture-resistant epoxy materials for long-term floor beauty and structural integrity.' },
+    icon: 'panorama_horizontal',
+    icon2: 'shield',
+    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+    ar: {
+      title: 'تلميع وتغليف الجرانيت',
+      desc: 'استعادة البريق العميق للجرانيت بأقراص الألماس المخصصة وتطبيق مواد نفاذة تحميه من امتصاص الزيوت، القهوة، والبقع بشكل دائم.',
+      duration: '3–5 ساعات / 100 م²'
+    },
+    en: {
+      title: 'Granite Polishing & Sealing',
+      desc: 'Penetrating sealants and diamond polishing bring back the rich lustre of granite surfaces while permanently protecting against stains.',
+      duration: '3–5 hours / 100 m²'
+    },
   },
   {
-    icon: 'shield',
-    ar: { title: 'طلاء الحماية بالنانو الإيطالي', desc: 'تطبيق طبقات النانو الإيطالية الشفافة التي تحمي السطح من الخدوش والرطوبة وتُبقي اللمعان ناصعاً لأكثر من 10 سنوات.' },
-    en: { title: 'Nano Protective Coating', desc: 'Application of transparent Italian nano layers that protect surfaces from scratches and moisture — maintaining brilliance for over 10 years.' },
+    icon: 'square_foot',
+    icon2: 'eco',
+    image: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80',
+    ar: {
+      title: 'ترميم الحجر الجيري والترافرتين',
+      desc: 'صقل لطيف بمركبات مخصصة لحماية البنية البلورية الرقيقة للحجر، مع ملء الفراغات وتطبيق مادة عازلة متنفّسة عالية الجودة.',
+      duration: '5–8 ساعات / 100 م²'
+    },
+    en: {
+      title: 'Limestone & Travertine Restoration',
+      desc: 'Gentle low-pH diamond honing, void-filling for travertine, and breathable natural-look protective sealing.',
+      duration: '5–8 hours / 100 m²'
+    },
   },
   {
     icon: 'foundation',
-    ar: { title: 'تلميع الحجر الطبيعي والغرانيت', desc: 'جلي الحجر الطبيعي والغرانيت بمراحل متعددة من المطرقة الألماسية وصولاً إلى الكريستلايزر لإخراج الجمال الطبيعي للحجر.' },
-    en: { title: 'Natural Stone & Granite Polish', desc: 'Multi-stage diamond and crystallizer polishing of natural stone and granite — revealing the material\'s natural beauty and deep luster.' },
+    icon2: 'construction',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    ar: {
+      title: 'طلاء الإيبوكسي وترميم الأرضيات',
+      desc: 'تحويل الأرضيات الخرسانية والبلاط المتآكل إلى أسطح إيبوكسي صناعية متينة بدون فواصل، مقاومة للمواد الكيميائية وسهلة التنظيف.',
+      duration: '1–2 يوم / 100 م²'
+    },
+    en: {
+      title: 'Epoxy Floor Coating & Repair',
+      desc: 'Industrial durability with residential elegance. Seamless, chemical-resistant epoxy coatings with 10+ year lifespan.',
+      duration: '1–2 days / 100 m²'
+    },
   },
 ];
 ---
@@ -47,46 +107,92 @@ const services = [
 
     <!-- Section header -->
     <div class="text-center mb-14">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fedb98] text-[#785f28] text-xs font-bold font-['Inter'] mb-4">
-        <span class="material-symbols-outlined text-[15px]">auto_awesome</span>
-        {isAr ? 'خدمة متكاملة لشتى أنواع الأرضيات' : 'Complete service for all floor types'}
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fedb98] text-[#785f28] text-xs font-bold font-['Inter'] mb-4 shadow-sm">
+        <span class="material-symbols-outlined text-[15px]">diamond</span>
+        {isAr ? 'خدمات معتمدة لجميع أنواع الأرضيات' : 'Certified Craftsmanship for All Floors'}
       </div>
-      <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
-        {isAr ? 'خدمات جلي متخصصة لأرضياتك' : 'Specialized Floor Polishing Services'}
+      <h2 class="text-3xl lg:text-5xl font-bold text-[#001026] tracking-tight mb-4">
+        {isAr ? 'خدمات جلي وترميم متخصصة لأرضياتك' : 'Specialized Floor Polishing & Restoration'}
       </h2>
-      <p class="text-lg text-[#44474e] max-w-2xl mx-auto">
+      <p class="text-base md:text-lg text-[#44474e] max-w-2xl mx-auto leading-relaxed">
         {isAr
-          ? 'نقدم حلولاً متكاملة لجلي وترميم جميع أنواع الأرضيات بمعايير فندقية باستخدام أحدث المعدات الإيطالية.'
-          : 'We deliver complete floor polishing and restoration solutions using the latest Italian equipment to hotel-grade standards.'}
+          ? 'نقدم حلولاً هندسية متكاملة لجلي وترميم الحجر والرخام بمعايير فندقية وبأحدث ماكينات كلياندكس الإيطالية في جميع أحياء حفر الباطن.'
+          : 'Complete precision stone restoration and hotel-grade polishing using Italian Klindex machinery across Hafar Al-Batin.'}
       </p>
     </div>
 
     <!-- Services grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {services.map(svc => (
-        <div class="group bg-white border border-[rgba(200,169,106,0.2)] rounded-xl p-6 shadow-sm
-                    hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(200,169,106,0.5)]
-                    transition-all duration-200">
-          <!-- Icon -->
-          <div class="w-12 h-12 rounded-lg bg-[#f6f3ec] flex items-center justify-center text-[#735b24] mb-5
-                      group-hover:bg-[#fedb98] transition-colors">
-            <span class="material-symbols-outlined text-[26px]">{svc.icon}</span>
+        <div class="group bg-white border border-[#e5e2db] rounded-2xl overflow-hidden shadow-sm
+                    hover:shadow-xl hover:-translate-y-1.5 hover:border-[#735b24]/40
+                    transition-all duration-300 flex flex-col justify-between">
+          
+          <!-- Card Image Header -->
+          <div class="relative h-48 overflow-hidden bg-[#001026]">
+            <img
+              src={svc.image}
+              alt={isAr ? svc.ar.title : svc.en.title}
+              loading="lazy"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#001026] via-[#001026]/30 to-transparent"></div>
+            
+            <!-- Badges -->
+            <div class="absolute top-3.5 inset-x-3.5 flex items-center justify-between pointer-events-none">
+              <span class="w-9 h-9 rounded-xl bg-[#001026]/80 backdrop-blur-md text-[#ffdf9f] flex items-center justify-center border border-white/10 shadow-md">
+                <span class="material-symbols-outlined text-xl">{svc.icon}</span>
+              </span>
+              <span class="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-md text-[#ffdf9f] flex items-center justify-center border border-white/20">
+                <span class="material-symbols-outlined text-sm">{svc.icon2}</span>
+              </span>
+            </div>
+
+            <!-- Title Overlay -->
+            <div class="absolute bottom-3.5 inset-x-3.5 pointer-events-none">
+              <h3 class="text-white font-bold text-lg leading-tight drop-shadow-md">
+                {isAr ? svc.ar.title : svc.en.title}
+              </h3>
+            </div>
           </div>
+
           <!-- Content -->
-          <h3 class="font-bold text-[#001026] text-lg mb-3">
-            {isAr ? svc.ar.title : svc.en.title}
-          </h3>
-          <p class="text-sm text-[#44474e] leading-relaxed mb-5">
-            {isAr ? svc.ar.desc : svc.en.desc}
-          </p>
-          <!-- CTA -->
-          <a href={waLink(lang)} target="_blank" rel="noopener"
-             class="inline-flex items-center gap-2 text-sm font-bold font-['Inter'] text-[#735b24] hover:text-[#001026] transition-colors">
-            <span class="material-symbols-outlined text-[16px]">chat</span>
-            {isAr ? 'استفسر عبر واتساب' : 'Inquire via WhatsApp'}
-          </a>
+          <div class="p-6 flex flex-col justify-between flex-1">
+            <p class="text-sm text-[#44474e] leading-relaxed mb-5">
+              {isAr ? svc.ar.desc : svc.en.desc}
+            </p>
+
+            <div class="pt-4 border-t border-[#e5e2db] flex items-center justify-between">
+              <span class="text-xs text-[#74777f] flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px] text-[#735b24]">schedule</span>
+                <span>{isAr ? svc.ar.duration : svc.en.duration}</span>
+              </span>
+
+              <a
+                href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(isAr ? 'السلام عليكم، أود الاستفسار عن خدمة ' + svc.ar.title + ' بحفر الباطن عبر jaliblaathafar.com' : 'Hello, I would like to inquire about ' + svc.en.title + ' via jaliblaathafar.com')}`}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-1 text-xs font-bold font-['Inter'] text-[#002c0f] bg-[#66ff8e]/20 hover:bg-[#002c0f] hover:text-[#66ff8e] px-3 py-1.5 rounded-lg transition-colors border border-[#002c0f]/20"
+              >
+                <span>{isAr ? 'اطلب تسعير' : 'Get Quote'}</span>
+                <span class="material-symbols-outlined text-[12px]">{isAr ? 'arrow_back' : 'arrow_forward'}</span>
+              </a>
+            </div>
+          </div>
+
         </div>
       ))}
+    </div>
+
+    <!-- View All Services CTA Button -->
+    <div class="mt-14 text-center">
+      <a
+        href={isAr ? sitePath('/ar/services/') : sitePath('/en/services/')}
+        class="inline-flex items-center gap-2 bg-[#001026] text-white hover:bg-[#0b2545] transition-all px-8 py-4 rounded-xl text-sm font-bold shadow-md hover:shadow-lg"
+      >
+        <span>{isAr ? 'استعرض تفاصيل خطوات العمل لجميع الخدمات' : 'View Full Technical Process For All Services'}</span>
+        <span class="material-symbols-outlined text-base">{isAr ? 'arrow_back' : 'arrow_forward'}</span>
+      </a>
     </div>
 
   </div>
