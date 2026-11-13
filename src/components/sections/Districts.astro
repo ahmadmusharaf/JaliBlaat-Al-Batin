@@ -1,67 +1,229 @@
 ---
 // src/components/sections/Districts.astro
-import { SITE } from '../../data/site';
+import { SITE, sitePath } from '../../data/site';
 
 export interface Props {
   lang?: 'ar' | 'en';
 }
 const { lang = 'ar' } = Astro.props;
 const isAr = lang === 'ar';
-const districts = isAr ? SITE.districts.ar : SITE.districts.en;
+
+const districtsData = [
+  { ar: 'العزيزية', en: 'Al-Aziziyah', type: isAr ? 'فلل وقصور سكنية' : 'Villas & Residential' },
+  { ar: 'الخالدية', en: 'Al-Khalidiyah', type: isAr ? 'مجالس ورخام فاخر' : 'Luxury Majlis Marble' },
+  { ar: 'المحمدية', en: 'Al-Muhammadiyah', type: isAr ? 'مشاريع سكنية وتجارية' : 'Residential & Commercial' },
+  { ar: 'البلدية', en: 'Al-Baladiyah', type: isAr ? 'معارض ومحلات وسط المدينة' : 'City Center Showrooms' },
+  { ar: 'أبو موسى الأشعري', en: 'Abu Musa Al-Ashari', type: isAr ? 'أحواش وبلاط خارجي' : 'Patios & Exterior Tiles' },
+  { ar: 'الروضة', en: 'Al-Rawdah', type: isAr ? 'فلل عائلية وتيرازو' : 'Family Homes & Terrazzo' },
+  { ar: 'الربوة', en: 'Al-Rabwah', type: isAr ? 'قصور وعزل نانو' : 'Estates & Nano Sealing' },
+  { ar: 'الفيصلية', en: 'Al-Faisaliyah', type: isAr ? 'مبانٍ وصالات واسعة' : 'Apartments & Large Halls' },
+  { ar: 'التلال', en: 'Al-Tilal', type: isAr ? 'تشطيب بعد الإنشاء' : 'Post-Construction Finish' },
+  { ar: 'النزهة', en: 'Al-Naifiyah', type: isAr ? 'بورسلان وترميم فواصل' : 'Porcelain & Grout Care' },
+  { ar: 'الواحة', en: 'Al-Wahat', type: isAr ? 'خدمة هادئة متقنة' : 'Quiet Residential Care' },
+  { ar: 'الريان', en: 'Al-Rayyan', type: isAr ? 'مشاريع حديثة متجددة' : 'Modern Developments' },
+];
+
+const mapQuery = isAr 
+  ? 'حفر+الباطن,+المنطقة+الشرقية,+المملكة+العربية+السعودية' 
+  : 'Hafar+Al+Batin,+Eastern+Province,+Saudi+Arabia';
+
+const gmapsDirectUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Hafar Al Batin, Saudi Arabia');
+
+const localSeoSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": isAr ? "جلي بلاط حفر الباطن 0539811299" : "Tile & Marble Polishing Hafar Al-Batin 0539811299",
+  "telephone": SITE.phone,
+  "url": SITE.url,
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": isAr ? "طريق الملك فيصل" : "King Faisal Road",
+    "addressLocality": isAr ? "حفر الباطن" : "Hafar Al-Batin",
+    "addressRegion": isAr ? "المنطقة الشرقية" : "Eastern Province",
+    "postalCode": "39921",
+    "addressCountry": "SA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 28.4342,
+    "longitude": 45.9636
+  },
+  "areaServed": districtsData.map(d => ({
+    "@type": "AdministrativeArea",
+    "name": isAr ? `${d.ar}، حفر الباطن` : `${d.en}, Hafar Al-Batin`
+  }))
+});
 ---
 
-<section id="service-areas" class="w-full bg-[#f6f3ec] py-20 lg:py-28">
+<section id="service-areas" class="w-full bg-[#f6f3ec] py-20 lg:py-28 relative">
+  <script type="application/ld+json" set:html={localSeoSchema} />
+
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
 
+    <!-- Section Header -->
     <div class="text-center mb-14">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#001026] text-[#ffdf9f] text-xs font-bold font-['Inter'] mb-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#001026] text-[#ffdf9f] text-xs font-bold font-['Inter'] mb-4 shadow-sm">
         <span class="material-symbols-outlined text-[15px]">location_on</span>
-        {isAr ? 'نغطي كل حفر الباطن' : 'Covering all of Hafar Al-Batin'}
+        {isAr ? 'تغطية معتمدة لكافة أحياء حفر الباطن الـ ١٢' : 'Official Coverage for All 12 Hafar Al-Batin Districts'}
       </div>
       <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
         {isAr ? 'نخدم أحياء ومناطق حفر الباطن' : 'Serving Hafar Al-Batin Neighbourhoods'}
       </h2>
       <p class="text-lg text-[#44474e] max-w-2xl mx-auto">
         {isAr
-          ? 'فريقنا مجهز للوصول إلى أي حي داخل حفر الباطن خلال ساعتين كحد أقصى.'
-          : 'Our team is equipped to reach any neighbourhood within Hafar Al-Batin within 2 hours maximum.'}
+          ? 'فريقنا مجهز للوصول إلى أي حي داخل حفر الباطن خلال ساعتين كحد أقصى مع معاينة مجانية وضمان كتابي.'
+          : 'Our mobile team is equipped to reach any neighbourhood within Hafar Al-Batin within 2 hours maximum with free on-site inspection.'}
       </p>
     </div>
 
-    <!-- District chips grid -->
-    <div class="flex flex-wrap gap-3 justify-center mb-12">
-      {districts.map(d => (
-        <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-[rgba(200,169,106,0.3)]
-                    text-sm text-[#001026] font-semibold shadow-sm hover:bg-[#0b2545] hover:text-[#ffdf9f]
-                    hover:border-[rgba(200,169,106,0.6)] transition-all duration-150 cursor-default">
-          <span class="material-symbols-outlined text-[14px] text-[#735b24]">location_on</span>
-          {d}
+    <!-- 2-Column Responsive Layout: Districts + Live Google Map -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch mb-12">
+
+      <!-- Left Column (Districts Listing with SEO Badges) -->
+      <div class="lg:col-span-7 flex flex-col justify-between">
+        <div>
+          <!-- Local Guarantee Highlights -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+            <div class="bg-white p-3.5 rounded-xl border border-[rgba(200,169,106,0.3)] shadow-sm flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-[#735b24] text-[22px]">schedule</span>
+              <div>
+                <p class="text-xs font-bold text-[#001026]">{isAr ? 'خلال ساعتين' : 'Within 2 Hours'}</p>
+                <p class="text-[10px] text-[#44474e]">{isAr ? 'وصول سريع للموقع' : 'Fast On-Site Arrival'}</p>
+              </div>
+            </div>
+            <div class="bg-white p-3.5 rounded-xl border border-[rgba(200,169,106,0.3)] shadow-sm flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-[#735b24] text-[22px]">verified</span>
+              <div>
+                <p class="text-xs font-bold text-[#001026]">{isAr ? 'معاينة مجانية' : 'Free Inspection'}</p>
+                <p class="text-[10px] text-[#44474e]">{isAr ? 'بدون أي التزام' : 'Zero Commitment'}</p>
+              </div>
+            </div>
+            <div class="bg-white p-3.5 rounded-xl border border-[rgba(200,169,106,0.3)] shadow-sm flex items-center gap-2.5 col-span-2 sm:col-span-1">
+              <span class="material-symbols-outlined text-[#735b24] text-[22px]">support_agent</span>
+              <div>
+                <p class="text-xs font-bold text-[#001026]">0539811299</p>
+                <p class="text-[10px] text-[#44474e]">{isAr ? 'طوارئ واستفسارات' : 'Direct Dispatch Line'}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- District Cards Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+            {districtsData.map(d => {
+              const districtName = isAr ? d.ar : d.en;
+              const waMsg = isAr
+                ? `السلام عليكم، أرغب في حجز خدمة جلي وتلميع أرضيات بحي ${d.ar} بحفر الباطن 0539811299`
+                : `Hello, I would like to book tile/marble polishing in ${d.en}, Hafar Al-Batin 0539811299`;
+              const waUrl = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(waMsg)}`;
+
+              return (
+                <a
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener"
+                  title={isAr ? `احجز خدمة جلي بلاط بحي ${d.ar}` : `Book tile polishing in ${d.en}`}
+                  class="group flex flex-col justify-between p-3.5 rounded-xl bg-white border border-[rgba(200,169,106,0.25)] hover:border-[#735b24] hover:shadow-md transition-all duration-200"
+                >
+                  <div class="flex items-center gap-1.5 mb-1.5">
+                    <span class="material-symbols-outlined text-[16px] text-[#735b24] group-hover:scale-110 transition-transform">location_on</span>
+                    <span class="font-bold text-sm text-[#001026] group-hover:text-[#735b24] transition-colors">{districtName}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-[11px] text-[#44474e]">
+                    <span>{d.type}</span>
+                    <span class="text-[#25D366] font-semibold text-[10px] group-hover:translate-x-0.5 transition-transform">واتساب ←</span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
         </div>
-      ))}
+
+        <!-- SEO Keyword Note -->
+        <div class="p-4 rounded-xl bg-white/70 border border-[#e5e2db] text-xs text-[#44474e] leading-relaxed">
+          <strong class="text-[#001026]">{isAr ? 'خدماتنا في حفر الباطن:' : 'Our Services in Hafar Al-Batin:'}</strong>
+          {isAr
+            ? ' جلي وتلميع رخام، معالجة فواصل البورسلان، تبييض الترويبة، طحن التيرازو الإيطالي، وعزل وتشميع الأرضيات الخارجية والداخلية لجميع أحياء حفر الباطن وضواحيها.'
+            : ' Marble restoration, porcelain tile polishing, grout whitening, Italian terrazzo grinding, and hydrophobic nano sealing for all Hafar Al-Batin residential and commercial districts.'}
+        </div>
+      </div>
+
+      <!-- Right Column (Interactive Google Map Card) -->
+      <div class="lg:col-span-5 flex flex-col">
+        <div class="h-full flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(200,169,106,0.3)] shadow-lg">
+
+          <!-- Map Header with Live Pulse -->
+          <div class="bg-[#001026] text-white px-5 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[#66ff8e] animate-pulse"></span>
+              <span class="font-bold text-xs tracking-wide">
+                {isAr ? 'نطاق التغطية الميدانية — حفر الباطن' : 'Live Field Coverage — Hafar Al-Batin'}
+              </span>
+            </div>
+            <span class="text-[11px] text-[#ffdf9f] font-mono font-bold">28.4342° N, 45.9636° E</span>
+          </div>
+
+          <!-- Embedded Google Map -->
+          <div class="relative flex-1 min-h-[340px] sm:min-h-[400px] w-full bg-[#e5e2db]">
+            <iframe
+              src={`https://maps.google.com/maps?q=${mapQuery}&t=&z=12&ie=UTF8&iwloc=&output=embed`}
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title={isAr ? 'خريطة أحياء حفر الباطن - مؤسسة جلي البلاط والرخام' : 'Hafar Al-Batin District Coverage Map — Marble & Tile Polishing'}
+              class="w-full h-full min-h-[340px] sm:min-h-[400px]"
+            ></iframe>
+          </div>
+
+          <!-- Map Footer with Directions Link -->
+          <div class="p-4 bg-[#fcf9f2] border-t border-[#e5e2db] flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2 text-xs text-[#001026]">
+              <span class="material-symbols-outlined text-[#735b24] text-[18px]">near_me</span>
+              <span class="font-semibold">{isAr ? 'طريق الملك فيصل، حفر الباطن' : 'King Faisal Road, Hafar Al-Batin'}</span>
+            </div>
+            <a
+              href={gmapsDirectUrl}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0b2545] hover:bg-[#001026] text-[#ffdf9f] text-xs font-bold rounded-lg transition-colors shadow-sm"
+            >
+              <span class="material-symbols-outlined text-[15px]">directions</span>
+              {isAr ? 'الاتجاهات في الخريطة' : 'Directions'}
+            </a>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
     <!-- Big CTA card -->
-    <div class="bg-[#0b2545] rounded-2xl p-8 lg:p-12 text-center text-white">
+    <div class="bg-[#0b2545] rounded-2xl p-8 lg:p-12 text-center text-white relative overflow-hidden shadow-xl">
+      <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-[#ffdf9f]/10 to-transparent rounded-full blur-2xl"></div>
+      
       <span class="material-symbols-outlined text-[48px] text-[#ffdf9f] mb-4 block">local_shipping</span>
       <h3 class="text-2xl lg:text-3xl font-bold mb-3">
         {isAr ? 'هل أرضيتك في حفر الباطن؟' : 'Is your floor in Hafar Al-Batin?'}
       </h3>
-      <p class="text-white/70 text-lg max-w-xl mx-auto mb-8">
+      <p class="text-white/80 text-lg max-w-xl mx-auto mb-8 leading-relaxed">
         {isAr
-          ? 'نصل إليك داخل حفر الباطن خلال ساعتين بدون رسوم معاينة — اتصل أو أرسل واتساب الآن.'
-          : 'We reach you within Hafar Al-Batin in 2 hours with no inspection fee — call or WhatsApp now.'}
+          ? 'نصل إليك في أي حي بحفر الباطن خلال ساعتين كحد أقصى مع فحص مجاني شامل وعرض سعر دقيق — اتصل أو أرسل واتساب الآن.'
+          : 'We reach you in any Hafar Al-Batin neighbourhood within 2 hours with free inspection & written quote — call or WhatsApp now.'}
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
         <a href={`https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(isAr ? SITE.waMessageAr : SITE.waMessageEn)}`}
            target="_blank" rel="noopener"
-           class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded font-bold text-sm font-['Inter'] hover:brightness-110 transition-all shadow-lg">
+           class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold text-sm font-['Inter'] hover:brightness-110 transition-all shadow-lg">
           <span class="material-symbols-outlined text-[22px]">chat</span>
-          {isAr ? 'احجز معاينة مجانية عبر واتساب' : 'Book Free Inspection via WhatsApp'}
+          {isAr ? 'احجز معاينة مجانية عبر واتساب 0539811299' : 'Book Free Inspection via WhatsApp 0539811299'}
         </a>
         <a href={`tel:${SITE.phone}`}
-           class="inline-flex items-center justify-center gap-3 bg-white/10 text-white border border-white/20 px-8 py-4 rounded font-bold text-sm font-['Inter'] hover:bg-white/20 transition-all">
+           class="inline-flex items-center justify-center gap-3 bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-bold text-sm font-['Inter'] hover:bg-white/20 transition-all">
           <span class="material-symbols-outlined text-[20px]">call</span>
-          {isAr ? 'اتصل مباشرة' : 'Call Directly'}
+          {isAr ? 'اتصال مباشر: 0539811299' : 'Direct Call: 0539811299'}
         </a>
       </div>
     </div>
