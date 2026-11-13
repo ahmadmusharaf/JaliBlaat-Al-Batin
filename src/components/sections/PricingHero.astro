@@ -101,17 +101,9 @@ const isAr = lang === 'ar';
           <img src="/images/client/stairs-marble.jpg"
                alt={isAr ? 'جلي رخام فاخر بحفر الباطن' : 'Luxury marble polishing Hafar Al-Batin'}
                class="w-full h-full object-cover"
-               loading="eager"
-               onerror="this.style.display='none'" />
-          <!-- Fallback gradient -->
-          <div class="absolute inset-0 bg-gradient-to-br from-[#0b2545] via-[#001026] to-[#735b24] flex items-center justify-center">
-            <div class="text-center text-white/70">
-              <span class="material-symbols-outlined text-[72px] block mb-3">diamond</span>
-              <div class="text-sm font-['Inter']">{isAr ? 'صورة المشروع' : 'Project Photo'}</div>
-            </div>
-          </div>
+               loading="eager" />
           <!-- Bottom overlay -->
-          <div class="absolute inset-0 bg-gradient-to-t from-[#001026]/90 via-transparent to-transparent flex flex-col justify-end p-7 text-white">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#001026]/90 via-transparent to-transparent flex flex-col justify-end p-7 text-white pointer-events-none">
             <span class="inline-block bg-[#735b24] text-white text-xs font-bold font-['Inter'] px-3 py-1 rounded mb-2 self-start">
               {isAr ? 'جلي أقراص الألماس المائي' : 'Water-diamond disc polishing'}
             </span>

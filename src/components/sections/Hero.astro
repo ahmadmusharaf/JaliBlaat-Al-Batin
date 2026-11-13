@@ -81,17 +81,9 @@ const isAr = lang === 'ar';
               class="w-full h-full object-cover"
               width="600" height="420"
               loading="eager"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
             />
-            <!-- Fallback when no image yet -->
-            <div class="absolute inset-0 bg-gradient-to-br from-[#0b2545] to-[#001026] flex items-center justify-center">
-              <div class="text-center text-white/60">
-                <span class="material-symbols-outlined text-[64px] mb-2 block">diamond</span>
-                <div class="text-sm font-['Inter']">{isAr ? 'صورة الرخام الفاخر' : 'Luxury Marble Photo'}</div>
-              </div>
-            </div>
-            <!-- Overlay gradient -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#001026]/80 via-[#001026]/20 to-transparent"></div>
+            <!-- Subtle bottom shadow gradient for contrast on the badge -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#001026]/50 via-transparent to-transparent pointer-events-none"></div>
             <!-- Bottom badge -->
             <div class="absolute bottom-4 inset-x-4 bg-white/95 backdrop-blur-md p-4 rounded shadow-md flex items-center justify-between">
               <div class="flex items-center gap-3">
