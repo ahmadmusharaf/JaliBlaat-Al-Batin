@@ -112,11 +112,11 @@ const services = [
         {isAr ? 'خدمات معتمدة لجميع أنواع الأرضيات' : 'Certified Craftsmanship for All Floors'}
       </div>
       <h2 class="text-3xl lg:text-5xl font-bold text-[#001026] tracking-tight mb-4">
-        {isAr ? 'خدمات جلي وترميم متخصصة لأرضياتك' : 'Specialized Floor Polishing & Restoration'}
+        {isAr ? 'خدمات جلي بلاط حفرالباطن وتلميع الرخام الإيطالي' : 'Specialized Floor Polishing & Restoration'}
       </h2>
       <p class="text-base md:text-lg text-[#44474e] max-w-2xl mx-auto leading-relaxed">
         {isAr
-          ? 'نقدم حلولاً هندسية متكاملة لجلي وترميم الحجر والرخام بمعايير فندقية وبأحدث ماكينات كلياندكس الإيطالية في جميع أحياء حفر الباطن.'
+          ? 'نقدم أفضل خدمات جلي بلاط حفرالباطن وجلي وتلميع الرخام، السيراميك، والبورسلان بأحدث مكائن كلياندكس الإيطالية وأقراص الألماس المائي في جميع أحياء حفر الباطن.'
           : 'Complete precision stone restoration and hotel-grade polishing using Italian Klindex machinery across Hafar Al-Batin.'}
       </p>
     </div>
@@ -132,7 +132,7 @@ const services = [
           <div class="relative h-48 overflow-hidden bg-[#001026]">
             <img
               src={svc.image}
-              alt={isAr ? svc.ar.title : svc.en.title}
+              alt={isAr ? `جلي بلاط حفرالباطن - ${svc.ar.title}` : `${svc.en.title} - Tile Polishing Hafar Al-Batin`}
               loading="lazy"
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
             />

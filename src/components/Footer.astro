@@ -20,19 +20,19 @@ const isAr = lang === 'ar';
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center font-bold text-white text-sm">JB</div>
           <div>
-            <div class="font-bold text-white">{isAr ? 'جلي بلاط حفرالباطن' : 'JaliBlaat Al Batin'}</div>
+            <div class="font-bold text-white text-base notranslate" translate="no" dir="rtl">جلي بلاط حفرالباطن</div>
             <div class="text-[10px] text-[#ffdf9f] uppercase tracking-widest font-semibold">
-              {isAr ? 'JaliBlaat Al Batin' : 'Luxury Stoneworks'}
+              {isAr ? '0539811299 · جلي وتلميع رخام وبلاط' : 'JaliBlaat Al Batin · Luxury Stoneworks'}
             </div>
           </div>
         </div>
-        <a href="https://jaliblaathafar.com" class="text-xs text-[#ffdf9f]/90 font-mono hover:text-[#ffdf9f] hover:underline flex items-center gap-1.5 w-fit">
+        <a href="https://jaliblaathafar.com" class="text-xs text-[#ffdf9f]/90 font-mono hover:text-[#ffdf9f] hover:underline flex items-center gap-1.5 w-fit notranslate" translate="no">
           <span class="material-symbols-outlined text-[15px] text-[#ffdf9f]">language</span>
           <span>jaliblaathafar.com</span>
         </a>
         <p class="text-sm text-white/65 leading-relaxed">
           {isAr
-            ? 'المؤسسة الرائدة في جلي وتلميع البلاط، الرخام، والأرضيات بحفر الباطن والمنطقة الشرقية.'
+            ? 'المؤسسة الرائدة المتخصصة في جلي بلاط حفرالباطن وتلميع الرخام، السيراميك، والبورسلان بأحدث مكائن كلياندكس الإيطالية وأقراص الألماس الكريستالية.'
             : 'The leading tile & marble polishing specialist in Hafar Al-Batin, Eastern Province.'}
         </p>
         <div class="flex gap-3">
@@ -126,6 +126,34 @@ const isAr = lang === 'ar';
 
     </div>
   </div>
+
+  <!-- Local SEO Keyword Tags Ribbon -->
+  {isAr && (
+    <div class="border-t border-white/5 bg-[#000a18]/50 py-5">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="flex flex-wrap items-center justify-center gap-2 text-[11px] text-white/50">
+          <span class="text-[#ffdf9f] font-bold notranslate" translate="no">كلمات البحث الشائعة:</span>
+          <span class="hover:text-white transition-colors cursor-default">جلي بلاط حفرالباطن</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">جلي بلاط حفر الباطن</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">شركة جلي بلاط بحفر الباطن</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">معلم جلي بلاط حفرالباطن</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">رقم جلي بلاط حفر الباطن 0539811299</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">جلي وتلميع رخام حفرالباطن</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">تنظيف وتلميع سيراميك حفر الباطن</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">اسعار جلي البلاط حفرالباطن</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors cursor-default">كلياندكس إيطالي</span>
+        </div>
+      </div>
+    </div>
+  )}
 
   <!-- Bottom bar -->
   <div class="border-t border-white/10 bg-[#000c1e]/70">

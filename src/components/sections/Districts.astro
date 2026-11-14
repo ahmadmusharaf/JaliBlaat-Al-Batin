@@ -32,7 +32,7 @@ const gmapsDirectUrl = 'https://www.google.com/maps/search/?api=1&query=' + enco
 const localSeoSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": isAr ? "جلي بلاط حفر الباطن 0539811299" : "Tile & Marble Polishing Hafar Al-Batin 0539811299",
+  "name": isAr ? "جلي بلاط حفرالباطن 0539811299" : "Tile & Marble Polishing Hafar Al-Batin 0539811299",
   "telephone": SITE.phone,
   "url": SITE.url,
   "priceRange": "$$",
@@ -51,7 +51,7 @@ const localSeoSchema = JSON.stringify({
   },
   "areaServed": districtsData.map(d => ({
     "@type": "AdministrativeArea",
-    "name": isAr ? `${d.ar}، حفر الباطن` : `${d.en}, Hafar Al-Batin`
+    "name": isAr ? `حي ${d.ar}، حفر الباطن` : `${d.en}, Hafar Al-Batin`
   }))
 });
 ---
@@ -68,11 +68,11 @@ const localSeoSchema = JSON.stringify({
         {isAr ? 'تغطية معتمدة لكافة أحياء حفر الباطن الـ ١٢' : 'Official Coverage for All 12 Hafar Al-Batin Districts'}
       </div>
       <h2 class="text-3xl lg:text-4xl font-bold text-[#001026] tracking-tight mb-4">
-        {isAr ? 'نخدم أحياء ومناطق حفر الباطن' : 'Serving Hafar Al-Batin Neighbourhoods'}
+        {isAr ? 'تغطية خدمات جلي بلاط حفرالباطن في كافة الأحياء' : 'Serving Hafar Al-Batin Neighbourhoods'}
       </h2>
       <p class="text-lg text-[#44474e] max-w-2xl mx-auto">
         {isAr
-          ? 'فريقنا مجهز للوصول إلى أي حي داخل حفر الباطن خلال ساعتين كحد أقصى مع معاينة مجانية وضمان كتابي.'
+          ? 'فريق جلي بلاط حفرالباطن جاهز للوصول إلى أي حي داخل حفر الباطن خلال ساعتين مع معاينة وفحص مجاني وضمان معتمد.'
           : 'Our mobile team is equipped to reach any neighbourhood within Hafar Al-Batin within 2 hours maximum with free on-site inspection.'}
       </p>
     </div>

@@ -38,9 +38,15 @@ const canonicalUrl = canonical ?? SITE.url + Astro.url.pathname;
     <!-- Primary SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content={lang === 'ar' ? 'جلي بلاط حفر الباطن, رقم جلي بلاط بحفر الباطن, جلي رخام حفر الباطن, شركة جلي بلاط بحفر الباطن, معلم جلي بلاط حفر الباطن, تلميع سيراميك وبورسلان حفر الباطن, اسعار جلي البلاط حفر الباطن, كلياندكس إيطالي, 0539811299, jaliblaathafar.com' : 'tile polishing hafar al batin, marble polishing hafar al batin, floor polishing saudi arabia, terrazzo restoration, 0539811299, jaliblaathafar.com'} />
+    <meta name="keywords" content={lang === 'ar' ? 'جلي بلاط حفرالباطن, جلي بلاط حفر الباطن, شركة جلي بلاط حفرالباطن, معلم جلي بلاط حفرالباطن, رقم جلي بلاط حفرالباطن, ارقام جلي بلاط بحفر الباطن, جلي رخام حفرالباطن, شركة جلي بلاط بحفر الباطن, معلم جلي بلاط حفر الباطن, تلميع سيراميك وبورسلان حفرالباطن, اسعار جلي البلاط حفر الباطن, تنظيف بلاط حفرالباطن, كلياندكس إيطالي, 0539811299, jaliblaathafar.com' : 'جلي بلاط حفرالباطن, tile polishing hafar al batin, marble polishing hafar al batin, floor polishing saudi arabia, terrazzo restoration, 0539811299, jaliblaathafar.com'} />
     <meta name="google-site-verification" content="d7b4c0bd8ab9559a" />
     <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Local Geo Meta Tags -->
+    <meta name="geo.region" content="SA-04" />
+    <meta name="geo.placename" content="Hafar Al-Batin" />
+    <meta name="geo.position" content="28.4342;45.9636" />
+    <meta name="ICBM" content="28.4342, 45.9636" />
 
     <!-- Open Graph -->
     <meta property="og:type"        content="website" />
@@ -49,7 +55,7 @@ const canonicalUrl = canonical ?? SITE.url + Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:image"       content={SITE.url + ogImage} />
     <meta property="og:locale"      content={lang === 'ar' ? 'ar_SA' : 'en_US'} />
-    <meta property="og:site_name"   content="JaliBlaat Al Batin" />
+    <meta property="og:site_name"   content="جلي بلاط حفرالباطن | JaliBlaat Al Batin" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image" />

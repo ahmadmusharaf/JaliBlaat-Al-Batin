@@ -15,58 +15,116 @@ import { SITE }    from '../data/site';
 
 const schema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  "name": "جلي بلاط حفر الباطن 0539811299 | JaliBlaat Al Batin",
-  "alternateName": [
-    "مؤسسة جلي وتلميع الرخام والبلاط بحفر الباطن",
-    "شركة جلي بلاط بحفر الباطن",
-    "معلم جلي رخام حفر الباطن 0539811299",
-    "رقم جلي بلاط حفر الباطن 0539811299"
-  ],
-  "url": SITE.url,
-  "telephone": SITE.phone,
-  "image": `${SITE.url}/images/og-default.jpg`,
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": SITE.address.street,
-    "addressLocality": SITE.address.city,
-    "addressRegion": SITE.address.region,
-    "postalCode": SITE.address.zip,
-    "addressCountry": SITE.address.country
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": SITE.address.lat, "longitude": SITE.address.lng },
-  "areaServed": SITE.districts.ar,
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "164",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
-  "openingHoursSpecification": [{
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],
-    "opens": "07:00", "closes": "23:00"
-  }],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "خدمات جلي وتلميع الأرضيات بحفر الباطن",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتلميع الرخام الطبيعي بالكريستال والألماس" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتنظيف البلاط والسيراميك والبورسلان" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "طحن وترميم أرضيات التيرازو والبلاط البلدي" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "تلميع وعزل الجرانيت الطبيعي ضد البقع" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ترميم وصقل الحجر الجيري والترافرتين" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "طلاء وإصلاح أرضيات الإيبوكسي المقاومة" } }
-    ]
-  }
+  "@graph": [
+    {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": `${SITE.url}/#business`,
+      "name": "جلي بلاط حفرالباطن 0539811299 | JaliBlaat Al Batin",
+      "alternateName": [
+        "جلي بلاط حفرالباطن",
+        "جلي بلاط حفر الباطن",
+        "شركة جلي بلاط حفرالباطن",
+        "مؤسسة جلي وتلميع الرخام والبلاط بحفر الباطن",
+        "شركة جلي بلاط بحفر الباطن",
+        "معلم جلي بلاط حفرالباطن",
+        "معلم جلي رخام حفر الباطن 0539811299",
+        "رقم جلي بلاط حفرالباطن 0539811299"
+      ],
+      "url": SITE.url,
+      "telephone": SITE.phone,
+      "image": `${SITE.url}/images/og-default.jpg`,
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": SITE.address.street,
+        "addressLocality": SITE.address.city,
+        "addressRegion": SITE.address.region,
+        "postalCode": SITE.address.zip,
+        "addressCountry": SITE.address.country
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": SITE.address.lat, "longitude": SITE.address.lng },
+      "areaServed": SITE.districts.ar.map(d => ({
+        "@type": "AdministrativeArea",
+        "name": `حي ${d}، حفر الباطن`
+      })),
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "164",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "07:00", "closes": "23:00"
+      }],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "خدمات جلي بلاط حفرالباطن وتلميع الأرضيات",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتلميع الرخام الطبيعي بالكريستال والألماس بحفر الباطن" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "جلي وتنظيف البلاط والسيراميك والبورسلان بحفرالباطن" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "طحن وترميم أرضيات التيرازو والبلاط البلدي بحفر الباطن" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "تلميع وعزل الجرانيت الطبيعي ضد البقع بحفرالباطن" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ترميم وصقل الحجر الجيري والترافرتين بحفر الباطن" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "طلاء وإصلاح أرضيات الإيبوكسي المقاومة بحفرالباطن" } }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE.url}/#faq`,
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ما هو سعر جلي الرخام والبلاط في حفر الباطن؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "يتراوح سعر جلي الرخام والبلاط في حفر الباطن بين 12 و35 ريال سعودي للمتر المربع، ويعتمد على نوع المادة (رخام، بورسلان، بلاط عادي)، وحالة الأرضية، ومساحة المشروع. المعاينة الميدانية مجانية بالكامل."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "كيف أحجز خدمة جلي بلاط حفرالباطن مع معاينة مجانية؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "يمكنك التواصل مباشرة عبر الاتصال أو الواتساب على الرقم 0539811299، ويصلك فريق العمل لمعاينة وفحص الأرضيات وعمل عينة تجريبية مجانية 1 م² في كافة أحياء حفر الباطن."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل تُسبب عملية جلي البلاط والرخام غباراً داخل المنزل؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لا إطلاقاً. نعتمد على ماكينات كلياندكس Klindex الإيطالية بنظام الجلي المائي المزود بشفط فوري للرواسب، مما يضمن عملاً نظيفاً 100% بدون أي غبار."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ما الفرق بين جلي الرخام العادي والجلي الكريستالي؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "الجلي العادي ينظف السطح مؤقتاً، بينما الجلي الكريستالي الإيطالي يعيد بناء سطح الرخام بطبقة لمعان زجاجية كالمرآة تقاوم البقع وتدوم لسنوات طويلة."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل تقدمون ضماناً معتمداً على جودة الجلي واللمعان؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نعم، نقدم ضماناً رسمياً مكتوباً على جودة صقل وتلميع الرخام والبلاط وعدم تقشر طبقات الحماية أو فقدان اللمعان."
+          }
+        }
+      ]
+    }
+  ]
 });
 ---
 
 <PageLayout
-  title="0539811299 جلي بلاط حفر الباطن | شركة جلي وتلميع رخام وبلاط بحفر الباطن"
-  description="جلي بلاط حفر الباطن 0539811299 تنظيف وتلميع وتجديد للرخام والبلاط وإزالة الخدوش والبقع بأقراص الألماس الإيطالية. رقم معلم جلي بلاط بحفر الباطن 0539811299 معاينة مجانية وضمان معتمد."
+  title="جلي بلاط حفرالباطن 0539811299 | شركة جلي وتلميع رخام وبلاط بحفر الباطن"
+  description="جلي بلاط حفرالباطن 0539811299 تنظيف وتلميع وتجديد للرخام والبلاط وإزالة الخدوش والبقع بأقراص الألماس الإيطالية. رقم معلم جلي بلاط بحفر الباطن 0539811299 معاينة مجانية وضمان معتمد."
   lang="ar"
   schemaJson={schema}
 >
